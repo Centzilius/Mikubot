@@ -9,7 +9,7 @@ function on_msg_receive (msg)
   if msg_valid(msg) then
     msg = pre_process_msg(msg)
     match_plugins(msg)
-    mark_read(receiver, ok_cb, false)
+--    mark_read(receiver, ok_cb, false)
   end
 end
 
