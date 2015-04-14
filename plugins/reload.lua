@@ -8,5 +8,6 @@ return {
     description = "Reloads Bot Plugins", 
     usage = "/reload",
     patterns = {"^/reload$"}, 
-    run = run 
+    run = run,
+  privileged = true
 }
