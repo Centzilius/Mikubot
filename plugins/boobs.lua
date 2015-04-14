@@ -11,7 +11,7 @@ function getRandomButts(attempt)
 
   -- The OpenBoobs API sometimes returns an empty array
   if not data and attempt < 10 then 
-    print('Cannot get that butts, trying another ones...')
+    print('Keine Butts gefunden!')
     return getRandomButts(attempt)
   end
 
@@ -29,7 +29,7 @@ function getRandomBoobs(attempt)
 
   -- The OpenBoobs API sometimes returns an empty array
   if not data and attempt < 10 then 
-    print('Cannot get that boobs, trying another ones...')
+    print('Keine Boobs gefunden!')
     return getRandomBoobs(attempt)
   end
 
@@ -39,11 +39,11 @@ end
 function run(msg, matches)
   local url = nil
   
-  if matches[1] == "!boobs" then
+  if matches[1] == "/boobs" then
     url = getRandomBoobs()
   end
 
-  if matches[1] == "!butts" then
+  if matches[1] == "/butts" then
     url = getRandomButts()
   end
 
@@ -51,19 +51,19 @@ function run(msg, matches)
     local receiver = get_receiver(msg)
     send_photo_from_url(receiver, url)
   else
-    return 'Error getting boobs/butts for you, please try again later.' 
+    return 'Keine Boobs/Butts gefunden.' 
   end
 end
 
 return {
-  description = "Gets a random boobs or butts pic", 
+  description = "Sendet ein zuf�lliges Boobs/Butts Bild", 
   usage = {
-    "!boobs: Get a boobs NSFW image. 🔞",
-    "!butts: Get a butts NSFW image. 🔞"
+    "/boobs",
+    "/butts"
   },
   patterns = {
-    "^!boobs$",
-    "^!butts$"
+    "^/boobs$",
+    "^/butts$"
   }, 
   run = run 
 }

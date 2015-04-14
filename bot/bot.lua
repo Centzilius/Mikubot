@@ -1,6 +1,6 @@
 require("./bot/utils")
 
-VERSION = '0.11.2'
+VERSION = '2.5-reloaded'
 
 -- This function is called when tg receive a msg
 function on_msg_receive (msg)
@@ -76,7 +76,7 @@ local function is_plugin_disabled_on_chat(plugin_name, receiver)
     for disabled_plugin,disabled in pairs(disabled_chats[receiver]) do
       print(disabled_plugin)
       if disabled_plugin == plugin_name and disabled then
-        local warning = 'Plugin '..disabled_plugin..' is disabled on this chat'
+        local warning = ''
         print(warning)
         send_msg(receiver, warning, ok_cb, false)
         return true

@@ -99,7 +99,7 @@ function download_to_file(url, file_name)
 
   file_name = file_name or get_http_file_name(url, headers)
     
-  local file_path = "/tmp/"..file_name
+  local file_path = "/home/pi/Mikubot/tmp/"..file_name
   print("Saved to: "..file_path)
 
   file = io.open(file_path, "w+")

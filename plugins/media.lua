@@ -1,6 +1,7 @@
 do
 
 function run(msg, matches)
+  local receiver = get_receiver(msg)
   local file = download_to_file(matches[1])
   send_document(get_receiver(msg), file, ok_cb, false)
 end
@@ -18,7 +19,17 @@ return {
     "(https?://[%w-_%.%?%.:/%+=&]+%.rar)$",
     "(https?://[%w-_%.%?%.:/%+=&]+%.wmv)$",
     "(https?://[%w-_%.%?%.:/%+=&]+%.doc)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.avi)$"
+    "(https?://[%w-_%.%?%.:/%+=&]+%.tar.gz)$",
+    "(https?://[%w-_%.%?%.:/%+=&]+%.dlc)$",
+    "(https?://[%w-_%.%?%.:/%+=&]+%.txt)$",
+    "(https?://[%w-_%.%?%.:/%+=&]+%.deb)$",
+    "(https?://[%w-_%.%?%.:/%+=&]+%.webm)$",
+    "(https?://[%w-_%.%?%.:/%+=&]+%.avi)$",
+	"(https?://[%w-_%.%?%.:/%+=&]+%.wav)$",
+	"(https?://[%w-_%.%?%.:/%+=&]+%.exe)$",
+	"(https?://[%w-_%.%?%.:/%+=&]+%.rpm)$",
+	"(https?://[%w-_%.%?%.:/%+=&]+%.dmg)$",
+	"(https?://[%w-_%.%?%.:/%+=&]+%.apk)$"
   }, 
   run = run 
 }

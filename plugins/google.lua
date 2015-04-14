@@ -28,10 +28,10 @@ function run(msg, matches)
 end
 
 return {
-  description = "Searches Google and send results",
-  usage = "!google [terms]: Searches Google and send results",
+  description = "Durchsucht Google und sendet die ersten 5 Ergebnisse",
+  usage = "/google [Begriff]",
   patterns = {
-    "^!google (.*)$",
+    "^/google (.*)$",
     "^%.[g|G]oogle (.*)$"
   },
   run = run

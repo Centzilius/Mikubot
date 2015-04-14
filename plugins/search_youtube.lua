@@ -29,7 +29,7 @@ local function searchYoutubeVideo(text)
     print("HTTP Error")
     return nil
   elseif not data.feed.entry then
-    return "YouTube video not found!"
+    return "Kein YouTube Video gefunden!"
   end
   return data.feed.entry[1].link[1].href
 end
@@ -43,10 +43,10 @@ local function run(msg, matches)
 end
 
 return {
-  description = "Search video on youtube and send it.",
-  usage = "!youtube [term]: Search for a youtube video and send it.",
+  description = "Sucht ein Video auf YouTube und sendet es",
+  usage = "/youtube [Begriff]",
   patterns = {
-    "^!youtube (.*)"
+    "^/youtube (.*)"
   },
   run = run
 }

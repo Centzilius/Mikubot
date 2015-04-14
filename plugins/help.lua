@@ -27,13 +27,13 @@ end
 
 -- !help command
 local function telegram_help()
-  local text = "Plugin list: \n\n"
+  local text = "Plugin Liste: \n\n"
   -- Plugins names
   for name in pairs(plugins) do
     text = text..name..'\n'
   end
-  text = text..'\n'..'Write "!help [plugin name]" for more info.'
-  text = text..'\n'..'Or "!help all" to show all info.'
+  text = text..'\n'..'Benutze "/hilfe [Plugin Name]" für mehr Informationen'
+  text = text..'\n'..'Oder "/hilfe all" um alles zu sehen.'
   return text
 end
 
@@ -47,9 +47,9 @@ local function help_all()
 end
 
 local function run(msg, matches)
-  if matches[1] == "!help" then
+  if matches[1] == "/hilfe" then
     return telegram_help()
-  elseif matches[1] == "!help all" then
+  elseif matches[1] == "/hilfe all" then
     return help_all()
   else 
     local text = plugin_help(matches[1])
@@ -61,16 +61,12 @@ local function run(msg, matches)
 end
 
 return {
-  description = "Help plugin. Get info from other plugins.  ", 
-  usage = {
-    "!help: Show list of plugins.",
-    "!help all: Show all commands for every plugin.",
-    "!help [plugin name]: Commands for that plugin."
-  },
+  description = "", 
+  usage = {""},
   patterns = {
-    "^!help$",
-    "^!help all",
-    "^!help (.+)"
+    "^/hilfe$",
+    "^/hilfe all",
+    "^/hilfe (.+)"
   }, 
   run = run 
 }

@@ -49,25 +49,25 @@ function run(msg, matches)
   end
 
   if not gif_url then 
-    return "Error: GIF not found"
+    return "Kein GIF gefunden!"
   end
 
   local receiver = get_receiver(msg)
   send_document_from_url(receiver, gif_url)
-  return "Preparing to make you laugh"
+  return "Einen Moment, GIF wird hochgeladen."
 end
 
 return {
-  description = "GIFs from telegram with Giphy API",
+  description = "Sucht und sendet ein GIF von Giphy",
   usage = {
-    "!gif (term): Search and sends GIF from Giphy. If no param, sends a trending GIF.",
-    "!giphy (term): Search and sends GIF from Giphy. If no param, sends a trending GIF."
+    "/gif (Begriff)",
+    "/giphy (Begriff)"
     },
   patterns = {
-    "^!gif$",
-    "^!gif (.*)",
-    "^!giphy (.*)",
-    "^!giphy$"
+    "^/gif$",
+    "^/gif (.*)",
+    "^/giphy (.*)",
+    "^/giphy$"
   },
   run = run
 }

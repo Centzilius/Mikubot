@@ -51,7 +51,7 @@ end
 local function enable_plugin( filename )
   -- Check if plugin is enabled
   if plugin_enabled(filename) then
-    return 'Plugin '..filename..' is enabled'
+    return 'Plugin '..filename..' ist aktiviert!'
   end
   -- Checks if plugin exists
   if plugin_exists(filename) then
@@ -61,19 +61,19 @@ local function enable_plugin( filename )
     -- Reload the plugins
     return reload_plugins( )
   else
-    return 'Plugin '..filename..' does not exists'
+    return 'Das Plugin '..filename..' exestiert nicht!'
   end
 end
 
 local function disable_plugin( name, chat )
   -- Check if plugins exists
   if not plugin_exists(name) then
-    return 'Plugin '..name..' does not exists'
+    return 'Das Plugin '..name..' exestiert nicht!'
   end
   local k = plugin_enabled(name)
   -- Check if plugin is enabled
   if not k then
-    return 'Plugin '..name..' not enabled'
+    return 'Das Plugin '..name..' ist nicht aktiviert!'
   end
   -- Disable and reload
   table.remove(_config.enabled_plugins, k)
@@ -83,7 +83,7 @@ end
 
 local function disable_plugin_on_chat(receiver, plugin)
   if not plugin_exists(plugin) then
-    return "Plugin doesn't exists"
+    return "Das Plugin exestiert nicht!"
   end
 
   if not _config.disabled_plugin_on_chat then
@@ -97,7 +97,7 @@ local function disable_plugin_on_chat(receiver, plugin)
   _config.disabled_plugin_on_chat[receiver][plugin] = true
 
   save_config()
-  return 'Plugin '..plugin..' disabled on this chat'
+  return 'Das Plugin '..plugin..' ist hier nun deaktiviert!'
 end
 
 local function reenable_plugin_on_chat(receiver, plugin)
@@ -110,16 +110,16 @@ local function reenable_plugin_on_chat(receiver, plugin)
   end
 
   if not _config.disabled_plugin_on_chat[receiver][plugin] then
-    return 'This plugin is not disabled'
+    return 'Dieses Plugin ist nicht deaktiviert!'
   end
 
   _config.disabled_plugin_on_chat[receiver][plugin] = false
-  return 'Plugin '..plugin..' is enabled again'
+  return 'Das Plugin '..plugin..' ist wieder aktiviert!'
 end
 
 local function run(msg, matches)
   -- Show the available plugins 
-  if matches[1] == '!plugins' then
+  if matches[1] == '/plugins' then
     return list_plugins()
   end
 
@@ -158,20 +158,15 @@ local function run(msg, matches)
 end
 
 return {
-  description = "Plugin to manage other plugins. Enable, disable or reload.", 
-  usage = {
-    "!plugins: list all plugins.", 
-    "!plugins enable [plugin]: enable plugin.",
-    "!plugins disable [plugin]: disable plugin.",
-    "!plugins disable [plugin] chat: disable plugin only this chat.",
-    "!plugins reload: reloads all plugins." },
+  description = "", 
+  usage = {""},
   patterns = {
-    "^!plugins$",
-    "^!plugins? (enable) ([%w_%.%-]+)$",
-    "^!plugins? (disable) ([%w_%.%-]+)$",
-    "^!plugins? (disable) ([%w_%.%-]+) (chat)",
-    "^!plugins? (enable) ([%w_%.%-]+) (chat)",
-    "^!plugins? (reload)$" }, 
+    "^/plugins$",
+    "^/plugins? (enable) ([%w_%.%-]+)$",
+    "^/plugins? (disable) ([%w_%.%-]+)$",
+    "^/plugins? (disable) ([%w_%.%-]+) (chat)",
+    "^/plugins? (enable) ([%w_%.%-]+) (chat)",
+    "^/plugins? (reload)$" }, 
   run = run,
   privileged = true
 }

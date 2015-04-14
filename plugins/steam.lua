@@ -1,3 +1,4 @@
+
 -- See https://wiki.teamfortress.com/wiki/User:RJackson/StorefrontAPI
 
 do
@@ -28,8 +29,8 @@ end
 function send_steam_data(data, receiver)
   local description = string.sub(unescape(data.about_the_game:gsub("%b<>", "")), 1, DESC_LENTH) .. '...'
   local title = data.name
-  local price = "$"..(data.price_overview.initial/100)
-  local sale_price = "$"..(data.price_overview.final/100)
+  local price = "€"..(data.price_overview.initial/100)
+  local sale_price = "€"..(data.price_overview.final/100)
   local percent_savings = data.price_overview.discount_percent
   local price_display = price 
 

@@ -4,10 +4,10 @@ function run(msg, matches)
 end
 
 return {
-  description = "Simplest plugin ever!",
-  usage = "!echo [whatever]: echoes the msg",
+  description = "Wiederholt euch",
+  usage = "/echo [Satz]",
   patterns = {
-    "^!echo (.*)$"
+    "^/echo (.*)$"
   }, 
   run = run 
 }
