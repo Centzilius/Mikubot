@@ -46,7 +46,8 @@ return {
   description = "Sucht ein Video auf YouTube und sendet es",
   usage = "/youtube [Begriff]",
   patterns = {
-    "^/youtube (.*)"
+    "^/youtube (.*)",
+	"^/yt (.*)"
   },
   run = run
 }
