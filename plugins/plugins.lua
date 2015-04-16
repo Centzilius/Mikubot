@@ -48,20 +48,22 @@ local function reload_plugins( )
 end
 
 
-local function enable_plugin( filename )
+local function enable_plugin( plugin_name )
+  print('checking if '..plugin_name..' exists')
   -- Check if plugin is enabled
-  if plugin_enabled(filename) then
-    return 'Plugin '..filename..' ist aktiviert!'
+  if plugin_enabled(plugin_name) then
+    return 'Plugin '..plugin_name..' ist aktiviert!'
   end
   -- Checks if plugin exists
-  if plugin_exists(filename) then
+  if plugin_exists(plugin_name) then
     -- Add to the config table
-    table.insert(_config.enabled_plugins, filename)
+    table.insert(_config.enabled_plugins, plugin_name)
+	print(plugin_name..' added to _config table')
     save_config()
     -- Reload the plugins
     return reload_plugins( )
   else
-    return 'Das Plugin '..filename..' exestiert nicht!'
+    return 'Das Plugin '..plugin_name..' exestiert nicht!'
   end
 end
 
@@ -114,6 +116,7 @@ local function reenable_plugin_on_chat(receiver, plugin)
   end
 
   _config.disabled_plugin_on_chat[receiver][plugin] = false
+  save_config()
   return 'Das Plugin '..plugin..' ist wieder aktiviert!'
 end
 
@@ -134,7 +137,7 @@ local function run(msg, matches)
   -- Enable a plugin
   if matches[1] == 'enable' then
     print("enable: "..matches[2])
-    return enable_plugin(matches[2])
+    return enable_plugin(plugin_name)
   end
 
   -- Disable a plugin on a chat
@@ -164,8 +167,8 @@ return {
     "^/plugins$",
     "^/plugins? (enable) ([%w_%.%-]+)$",
     "^/plugins? (disable) ([%w_%.%-]+)$",
-    "^/plugins? (disable) ([%w_%.%-]+) (chat)",
     "^/plugins? (enable) ([%w_%.%-]+) (chat)",
+    "^/plugins? (disable) ([%w_%.%-]+) (chat)",
     "^/plugins? (reload)$" }, 
   run = run,
   privileged = true
