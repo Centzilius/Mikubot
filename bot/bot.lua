@@ -74,7 +74,6 @@ local function is_plugin_disabled_on_chat(plugin_name, receiver)
   if disabled_chats and disabled_chats[receiver] then
     -- Checks if plugin is disabled on this chat
     for disabled_plugin,disabled in pairs(disabled_chats[receiver]) do
-      print(disabled_plugin)
       if disabled_plugin == plugin_name and disabled then
         local warning = ''
         print(warning)
