@@ -1,3 +1,4 @@
+
 do
 
 function getGoogleImage(text)
@@ -37,6 +38,7 @@ function run(msg, matches)
 
   print("Bilder-URL: ", url)
     send_photo_from_url(receiver, url)
+    return "Source:"..url
 end
 
 return {
@@ -45,5 +47,4 @@ return {
     patterns = {"^/img (.*)$"}, 
     run = run 
 }
-
 end
