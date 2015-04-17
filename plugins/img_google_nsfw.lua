@@ -32,7 +32,7 @@ function run(msg, matches)
   local url = getGoogleImage(text)
   
   if not url then
-    return "Kein Bild gefunden. Versuch es nochmal"
+    return "Kein Bild gefunden."
   end
 
   print("Bilder-URL: ", url)
@@ -43,7 +43,8 @@ end
 return {
     description = "Sucht Bild mit Google-API und versendet es (SafeSearch aktiv)", 
     usage = "/img2 [Suchbegriff]",
-    patterns = {"^/img2 (.*)$"}, 
+    patterns = {"^/img2 (.*)$",
+				"^/nsfwimg (.*)$"}, 
     run = run 
 }
 

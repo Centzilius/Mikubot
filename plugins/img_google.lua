@@ -33,12 +33,12 @@ function run(msg, matches)
   local url = getGoogleImage(text)
   
   if not url then
-    return "Kein Bild gefunden. Versuch es nochmal"
+    return "Kein Bild gefunden."
   end
 
   print("Bilder-URL: ", url)
     send_photo_from_url(receiver, url)
-    return "Source:"..url
+    return "Source: "..url
 end
 
 return {
