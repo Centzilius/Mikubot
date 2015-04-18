@@ -1,6 +1,5 @@
 function run(msg, matches)
 
-	if string.starts(msg.text, '/kitty') then
 	randomValue = math.random(4)
 	if randomValue == 1 then
 	send_photo(get_receiver(msg), "pictures/cats/cat1.jpg", ok_cb, false)
@@ -11,7 +10,6 @@ function run(msg, matches)
 	elseif randomValue == 4 then
 	send_photo(get_receiver(msg), "pictures/cats/cat4.jpg", ok_cb, false)
 	end
-    end
 end
 
 return {

@@ -28,7 +28,7 @@ function run(msg, matches)
   local title = getTitle(result)
   
   -- We don't want 301 (and one Extrawurst for Google), 302, 404 and empty titles
-  if title == "301 Moved Permanently" or title == "" or title == "404 Not Found" or title == "302 Found" or title == "Moved Permanently" then
+  if title == "301 Moved Permanently" or title == "" or title == "404 Not Found" or title == "302 Found" or title == "Moved Permanently" or string.match(title, "DeviantArt") then
     print('Invalide, da "'..title..'"')
   else
     return title
