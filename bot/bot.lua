@@ -28,6 +28,7 @@ function on_binlog_replay_end()
   -- See plugins/ping.lua as an example for cron
 
   _config = load_config()
+  cred_data = load_cred()
 
   -- load plugins
   plugins = {}
@@ -153,6 +154,19 @@ function load_config( )
   return config
 end
 
+function load_cred( )
+  local cf = io.open('./data/credentials.lua', "r")
+  -- If credentials.lua doesnt exists
+  if not cf then
+    print ("Created new credentials file: data/credentials.lua")
+    create_cred()
+  else
+    cf:close()
+  end
+  local _file_cred = loadfile ("./data/credentials.lua")()
+  return _file_cred
+end
+
 -- Create a basic config.json file and saves it.
 function create_config( )
   -- A simple config with basic plugins and ourserves as priviled user
@@ -185,6 +199,26 @@ function create_config( )
   }
   serialize_to_file(config, './data/config.lua')
   print ('saved config into ./data/config.lua')
+end
+
+function create_cred( )
+  cred = {
+  bitly_access_token = "",
+  fb_access_token = "",
+  gender_apikey = "",
+  instagram_access_token = "",
+  lyricsnmusic_apikey = "",
+  neutrino_userid = "",
+  neutrino_apikey = "",
+  page2images_restkey = "",
+  soundcloud_client_id = "",
+  tw_consumer_key = "",
+  tw_consumer_secret = "",
+  tw_access_token = "",
+  tw_access_token_secret = ""
+  }
+  serialize_to_file(cred, './data/credentials.lua')
+  print ('saved credentials into ./data/credentials.lua')
 end
 
 function on_our_id (id)
