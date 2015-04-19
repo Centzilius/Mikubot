@@ -6,8 +6,6 @@ end
 return {
   description = "Wiederholt euch",
   usage = "/echo [Satz]",
-  patterns = {
-    "^/echo (.*)$"
-  }, 
+  patterns = {"^/echo (.*)$"}, 
   run = run 
 }
