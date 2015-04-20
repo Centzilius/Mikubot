@@ -1,7 +1,7 @@
 
 function run(msg, matches)
 	return 'se'
-	end
+end
 
 return {
   description = "Möpse? Meepse?", 
@@ -12,4 +12,4 @@ return {
   			"Meep"}, 
   run = run 
 }
-
+--by Akamaru

@@ -38,11 +38,11 @@ function run(msg, matches)
     	 return "Fehler: "..response_code
     end
 	 local data = json:decode(response_body)
-	 return "Tweet gesendet! Sieh ihn dir an: https://twitter.com/TalesOfTelegram/status/"..data.id_str
+	 return "Tweet gesendet!"..data.id_str
 end
 
 return {
-  description = "Sends a tweet", 
+  description = "", 
   usage = "",
   patterns = {"^/tw (.+)"}, 
   run = run,

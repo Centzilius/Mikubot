@@ -1,8 +1,5 @@
 function run(msg, matches)
-
-	if string.starts(msg.text, "/nau") then
-	    send_photo(get_receiver(msg), "pictures/nau.jpg", ok_cb, false)
-	end
+	send_photo(get_receiver(msg), "pictures/nau.jpg", ok_cb, false)
 end
 
 return {
@@ -11,3 +8,4 @@ return {
   patterns = {"^/nau"}, 
   run = run 
 }
+--by Akamaru

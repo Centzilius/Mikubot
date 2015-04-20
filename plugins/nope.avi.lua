@@ -1,9 +1,6 @@
 
 function run(msg, matches)
-	if matches[1] == "nope.avi" then
-    		return 'https://www.youtube.com/watch?v=gvdf5n-zI14'
-	end
-	
+	return 'https://www.youtube.com/watch?v=gvdf5n-zI14'
 end
 
 return {
@@ -12,4 +9,4 @@ return {
   patterns = {"^nope.avi"}, 
   run = run 
 }
-
+--by Akamaru

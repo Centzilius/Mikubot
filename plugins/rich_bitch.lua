@@ -1,9 +1,6 @@
 
 function run(msg, matches)
-	if matches[1] == "rich bitch" then
-    		return 'Akamaru ist nicht reich!'
-	end
-	
+	return 'Akamaru ist nicht reich!'
 end
 
 return {
@@ -16,4 +13,4 @@ return {
 			  "^RICH BITCH"}, 
   run = run 
 }
-
+--by Akamaru

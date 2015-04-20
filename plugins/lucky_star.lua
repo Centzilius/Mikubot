@@ -30,3 +30,4 @@ return {
 			  "^/Tsukasa"}, 
   run = run 
 }
+--by Akamaru

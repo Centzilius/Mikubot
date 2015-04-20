@@ -4,27 +4,27 @@ function run(msg, matches)
 	send_photo(get_receiver(msg), "pictures/sakurasou/shiina.jpg", ok_cb, false)
 	end
 
-    if string.starts(msg.text, '/chihiro') or string.starts(msg.text, "/Chihiro") then
+    	if string.starts(msg.text, '/chihiro') or string.starts(msg.text, "/Chihiro") then
 	send_photo(get_receiver(msg), "pictures/sakurasou/chihiro.jpg", ok_cb, false)
 	end
 
-    if string.starts(msg.text, '/jin') or string.starts(msg.text, "/Jin") then
+    	if string.starts(msg.text, '/jin') or string.starts(msg.text, "/Jin") then
 	send_photo(get_receiver(msg), "pictures/sakurasou/jin.jpg", ok_cb, false)
 	end
 
-    if string.starts(msg.text, '/misaki') or string.starts(msg.text, "/Misaki") then
+    	if string.starts(msg.text, '/misaki') or string.starts(msg.text, "/Misaki") then
 	send_photo(get_receiver(msg), "pictures/sakurasou/misaki.jpg", ok_cb, false)
 	end
 
-    if string.starts(msg.text, '/nanami') or string.starts(msg.text, "/Nanami") then
+    	if string.starts(msg.text, '/nanami') or string.starts(msg.text, "/Nanami") then
 	send_photo(get_receiver(msg), "pictures/sakurasou/nanami.jpg", ok_cb, false)
 	end
 
-    if string.starts(msg.text, '/ryuunosuke') or string.starts(msg.text, "/Ryuunosuke") then
+    	if string.starts(msg.text, '/ryuunosuke') or string.starts(msg.text, "/Ryuunosuke") then
 	send_photo(get_receiver(msg), "pictures/sakurasou/ryuunosuke.jpg", ok_cb, false)
 	end
 
-    if string.starts(msg.text, '/sorata') or string.starts(msg.text, "/Sorata") then
+    	if string.starts(msg.text, '/sorata') or string.starts(msg.text, "/Sorata") then
 	send_photo(get_receiver(msg), "pictures/sakurasou/sorata.jpg", ok_cb, false)
 	end
 end
@@ -48,3 +48,4 @@ return {
 			  "^/Sorata"}, 
   run = run 
 }
+--by Akamaru

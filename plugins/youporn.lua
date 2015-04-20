@@ -2,16 +2,16 @@
 function run(msg, matches)
 
 	-- local g = require "./plugins/google"
-	-- local query = "site:pornhub.com+viewkey+" .. matches[1]
+	-- local query = "site:youporn.com+viewkey+" .. matches[1]
 	-- local new_matches = {query}
 
 	-- return g.run(msg, new_matches)
-	local results = findAss(matches[1])
+	local results = findYouporn(matches[1])
 	return results-- build_result(results)
 end
 
-function findAss(query)
-	local api        = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=site:youporn.com+viewkey+" .. query:gsub(" ", "+")
+function findYouporn(query)
+	local api = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=site:youporn.com+viewkey+" .. query:gsub(" ", "+")
 
 	-- Do the request
 	local res, code = https.request(api)
@@ -41,7 +41,7 @@ function build_result(query)
 end
 
 return {
-    description = "",
+    description = "Sendet ein YouPorn Video",
     usage = "/youporn",
     patterns = {"^/youporn (.*)$",
     			  "^/yp (.*)$"}, 

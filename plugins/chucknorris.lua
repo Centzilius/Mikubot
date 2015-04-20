@@ -14,7 +14,7 @@ function run(msg, matches)
 end
 
 return {
-    description = "get chuck norris joke",
+    description = "Sendet Chuck Norris Witze (Englisch)",
     usage = "/cn",
     patterns = {"^/cn$"},
     run = run

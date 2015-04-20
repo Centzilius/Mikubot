@@ -7,8 +7,8 @@ function run(msg, matches)
 end
 
 return {
-  description = "When user sends image URL (ends with png, jpg, jpeg) download and send it to origin.", 
-  usage = "",
+  description = "Wenn ein Link zu einem Bild gesendet wird, läd und sendet der Bot das Bild.", 
+  usage = "Link zum Bild",
   patterns = {
     "(https?://[%w-_%.%?%.:/%+=&]+%.png)$",
     "(https?://[%w-_%.%?%.:/%+=&]+%.jpg)$",

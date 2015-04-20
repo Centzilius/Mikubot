@@ -7,8 +7,8 @@ function run(msg, matches)
 end
 
 return {
-  description = "When user sends media URL (ends with gif, mp4, pdf, etc.) download and send it to origin.", 
-  usage = "",
+  description = "Wenn ein Link zu einer Datei gesendet wird, läd und sendet der Bot die Datei.", 
+  usage = "Link zur Datei",
   patterns = {
     "(https?://[%w-_%.%?%.:/%+=&]+%.gif)$",
     "(https?://[%w-_%.%?%.:/%+=&]+%.mp4)$",

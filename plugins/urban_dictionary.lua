@@ -25,14 +25,14 @@ end
 function run(msg, matches)
   local text = getUrbanDictionary(msg.text)
   if (text == nil) then
-    return "Zzzzz..."
+    return "Nichts gefunden!"
   else
     return text
   end
 end
 
 return {
-    description = "get urban dictionary definition",
+    description = "Zeigt eine Urban Dictionary Definition",
     usage = "/ud [topic]",
     patterns = {"^/ud (.*)$"},
     run = run

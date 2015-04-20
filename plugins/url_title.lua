@@ -27,8 +27,15 @@ function run(msg, matches)
   local result = http.request(url)
   local title = getTitle(result)
   
-  -- We don't want 301 (and one Extrawurst for Google), 302, 404 and empty titles
-  if title == "301 Moved Permanently" or title == "" or title == "404 Not Found" or title == "302 Found" or title == "Moved Permanently" or string.match(title, "DeviantArt") then
+  --Ignoring 301, 302, 404 and more
+  if title == "301 Moved Permanently" or 
+      title == "" or 
+      title == "404 Not Found" or 
+      title == "302 Found" or 
+      title == "Moved Permanently" or 
+      string.match(title, "deviantArt") or
+      string.match(title, "twitch") or
+      string.match(title, "eBay</title>") then
     print('Invalide, da "'..title..'"')
   else
     return title
@@ -37,11 +44,8 @@ function run(msg, matches)
 
 return {
   description = "Postet URL-Titel", 
-  usage = "",
-  patterns = {
-    "(https?://[%w-_%.%?%.:/%+=&]+)$",
-  }, 
+  usage = "Irgendein Link",
+  patterns = {"(https?://[%w-_%.%?%.:/%+=&]+)$",}, 
   run = run 
 }
-
 end

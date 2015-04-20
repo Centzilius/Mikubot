@@ -31,7 +31,7 @@ end
 function run(msg, matches)
   local lyrics = getLyrics(msg.text)
   if (lyrics == nil) then
-    return "Zzzzz..."
+    return "Nichts gefunden!"
   else
     return lyrics
   end

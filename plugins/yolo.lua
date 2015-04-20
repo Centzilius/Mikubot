@@ -1,15 +1,12 @@
 
 function run(msg, matches)
-	if matches[1] == "yolo" then
-    		return 'Hä YOLO?'
-	end
-	
+	return 'Hä YOLO?'
 end
 
 return {
   description = "Sendet euch ein Hä YOLO?", 
   usage = "/yolo",
-  patterns = {"^/(yolo)"}, 
+  patterns = {"^/yolo"}, 
   run = run 
 }
-
+--by Akamaru

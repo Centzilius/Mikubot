@@ -6,12 +6,12 @@ function run(msg, matches)
 	-- local new_matches = {query}
 
 	-- return g.run(msg, new_matches)
-	local results = findPorn(matches[1])
+	local results = findPornhub(matches[1])
 	return results-- build_result(results)
 end
 
-function findPorn(query)
-	local api        = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=site:pornhub.com+viewkey+" .. query:gsub(" ", "+")
+function findPornhub(query)
+	local api = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=site:pornhub.com+viewkey+" .. query:gsub(" ", "+")
 
 	-- Do the request
 	local res, code = https.request(api)
@@ -41,7 +41,7 @@ function build_result(query)
 end
 
 return {
-    description = "",
+    description = "Sendet ein PornHub Video",
     usage = "/pornhub",
     patterns = {"^/pornhub (.*)$",
     			  "^/ph (.*)$"}, 

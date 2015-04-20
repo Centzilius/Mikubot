@@ -1,6 +1,6 @@
 do
 
-function getGoogleImage(text)
+function getGoogleImage2(text)
   local text = URL.escape(text)
   local api = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=8&q="
   local res, code = http.request(api..text)
@@ -29,7 +29,7 @@ end
 function run(msg, matches)
   local receiver = get_receiver(msg)
   local text = matches[1]
-  local url = getGoogleImage(text)
+  local url = getGoogleImage2(text)
   
   if not url then
     return "Kein Bild gefunden."

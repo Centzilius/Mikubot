@@ -1,11 +1,11 @@
 
 function run(msg, matches)
        return "Gomen'nasai 😣"
-	end
+end
 
 return {
-  description = "", 
-  usage = "",
+  description = "So ein dummer Bot", 
+  usage = "Baka Bot",
   patterns = {"^baka bot",
   			"Baka bot",
   			"baka Bot",
@@ -13,3 +13,4 @@ return {
   			"BAKA BOT"}, 
   run = run 
 }
+--by Akamaru

@@ -1,12 +1,12 @@
 function run(msg, matches)
   plugins = {}
   load_plugins()
-  return 'Plugins reloaded'
+  return 'Plugins erfolgreich geladen!'
 end
 
 return {
-    description = "Reloads Bot Plugins", 
-    usage = "/reload",
+    description = "", 
+    usage = "",
     patterns = {"^/reload$"}, 
     run = run,
   privileged = true

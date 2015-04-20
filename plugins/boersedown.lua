@@ -16,7 +16,7 @@ function cron()
 end
 
 return {
-    description = "",
+    description = "Checkt ob Boerse.to online ist",
     usage = "",
     patterns = {},
     run = nil,

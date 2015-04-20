@@ -9,3 +9,4 @@ return {
 			  "^/Facepalm"}, 
   run = run 
 }
+--by Akamaru

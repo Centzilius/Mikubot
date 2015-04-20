@@ -1,9 +1,5 @@
 function run(msg, matches)
-
-	if string.starts(msg.text, 'nii-san') or string.starts(msg.text, 'Nii-san') or string.starts(msg.text, 'Nissan') or string.starts(msg.text, 'nissan') then
-		send_photo(get_receiver(msg), "pictures/Nii-san.jpg", ok_cb, false)
-    end
-	
+	send_photo(get_receiver(msg), "pictures/Nii-san.jpg", ok_cb, false)
 end
 
 return {
@@ -15,4 +11,4 @@ return {
 			  "^Nissan"}, 
   run = run 
 }
-
+--by Akamaru
