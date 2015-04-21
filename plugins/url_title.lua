@@ -35,7 +35,8 @@ function run(msg, matches)
       title == "Moved Permanently" or 
       string.match(title, "deviantArt") or
       string.match(title, "twitch") or
-      string.match(title, "eBay</title>") then
+      string.match(title, "eBay</title>") or
+	  string.match(title, "Twitch") then
     print('Invalide, da "'..title..'"')
   else
     return title
@@ -45,7 +46,7 @@ function run(msg, matches)
 return {
   description = "Postet URL-Titel", 
   usage = "Irgendein Link",
-  patterns = {"(https?://[%w-_%.%?%.:/%+=&]+)$",}, 
+  patterns = {"^(https?://[%w-_%.%?%.:,/%+=&]+)$",}, 
   run = run 
 }
 end
