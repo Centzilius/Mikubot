@@ -32,11 +32,12 @@ function run(msg, matches)
       title == "" or 
       title == "404 Not Found" or 
       title == "302 Found" or 
+      title == "302 Moved" or 
       title == "Moved Permanently" or 
       string.match(title, "deviantArt") or
       string.match(title, "twitch") or
       string.match(title, "eBay</title>") or
-	  string.match(title, "Twitch") then
+	  string.match(title, "Twitch</title>") then
     print('Invalide, da "'..title..'"')
   else
     return title
