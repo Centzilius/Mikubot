@@ -204,6 +204,7 @@ end
 function create_cred( )
   cred = {
   bitly_access_token = "",
+  cloudconvert_apikey = "",
   fb_access_token = "",
   gender_apikey = "",
   instagram_access_token = "",

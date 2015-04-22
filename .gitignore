@@ -21,3 +21,4 @@ plugins/pagespeed_insights.lua
 plugins/ping_adress.lua
 plugins/test.lua
 plugins/twitch.lua
+plugins/create_sticker.lua
