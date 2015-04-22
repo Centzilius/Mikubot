@@ -461,3 +461,7 @@ function match_pattern(pattern, text)
   end
   -- nil
 end
+
+function sleep(n)
+  os.execute("sleep " .. tonumber(n))
+end
