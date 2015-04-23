@@ -22,3 +22,5 @@ plugins/ping_adress.lua
 plugins/test.lua
 plugins/twitch.lua
 plugins/create_sticker.lua
+plugins/derpibooru_nsfw.lua
+plugins/derpibooru.lua
