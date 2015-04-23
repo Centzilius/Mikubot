@@ -34,6 +34,7 @@ function run(msg, matches)
       title == "302 Found" or 
       title == "302 Moved" or 
       title == "Moved Permanently" or 
+	  title == "Redirection" or
       string.match(title, "deviantArt") or
       string.match(title, "twitch") or
       string.match(title, "eBay</title>") or
