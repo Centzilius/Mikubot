@@ -82,7 +82,8 @@ local function get_stats_status( msg )
     if user.last_name == nil then
       text = text..user.name..": "..user.msg_num.."\n"
     else
-      text = text..user.name.." "..user.last_name..": "..user.msg_num.."\n"
+	--text = text..user.name.." "..user.last_name..": "..user.msg_num.."\n"
+      text = text..user.name..": "..user.msg_num.."\n"
     end
   end
   print("usuarios: "..text)
