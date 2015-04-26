@@ -24,3 +24,4 @@ plugins/twitch.lua
 plugins/create_sticker.lua
 plugins/derpibooru_nsfw.lua
 plugins/derpibooru.lua
+plugins/rss.lua
