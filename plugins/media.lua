@@ -1,43 +1,65 @@
 do
 
-function run(msg, matches)
+local function run(msg, matches)
   local receiver = get_receiver(msg)
-  local file = download_to_file(matches[1])
-  send_document(get_receiver(msg), file, ok_cb, false)
+  local url = matches[1]
+  local ext = matches[2]
+
+  local file = download_to_file(url)
+  local cb_extra = {file_path=file}
+  
+  local mime_type = mimetype.get_content_type_no_sub(ext)
+
+  if ext == 'gif' then
+    print('send_file')
+    send_document(receiver, file, rmtmp_cb, cb_extra)
+
+  elseif mime_type == 'text' then
+    print('send_document')
+    send_document(receiver, file, rmtmp_cb, cb_extra)
+  
+  elseif mime_type == 'image' then
+    print('send_photo')
+    send_photo(receiver, file, rmtmp_cb, cb_extra)
+  
+  elseif mime_type == 'audio' then
+    print('send_audio')
+    send_audio(receiver, file, rmtmp_cb, cb_extra)
+
+  elseif mime_type == 'video' then
+    print('send_video')
+    send_video(receiver, file, rmtmp_cb, cb_extra)
+  
+  else
+    print('send_file')
+    send_document(receiver, file, rmtmp_cb, cb_extra)
+  end
+  
 end
 
 return {
-  description = "Wenn ein Link zu einer Datei gesendet wird, läd und sendet der Bot die Datei.", 
-  usage = "Link zur Datei",
-  patterns = {
-    "(https?://[%w-_%.%?%.:/%+=&]+%.gif)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.mp4)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.pdf)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.ogg)$",
-	"(https?://[%w-_%.%?%.:/%+=&]+%.ogv)$",
-	"(https?://[%w-_%.%?%.:/%+=&]+%.oga)$",
-	"(https?://[%w-_%.%?%.:/%+=&]+%.ogx)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.zip)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.mp3)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.rar)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.wmv)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.wma)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.doc)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.tar.gz)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.dlc)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.txt)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.deb)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.webm)$",
-    "(https?://[%w-_%.%?%.:/%+=&]+%.avi)$",
-	"(https?://[%w-_%.%?%.:/%+=&]+%.wav)$",
-	"(https?://[%w-_%.%?%.:/%+=&]+%.exe)$",
-	"(https?://[%w-_%.%?%.:/%+=&]+%.rpm)$",
-	"(https?://[%w-_%.%?%.:/%+=&]+%.dmg)$",
-	"(https?://[%w-_%.%?%.:/%+=&]+%.apk)$",
-	"(https?://[%w-_%.%?%.:/%+=&]+%.ipa)$",
-	"(https?://[%w-_%.%?%.:/%+=&]+%.webp)$"
-  }, 
-  run = run 
+    description = "Wenn ein User eine Medien-Datei sendet (gif, mp4, pdf, etc.), wird es gedownloadet und gesendet.", 
+    usage = "",
+    patterns = {
+    	"(https?://[%w-_%.%?%.:/%+=&]+%.(gif))$",
+    	"(https?://[%w-_%.%?%.:/%+=&]+%.(mp4))$",
+    	"(https?://[%w-_%.%?%.:/%+=&]+%.(pdf))$",
+    	"(https?://[%w-_%.%?%.:/%+=&]+%.(ogg))$",
+    	"(https?://[%w-_%.%?%.:/%+=&]+%.(zip))$",
+        "(https?://[%w-_%.%?%.:/%+=&]+%.(tar.gz))$",
+        "(https?://[%w-_%.%?%.:/%+=&]+%.(7z))$",
+    	"(https?://[%w-_%.%?%.:/%+=&]+%.(mp3))$",
+    	"(https?://[%w-_%.%?%.:/%+=&]+%.(rar))$",
+    	"(https?://[%w-_%.%?%.:/%+=&]+%.(wmv))$",
+    	"(https?://[%w-_%.%?%.:/%+=&]+%.(doc))$",
+    	"(https?://[%w-_%.%?%.:/%+=&]+%.(avi))$",
+		"(https?://[%w-_%.%?%.:/%+=&]+%.(wav))$",
+		"(https?://[%w-_%.%?%.:/%+=&]+%.(apk))$",
+		"(https?://[%w-_%.%?%.:/%+=&]+%.(webm))$",
+		"(https?://[%w-_%.%?%.:/%+=&]+%.(ogv))$",
+		"(https?://[%w-_%.%?%.:/%+=&]+%.(webp))$"
+    }, 
+    run = run 
 }
 
 end
