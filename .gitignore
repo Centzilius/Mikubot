@@ -25,3 +25,5 @@ plugins/create_sticker.lua
 plugins/derpibooru_nsfw.lua
 plugins/derpibooru.lua
 plugins/rss.lua
+plugins/url_info.lua
+plugins/meme.lua
