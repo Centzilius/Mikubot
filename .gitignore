@@ -5,7 +5,6 @@ data/
 plugins/alive.lua
 plugins/bitly.lua
 plugins/danbooru.lua
-plugins/danbooru2.lua
 plugins/deviantart.lua
 plugins/facebook.lua
 plugins/facebook_photo.lua
@@ -25,5 +24,4 @@ plugins/create_sticker.lua
 plugins/derpibooru_nsfw.lua
 plugins/derpibooru.lua
 plugins/rss.lua
-plugins/url_info.lua
 plugins/meme.lua
