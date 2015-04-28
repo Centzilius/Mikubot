@@ -6,7 +6,7 @@ end
 
 return {
     description = "Sagt dass ihr afk seid",
-    usage = "/afk",
+    usage = {"/afk"},
     patterns = {"^/afk(.*)$"}, 
     run = run
 }

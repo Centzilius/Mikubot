@@ -1,4 +1,3 @@
-
 do
 
 
@@ -24,21 +23,16 @@ function run(msg, matches)
     local receiver = get_receiver(msg)
     send_photo_from_url(receiver, url)
   else
-    return 'Error getting dicks for you, please try again later.'
+    return 'Huch, da lief was falsch.'
   end
 end
 
 
 return {
-  description = "Gets a random dicks pic",
-  usage = {
-    "/dicks: Get a dicks NSFW image. 🔞"
-  },
-  patterns = {
-    "^/dicks$"
-  },
+  description = "Das dümmste Plugin ever [NSFW]",
+  usage = {"/dicks"},
+  patterns = {"^/dicks$"},
   run = run
 }
-
 
 end

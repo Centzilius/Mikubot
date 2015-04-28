@@ -17,7 +17,7 @@ end
 
 return {
     description = "Checkt ob Boerse.to online ist",
-    usage = "",
+    usage = {"Hierfür gibt es kein Befehl"},
     patterns = {},
     run = nil,
     cron = cron

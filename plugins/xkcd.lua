@@ -47,11 +47,7 @@ end
 return {
   description = "Sendet Comics von xkcd",
   usage = {"/xkcd"},
-  patterns = {
-    "^/xkcd$",
-    "^/xkcd (%d+)",
-    "xkcd.com/(%d+)"
-  },
+  patterns = {"^/xkcd$","^/xkcd (%d+)","xkcd.com/(%d+)"},
   run = run
 }
 

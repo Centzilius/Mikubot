@@ -7,7 +7,7 @@ end
 
 return {
     description = "Würfel eine Zahl zwischen 1 bis 6",
-    usage = "/würfel",
+    usage = {"/würfel"},
     patterns = {"^/würfel"},
     run = run
 }

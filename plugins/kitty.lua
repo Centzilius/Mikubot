@@ -13,12 +13,8 @@ end
 
 return {
   description = "Sendet eins von 4 Katzenbilder", 
-  usage = "/kitty",
-  patterns = {"^/kitty",
-  			"^/katze",
-  			"^/cat",
-  			"^/neko",
-  			"^/kadse"}, 
+  usage = {"/kitty","/katze","/cat","/neko","/kadse"},
+  patterns = {"^/kitty$","^/katze$","^/cat$","^/neko$","^/kadse$"}, 
   run = run 
 }
 --by Akamaru

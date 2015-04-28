@@ -162,15 +162,9 @@ local function run(msg, matches)
 end
 
 return {
-  description = "", 
-  usage = { "" },
-  patterns = {
-    "^/plugins$",
-    "^/plugins? (enable) ([%w_%.%-]+)$",
-    "^/plugins? (disable) ([%w_%.%-]+)$",
-    "^/plugins? (enable) ([%w_%.%-]+) (chat)",
-    "^/plugins? (disable) ([%w_%.%-]+) (chat)",
-    "^/plugins? (reload)$" },
+  description = "Plugin Verwaltung", 
+  usage = { "Das kann nur Akamaru" },
+  patterns = {"^/plugins$","^/plugins? (enable) ([%w_%.%-]+)$","^/plugins? (disable) ([%w_%.%-]+)$","^/plugins? (enable) ([%w_%.%-]+) (chat)","^/plugins? (disable) ([%w_%.%-]+) (chat)","^/plugins? (reload)$" },
   run = run,
   privileged = true
   }

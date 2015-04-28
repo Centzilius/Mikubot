@@ -6,10 +6,8 @@ end
 
 return {
   description = "Zeigt die Bot Version", 
-  usage = "/version",
-  patterns = {
-    "^/version$"
-  }, 
+  usage = {"/version","/v"},
+  patterns = {"^/version$","^/v$"}, 
   run = run 
 }
 end

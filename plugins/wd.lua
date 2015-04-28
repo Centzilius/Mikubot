@@ -5,7 +5,7 @@ end
 
 return {
     description = "Sagt dass ihr wieder da seid",
-    usage = "/wd",
+    usage = {"/wd"},
     patterns = {"^/wd(.*)$"}, 
     run = run
 }

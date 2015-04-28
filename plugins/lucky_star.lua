@@ -19,15 +19,8 @@ end
 
 return {
   description = "Sendet ein Bild von den Lucky Star Chars", 
-  usage = "/kagami, /konata, /tsukasa oder /miyuki",
-  patterns = {"^/kagami",
-			  "^/Kagami",
-			  "^/konata",
-			  "^/Konata",
-			  "^/miyuki",
-			  "^/Miyuki",
-			  "^/tsukasa",
-			  "^/Tsukasa"}, 
+  usage = {"/Kagami","/kagami","/Konata","/konata","/Tsukasa","/tsukasa","/Miyuki","/miyuki"},
+  patterns = {"^/kagami$","^/Kagami$","^/konata$","^/Konata$","^/miyuki$","^/Miyuki$","^/tsukasa$","^/Tsukasa$"}, 
   run = run 
 }
 --by Akamaru

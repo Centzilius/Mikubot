@@ -3,10 +3,9 @@ function run(msg, matches)
 end
 
 return {
-  description = "Facepalm", 
-  usage = "/facepalm",
-  patterns = {"^/facepalm",
-			  "^/Facepalm"}, 
+  description = "Sendet ein Facepalm-Sticker", 
+  usage = {"/facepalm","/Facepalm"},
+  patterns = {"^/facepalm","^/Facepalm"}, 
   run = run 
 }
 --by Akamaru

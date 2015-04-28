@@ -41,10 +41,9 @@ function run(msg, matches)
 end
 
 return {
-    description = "Sucht Bild mit Google-API und versendet es (SafeSearch aktiv)", 
-    usage = "/img2 [Suchbegriff]",
-    patterns = {"^/img2 (.*)$",
-				"^/nsfwimg (.*)$"}, 
+    description = "Sucht Bild mit Google-API und versendet es [NSFW]", 
+    usage = {"/img2 [Suchbegriff]","/nsfwimg [Suchbegriff]"},
+    patterns = {"^/img2 (.*)$","^/nsfwimg (.*)$"}, 
     run = run 
 }
 

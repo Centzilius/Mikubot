@@ -4,11 +4,8 @@ end
 
 return {
   description = "Nii-san <3", 
-  usage = "nii-san, Nii-san, nissan oder Nissan",
-  patterns = {"^nii-san",
-			  "^Nii-san",
-			  "^nissan",
-			  "^Nissan"}, 
+  usage = {"nii-san","Nii-san","nissan","Nissan"},
+  patterns = {"^nii-san","^Nii-san","^nissan","^Nissan"}, 
   run = run 
 }
 --by Akamaru

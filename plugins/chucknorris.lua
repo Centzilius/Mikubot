@@ -7,7 +7,7 @@ end
 function run(msg, matches)
   local j = getChuckNorris()
   if (j == nil) then
-    return "Zzzzz..."
+    return "Huch, da lief was falsch!"
   else
     return j
   end
@@ -15,7 +15,7 @@ end
 
 return {
     description = "Sendet Chuck Norris Witze (Englisch)",
-    usage = "/cn",
+    usage = {"/cn"},
     patterns = {"^/cn$"},
     run = run
 }

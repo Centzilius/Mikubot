@@ -5,9 +5,8 @@ end
 
 return {
   description = "Sendet alle Emoticons", 
-  usage = "/emoticons",
-  patterns = {"^/emoticons",
-  			"^/Emoticons"}, 
+  usage = {"/emoticons","/Emoticons"},
+  patterns = {"^/emoticons","^/Emoticons"}, 
   run = run 
 }
 --by Akamaru

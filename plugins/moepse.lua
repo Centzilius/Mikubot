@@ -5,11 +5,8 @@ end
 
 return {
   description = "Möpse? Meepse?", 
-  usage = "möp oder meep",
-  patterns = {"^möp",
-  			"Möp",
-  			"meep",
-  			"Meep"}, 
+  usage = {"möp","Möp","meep","Meep"},
+  patterns = {"^möp","Möp","meep","Meep"}, 
   run = run 
 }
 --by Akamaru

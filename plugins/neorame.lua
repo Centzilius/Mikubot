@@ -4,7 +4,7 @@ end
 
 return {
   description = "NeoRame is best pony!", 
-  usage = "/neorame",
+  usage = {"/neorame"},
   patterns = {"^/neorame"}, 
   run = run 
 }

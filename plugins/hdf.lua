@@ -19,8 +19,8 @@ end
 end
 
 return {
-  description = "Sendet eins von 4 Katzenbilder", 
-  usage = "/hdf",
+  description = "Einfach mal die Fresse halten!", 
+  usage = {"/hdf"},
   patterns = {"^/hdf"}, 
   run = run 
 }

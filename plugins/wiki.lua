@@ -60,11 +60,7 @@ end
 
 return {
   description = "Sendet einen Wikipedia-Artikel",
-  usage = "/wiki Suchwort",
-  patterns = {
-    "^/wiki (.*)$",
-    "^%.[w|W]iki (.*)$",
-	"de.wikipedia.org/wiki/([A-Za-z0-9-_-]+)"
-    },
+  usage = {"/wiki [Suchwort]","de.wikipedia.org Link"},
+  patterns = {"^/wiki (.*)$","^%.[w|W]iki (.*)$","de.wikipedia.org/wiki/([A-Za-z0-9-_-]+)"},
     run = run
   }

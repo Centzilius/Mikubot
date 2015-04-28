@@ -39,7 +39,7 @@ end
 
 return {
     description = "Liedertext bekommen",
-    usage = "/lyrics [Lied]",
+    usage = {"/lyrics [Lied]"},
     patterns = {"^/lyrics (.*)$"},
     run = run
 }

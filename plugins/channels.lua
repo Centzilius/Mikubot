@@ -68,10 +68,8 @@ end
 
 return {
 	description = "", 
-	usage = {""},
-	patterns = {
-		"^/channel? (enable)",
-		"^/channel? (disable)" }, 
+	usage = {"Das kann nur Akamaru"},
+	patterns = {"^/channel? (enable)","^/channel? (disable)" }, 
 	run = run,
 	privileged = true,
 	pre_process = pre_process

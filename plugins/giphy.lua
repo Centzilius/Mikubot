@@ -70,16 +70,8 @@ end
 
 return {
   description = "Sucht und sendet ein GIF von Giphy",
-  usage = {
-    "/gif (Begriff)",
-    "/giphy (Begriff)"
-    },
-  patterns = {
-    "^/gif$",
-    "^/gif (.*)",
-    "^/giphy (.*)",
-    "^/giphy$"
-  },
+  usage = {"/gif [Begriff]","/giphy [Begriff]"},
+  patterns = {"^/gif$","^/gif (.*)","^/giphy (.*)","^/giphy$"},
   run = run
 }
 

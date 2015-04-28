@@ -4,10 +4,8 @@ end
 
 return {
   description = "Balsamiko Essig!", 
-  usage = "/barusamiko",
-  patterns = {"^/barusamiko",
-			"^/barusamikosu",
-			"^/Balsamiko Essig"}, 
+  usage = {"/barusamiko","/barusamikosu","/Balsamiko Essig"}, 
+  patterns = {"^/barusamiko","^/barusamikosu","^/Balsamiko Essig"}, 
   run = run 
 }
 --by Akamaru

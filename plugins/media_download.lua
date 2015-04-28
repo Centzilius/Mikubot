@@ -32,8 +32,8 @@ local function pre_process(msg)
 end
 
 return {
-  description = "When bot receives a media msg, download the media.",
-  usage = "",
+  description = "Wenn eine Datei gesendet wird, läd Mikubot sie runter.",
+  usage = {"Irgendeine Datei"},
   run = run,
   patterns = {
     '%[(document)%]',

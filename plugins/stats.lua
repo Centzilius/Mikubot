@@ -105,12 +105,9 @@ end
 _stats = read_file_stats()
 
 return {
-  description = "", 
-  usage = "",
-  patterns = {
-    "^/(stats)",
-    ".*"
-    }, 
+  description = "Zeigt wieviel ihr spamt", 
+  usage = {"/stats"},
+  patterns = {"^/(stats)",}, 
   run = run,
   cron = save_stats
 }

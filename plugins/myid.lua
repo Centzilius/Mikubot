@@ -4,7 +4,7 @@ end
 
 return {
   description = 'Zeigt deine Telegram ID',
-  usage = '/myid',
+  usage = {"/myid"},
   patterns = {'^/myid$'},
   run = run
 }

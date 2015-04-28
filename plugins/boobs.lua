@@ -59,14 +59,8 @@ end
 
 return {
   description = "Sendet ein zufälliges Boobs/Butts Bild", 
-  usage = {
-    "/boobs",
-    "/butts"
-  },
-  patterns = {
-    "^/boobs$",
-    "^/butts$"
-  }, 
+  usage = {"/boobs","/butts"},
+  patterns = {"^/boobs$","^/butts$"}, 
   run = run 
 }
 

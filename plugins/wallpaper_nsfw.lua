@@ -1,4 +1,3 @@
-
 do
 
 function getWallpaper2(text)
@@ -33,7 +32,7 @@ function run(msg, matches)
   local url = getWallpaper2(text)
   
   if not url then
-    return "Kein Bild gefunden."
+    return "Kein Wallpaper gefunden."
   end
 
   print("Bilder-URL: ", url)
@@ -42,9 +41,10 @@ function run(msg, matches)
 end
 
 return {
-    description = "Sucht Bild mit Google-API und versendet es", 
-    usage = "/wallpaper2 [Suchbegriff]",
+    description = "Sucht Wallpaper mit Google und versendet es [NSFW]", 
+    usage = {"/wallpaper2 [Suchbegriff]","/wp2 [Suchbegriff]"},
     patterns = {"^/wallpaper2 (.*)$","^/wp2 (.*)$"}, 
     run = run 
 }
 end
+-- Original by yagop ; Modified by Akamaru

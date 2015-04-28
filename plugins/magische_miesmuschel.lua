@@ -8,13 +8,8 @@ end
 
 return {
     description = "Beantwortet euch eine Frage (100% Wahrheit!)",
-    usage = "Magische Miesmuschel [Frage]",
-    patterns = {
-	"^Magische Miesmuschel(.*)$",
-	"^magische Miesmuschel(.*)$",
-	"^Magische miesmuschel(.*)$",
-	"^magische miesmuschel(.*)$"
-	}, 
+    usage = {"Magische Miesmuschel [Frage]","magische Miesmuschel [Frage]","Magische miesmuschel [Frage]","magische miesmuschel [Frage]"},
+    patterns = {"^Magische Miesmuschel(.*)$","^magische Miesmuschel(.*)$","^Magische miesmuschel(.*)$","^magische miesmuschel(.*)$"}, 
     run = run
 }
 end

@@ -33,7 +33,7 @@ end
 
 return {
     description = "Zeigt eine Urban Dictionary Definition",
-    usage = "/ud [topic]",
+    usage = {"/ud [Begriff]"},
     patterns = {"^/ud (.*)$"},
     run = run
 }

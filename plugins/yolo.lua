@@ -5,7 +5,7 @@ end
 
 return {
   description = "Sendet euch ein Hä YOLO?", 
-  usage = "/yolo",
+  usage = {"/yolo"},
   patterns = {"^/yolo"}, 
   run = run 
 }

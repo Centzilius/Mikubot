@@ -32,10 +32,7 @@ end
 
 return {
   description = "Durchsucht Google und sendet die ersten 5 Ergebnisse",
-  usage = "/google [Begriff]",
-  patterns = {
-    "^/google (.*)$",
-    "^%.[g|G]oogle (.*)$"
-  },
+  usage = {"/google [Begriff]","/Google [Begriff]"},
+  patterns = {"^/google (.*)$","^/Google (.*)$"},
   run = run
 }

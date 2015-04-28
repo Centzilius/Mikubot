@@ -17,7 +17,7 @@ end
 
 return {
   description = "Sendet eins von 6 Just Kitten Bilder", 
-  usage = "/jk",
+  usage = {"/jk"},
   patterns = {"^/jk"}, 
   run = run 
 }

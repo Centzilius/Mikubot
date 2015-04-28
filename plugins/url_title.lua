@@ -28,7 +28,7 @@ function run(msg, matches)
   local title = getTitle(result)
   
   --Ignoring 301, 302, 404 and more
-  if title == "301 Moved Permanently" or 
+  if  title == "301 Moved Permanently" or 
       title == "" or 
       title == "404 Not Found" or 
       title == "302 Found" or 
@@ -38,7 +38,7 @@ function run(msg, matches)
       string.match(title, "deviantArt") or
       string.match(title, "twitch") or
       string.match(title, "eBay</title>") or
-	  string.match(title, "Twitch</title>") then
+	  string.match(title, "Twitch") then
     print('Invalide, da "'..title..'"')
   else
     return title
@@ -47,7 +47,7 @@ function run(msg, matches)
 
 return {
   description = "Postet URL-Titel", 
-  usage = "Irgendein Link",
+  usage = {"Irgendein Link"},
   patterns = {"^(https?://[%w-_%.%?%.:,/%+=&]+)$",}, 
   run = run 
 }

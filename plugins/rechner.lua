@@ -6,7 +6,7 @@ end
 
 return {
   description = "Ein simpler Taschenrechner",
-  usage = "/calc [Rechnung]",
+  usage = {"/calc [Rechnung]"},
   patterns = {"^/calc (.*)$"},
   run = run
 }

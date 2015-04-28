@@ -12,11 +12,8 @@ end
 
 return {
   description = "Es ist so still hier",
-  usage = "stille",
-  patterns = {"^Stille",
-  			"^stille",
-  			"^*stille*",
-  			"^*Stille*"},
+  usage = {"Stille","stille","*stille*","*Stille*"},
+  patterns = {"^Stille","^stille","^*stille*","^*Stille*"},
   run = run
 }
 end

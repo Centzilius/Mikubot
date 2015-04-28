@@ -42,8 +42,7 @@ end
 
 return {
     description = "Sendet ein PornHub Video",
-    usage = "/pornhub",
-    patterns = {"^/pornhub (.*)$",
-    			  "^/ph (.*)$"}, 
+    usage = {"/pornhub [Suchwort]","/ph [Suchwort]"},
+    patterns = {"^/pornhub (.*)$","^/ph (.*)$"}, 
     run = run 
     }

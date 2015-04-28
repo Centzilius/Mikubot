@@ -43,7 +43,7 @@ end
 
 return {
     description = "Sucht Bild mit Google-API und versendet es (SafeSearch aktiv)", 
-    usage = "/img [Suchbegriff]",
+    usage = {"/img [Suchbegriff]"},
     patterns = {"^/img (.*)$"}, 
     run = run 
 }

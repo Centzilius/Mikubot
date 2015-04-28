@@ -4,7 +4,7 @@ end
 
 return {
   description = "RTL Nau", 
-  usage = "/nau",
+  usage = {"/nau"},
   patterns = {"^/nau"}, 
   run = run 
 }

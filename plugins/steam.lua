@@ -68,10 +68,8 @@ end
 
 return {
   description = "Grabs Steam info for Steam links.",
-  usage = "",
-  patterns = {
-    "http://store.steampowered.com/app/([0-9]+)",
-  },
+  usage = {"store.steampowered.com Link"},
+  patterns = {"http://store.steampowered.com/app/([0-9]+)",},
   run = run
 }
 

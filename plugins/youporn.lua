@@ -42,8 +42,7 @@ end
 
 return {
     description = "Sendet ein YouPorn Video",
-    usage = "/youporn",
-    patterns = {"^/youporn (.*)$",
-    			  "^/yp (.*)$"}, 
+    usage = {"/youporn","/yp"},
+    patterns = {"^/youporn (.*)$","^/yp (.*)$"}, 
     run = run 
     }

@@ -67,12 +67,8 @@ end
 
 return {
   description = "Übersetze Text", 
-  usage = "/translate [Text]",
-  patterns = {
-    "^/translate ([%w]+),([%a]+) (.+)",
-    "^/translate ([%w]+) (.+)",
-    "^/translate (.+)",
-  }, 
+  usage = {"/translate [Text]"},
+  patterns = {"^/translate ([%w]+),([%a]+) (.+)","^/translate ([%w]+) (.+)","^/translate (.+)",}, 
   run = run 
 }
 

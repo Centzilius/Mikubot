@@ -1,11 +1,12 @@
 
 function run(msg, matches)
-	return 'https://www.youtube.com/watch?v=gvdf5n-zI14'
+	send_video(get_receiver(msg), "videos/nope.avi", ok_cb, false)
+	return 'Video wird gesendet...'
 end
 
 return {
-  description = 'Sendet ein YouTube Video namens "nope.avi"', 
-  usage = "nope.avi", 
+  description = 'Sendet ein Video namens "nope.avi"', 
+  usage = {"nope.avi"}, 
   patterns = {"^nope.avi"}, 
   run = run 
 }

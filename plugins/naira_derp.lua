@@ -4,9 +4,8 @@ end
 
 return {
   description = "Naira Derp", 
-  usage = "/nairad",
-  patterns = {"^/nairad",
-			  "^/Nairad"}, 
+  usage = {"/nairad","/Nairad"},
+  patterns = {"^/nairad","^/Nairad"}, 
   run = run 
 }
 --by Akamaru

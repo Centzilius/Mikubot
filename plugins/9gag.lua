@@ -31,7 +31,7 @@ end
 
 return {
   description = "9GAG",
-  usage = "/9gag",
+  usage = {"/9gag"},
   patterns = {"^/9gag$"},
   run = run
 }

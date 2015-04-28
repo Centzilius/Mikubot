@@ -1,16 +1,13 @@
 
 function run(msg, matches)
-       return "Gomen'nasai 😣"
+  local user_name = get_name(msg)
+       return "Gomen'nasai "..user_name.."-sempai 😣"
 end
 
 return {
   description = "So ein dummer Bot", 
-  usage = "Baka Bot",
-  patterns = {"^baka bot",
-  			"Baka bot",
-  			"baka Bot",
-  			"Baka Bot",
-  			"BAKA BOT"}, 
+  usage = {"Baka Bot","baka bot","Baka bot","baka Bot","BAKA BOT"},
+  patterns = {"baka bot","Baka bot","baka Bot","Baka Bot","BAKA BOT"}, 
   run = run 
 }
 --by Akamaru

@@ -5,12 +5,9 @@ function run(msg, matches)
 end
 
 return {
-    description = "Sagt hallo zu euch",
-    usage = "hallo",
-    patterns = {
-	"^Hallo(.*)$",
-	"^hallo(.*)$"
-	}, 
-    run = run
+    description = "Miku sagt Hallo zu euch",
+    usage = {"Hallo","hallo"},
+    patterns = {"^Hallo$","^hallo$"},
+run = run
 }
 --by Akamaru

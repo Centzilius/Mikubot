@@ -61,13 +61,9 @@ local function run(msg, matches)
 end
 
 return {
-  description = "", 
-  usage = {""},
-  patterns = {
-    "^/hilfe$",
-    "^/hilfe all",
-    "^/hilfe (.+)"
-  }, 
+  description = "Zeigt die Plugins und Befehle", 
+  usage = {"/hilfe","/hilfe all","/hilfe [Plugin]"},
+  patterns = {"^/hilfe$","^/hilfe all","^/hilfe (.+)"}, 
   run = run 
 }
 
