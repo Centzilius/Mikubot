@@ -110,26 +110,33 @@ end
 function match_plugin(plugin, plugin_name, msg)
   local receiver = get_receiver(msg)
 
-  -- Go over patterns. If one matches is enought.
+  -- Go over patterns. If one matches is enough.
   for k, pattern in pairs(plugin.patterns) do
     local matches = match_pattern(pattern, msg.text)
     if matches then
       print("msg matches: ", pattern)
-
-      if is_plugin_disabled_on_chat(plugin_name, receiver) then
+	  
+	  if is_plugin_disabled_on_chat(plugin_name, receiver) then
         return nil
-      end
+	  end
       -- Function exists
       if plugin.run then
-        -- If plugin is for privileged users only
+        -- check if user has privileges
+          if can_use_bot(msg) then
+	    print("Gesperrt")
+            -- local text = 'Du darfst den Bot nicht nutzen!'
+           -- send_msg(receiver, text, ok_cb, false)
+          else
+	-- If plugin is for privileged users only
         if not warns_user_not_allowed(plugin, msg) then
           local result = plugin.run(msg, matches)
           if result then
-            send_large_msg(receiver, result)
+			send_large_msg(receiver, result)
           end
         end
       end
-      -- One patterns matches
+     end
+      -- One pattern matches
       return
     end
   end
