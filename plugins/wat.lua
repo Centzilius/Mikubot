@@ -1,5 +1,5 @@
 function run(msg, matches)
-	randomValue = math.random(7)
+	randomValue = math.random(8)
 if randomValue == 1 then
 	send_photo(get_receiver(msg), "pictures/wat/wat1.jpg", ok_cb, false)
 elseif randomValue == 2 then
@@ -14,6 +14,8 @@ elseif randomValue == 6 then
 	send_photo(get_receiver(msg), "pictures/wat/wat6.jpg", ok_cb, false)
 elseif randomValue == 7 then
 	send_photo(get_receiver(msg), "pictures/wat/wat7.jpg", ok_cb, false)
+elseif randomValue == 8 then
+	send_photo(get_receiver(msg), "pictures/wat/wat8.jpg", ok_cb, false)
 end
 end
 
