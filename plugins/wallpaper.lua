@@ -39,7 +39,7 @@ function run(msg, matches)
   print("Bilder-URL: ", url)
     send_photo_from_url(receiver, url)
   --return "Source: "..url
-  return "Bild wird gesendet!"
+  return "Wallpaper wird gesendet!"
 end
 
 return {

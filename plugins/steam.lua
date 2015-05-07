@@ -3,7 +3,7 @@
 do
 
 local BASE_URL = 'http://store.steampowered.com/api/appdetails/'
-local DESC_LENTH = 200
+local DESC_LENTH = 400
 
 local function unescape(str)
   str = string.gsub( str, '&lt;', '<' )
@@ -19,16 +19,17 @@ end
 local function get_steam_data (appid)
   local url = BASE_URL
   url = url..'?appids='..appid
-  url = url..'&cc=DE'
+  url = url..'&l=german&cc=DE'
   local res,code  = http.request(url)
   if code ~= 200 then return nil end
   local data = json:decode(res)[appid].data
   return data
 end
 
+
 local function price_info (data)
   local price = '' -- If no data is empty
-
+  
   if data then
     local initial = data.initial
     local final = data.final or data.initial
@@ -37,7 +38,7 @@ local function price_info (data)
     if data.discount_percent and initial ~= final then
       price = price..data.currency..' ('..data.discount_percent..'% OFF)'
     end
-    price = price..' (US)'
+    price = price..' €'
   end
 
   return price
@@ -49,7 +50,7 @@ local function send_steam_data(data, receiver)
   local title = data.name
   local price = price_info(data.price_overview)
 
-  local text = title..' '..price..'\n'..description
+  local text = title..'\nPreis: '..price..'\n'..description
   local image_url = data.header_image
   local cb_extra = {
     receiver = receiver,
@@ -67,9 +68,12 @@ local function run(msg, matches)
 end
 
 return {
-  description = "Grabs Steam info for Steam links.",
-  usage = {"store.steampowered.com Link"},
-  patterns = {"http://store.steampowered.com/app/([0-9]+)",},
+  description = "Steam-Info",
+  usage = "",
+  patterns = {
+    "store.steampowered.com/app/([0-9]+)",
+	"steamcommunity.com/app/([0-9]+)"
+  },
   run = run
 }
 
