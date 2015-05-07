@@ -1,5 +1,5 @@
 function getAnime(query)
-  local api        = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&safe=active&hl=de&q=myanimelist"
+  local api        = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&safe=active&hl=de&q=site%3Amyanimelist.net"
   local parameters = "+".. (URL.escape(query) or "")
 
   -- Do the request

@@ -11,7 +11,7 @@ function run(msg, matches)
 end
 
 function findYouporn(query)
-	local api = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=site:youporn.com+viewkey+" .. query:gsub(" ", "+")
+	local api = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=site%3Ayouporn.com+" .. query:gsub(" ", "+")
 
 	-- Do the request
 	local res, code = https.request(api)
