@@ -1,5 +1,4 @@
 res/
-data/
 .luarocks
 *.db
 plugins/alive.lua

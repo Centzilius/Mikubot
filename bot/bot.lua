@@ -225,16 +225,22 @@ function create_cred( )
   derpibooru_apikey = "",
   fb_access_token = "",
   gender_apikey = "",
+  google_apikey = "",
+  google_cse_id = "",
   instagram_access_token = "",
   lyricsnmusic_apikey = "",
   neutrino_userid = "",
   neutrino_apikey = "",
   page2images_restkey = "",
   soundcloud_client_id = "",
+  superfeedr_authorization = "=",
   tw_consumer_key = "",
   tw_consumer_secret = "",
   tw_access_token = "",
-  tw_access_token_secret = ""
+  tw_access_token_secret = "",
+  x_mashape_key = "",
+  yandex_translate_apikey = "",
+  yandex_rich_content_apikey = ""
   }
   serialize_to_file(cred, './data/credentials.lua')
   print ('saved credentials into ./data/credentials.lua')
