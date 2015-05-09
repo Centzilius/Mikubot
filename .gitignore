@@ -25,3 +25,16 @@ plugins/derpibooru_nsfw.lua
 plugins/derpibooru.lua
 plugins/rss.lua
 plugins/meme.lua
+plugins/app_store.lua
+plugins/bitly_create.lua
+plugins/dailymotion.lua
+plugins/dns.lua
+plugins/gdrive.lua
+plugins/instagram.lua
+plugins/play_store.lua
+plugins/reddit.lua
+plugins/soundcloud.lua
+plugins/spotify.lua
+plugins/vimeo.lua
+plugins/vine.lua
+plugins/youtube_playlist.lua
