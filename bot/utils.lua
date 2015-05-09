@@ -78,7 +78,7 @@ end
 -- will get the text after the last "/" for filename 
 -- and content-type for extension
 function download_to_file(url, file_name)
-  print("url to download: "..url)
+  print("Download URL: "..url)
 
   local respbody = {}
   local options = {
@@ -106,7 +106,7 @@ function download_to_file(url, file_name)
   file_name = file_name or get_http_file_name(url, headers)
     
   local file_path = "/home/pi/Mikubot/tmp/"..file_name
-  print("Saved to: "..file_path)
+  print("Gespeichert in: "..file_path)
 
   file = io.open(file_path, "w+")
   file:write(table.concat(respbody))
@@ -253,10 +253,10 @@ function send_photo_from_url(receiver, url, cb_function, cb_extra)
   
   local file_path = download_to_file(url, false)
   if not file_path then -- Error
-    local text = 'Error downloading the image'
+    local text = 'Fehler beim laden des Bildes'
     send_msg(receiver, text, cb_function, cb_extra)
   else
-    print("File path: "..file_path)
+    print("Datei Pfad: "..file_path)
     _send_photo(receiver, file_path, cb_function, cb_extra)
   end
 end
@@ -268,10 +268,10 @@ function send_photo_from_url_callback(cb_extra, success, result)
   
   local file_path = download_to_file(url, false)
   if not file_path then -- Error
-    local text = 'Error downloading the image'
+    local text = 'Fehler beim laden des Bildes'
     send_msg(receiver, text, ok_cb, false)
   else
-    print("File path: "..file_path)
+    print("Datei Pfad: "..file_path)
     _send_photo(receiver, file_path, ok_cb, false)
   end
 end
@@ -298,7 +298,7 @@ function send_photos_from_url_callback(cb_extra, success, result)
   -- The previously image to remove
   if remove_path ~= nil then
     os.remove(remove_path)
-    print("Deleted: "..remove_path)
+    print(remove_path.." gelöscht!")
   end
 
   -- Nil or empty, exit case (no more urls)
@@ -328,7 +328,7 @@ function rmtmp_cb(cb_extra, success, result)
 
   if file_path ~= nil then
     os.remove(file_path)
-    print("Deleted: "..file_path)
+    print(file_path.." gelöscht!")
   end
   -- Finaly call the callback
   cb_function(cb_extra, success, result)
@@ -350,7 +350,7 @@ end
 -- cb_function and cb_extra are optionals callback
 function send_document_from_url(receiver, url, cb_function, cb_extra)
   local file_path = download_to_file(url, false)
-  print("File path: "..file_path)
+  print("Datei Pfad: "..file_path)
   _send_document(receiver, file_path, cb_function, cb_extra)
 end
 
@@ -377,7 +377,7 @@ end
 -- Returns true if user was warned and false if not warned (is allowed)
 function warns_user_not_allowed(plugin, msg)
   if not user_allowed(plugin, msg) then
-    local text = 'This plugin requires privileged user'
+    local text = 'Du darfst diesen Befehl nicht nutzen!'
     local receiver = get_receiver(msg)
     send_msg(receiver, text, ok_cb, false)
     return true
@@ -451,9 +451,9 @@ function load_from_file(file)
   if f == nil then
     -- Create a new empty table
     serialize_to_file({}, file)
-    print ('Created file', file)
+    print ('Erstelle Datei', file)
   else
-    print ('Data loaded from file', file)
+    print ('Daten geladen von', file)
     f:close() 
   end
   return loadfile (file)()
