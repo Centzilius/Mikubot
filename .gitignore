@@ -37,3 +37,4 @@ plugins/spotify.lua
 plugins/vimeo.lua
 plugins/vine.lua
 plugins/youtube_playlist.lua
+plugins/yandere.lua

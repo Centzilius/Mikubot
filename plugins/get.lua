@@ -40,7 +40,7 @@ end
 
 local function run(msg, matches)
   local chat_id = tostring(msg.to.id)
-  if matches[1] == "!get" then
+  if matches[1] == "/get" then
     return get_value(chat_id, nil)
   end
   return get_value(chat_id, matches[1])
@@ -77,4 +77,3 @@ return {
     run = run,
     pre_process = lex
 }
-

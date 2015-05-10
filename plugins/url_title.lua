@@ -38,11 +38,10 @@ function run(msg, matches)
 	  title == "Object moved" or
 	  string.match(title, "on Steam") or
 	  string.match(title, "521: Web server is down") or
-      string.match(title, "deviantArt") or
-      string.match(title, "twitch") or
       string.match(title, "eBay</title>") or
-	  string.match(title, "Twitch") or
-	  string.match(msg.text, "steamcommunity.com/app/") then
+	  string.match(msg.text, "twitch.tv") or
+	  string.match(msg.text, "steamcommunity.com/app/") or
+	  string.match(msg.text, "deviantart.com") then
     print('Invalide, da "'..title..'"')
   else
     return title

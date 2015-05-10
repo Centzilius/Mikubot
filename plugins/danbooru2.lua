@@ -45,7 +45,7 @@ function run(msg, matches)
 
   local txt = 'Artist: ' .. post.tag_string_artist .. '\n'
   txt = txt .. 'Character: ' .. post.tag_string_character .. '\n'
-  txt = txt .. '[' .. math.ceil(post.file_size/1000) .. 'kb] ' .. URL .. post.file_url
+  --txt = txt .. '[' .. math.ceil(post.file_size/1000) .. 'kb] ' .. URL .. post.file_url
   return txt
 end
 

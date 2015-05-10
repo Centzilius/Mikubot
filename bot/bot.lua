@@ -233,7 +233,7 @@ function create_cred( )
   neutrino_apikey = "",
   page2images_restkey = "",
   soundcloud_client_id = "",
-  superfeedr_authorization = "=",
+  superfeedr_authorization = "",
   tw_consumer_key = "",
   tw_consumer_secret = "",
   tw_access_token = "",
