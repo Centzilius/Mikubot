@@ -3,7 +3,7 @@ socket = require("socket")
 function cron()
 	-- Use yours desired web and id
 	local addr = "www.boerse.to"
-	local dest = "chat#id21091846"
+	local dest = "chat#id12345678"
     -- Checks a TCP connexion
     local connexion = socket.connect(addr, 80)
     if not connexion then 
