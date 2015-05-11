@@ -38,7 +38,7 @@ function run(msg, matches)
     	 return "Fehler: "..response_code
     end
 	 local data = json:decode(response_body)
-	 return "Tweet gesendet!"..data.id_str
+	 return "Tweet gesendet!"
 end
 
 return {
@@ -46,7 +46,6 @@ return {
   usage = "",
   patterns = {"^/tw (.+)"}, 
   run = run,
-  privileged = true
 }
 
 end

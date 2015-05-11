@@ -231,10 +231,10 @@ end
 return {
    description = "Random tweew from user",
    usage = {
-      "!tweet id [id]: Get a random tweet from the user with that ID",
-      "!tweet id [id] last: Get a random tweet from the user with that ID",
-      "!tweet name [name]: Get a random tweet from the user with that name",
-      "!tweet name [name] last: Get a random tweet from the user with that name"
+      "/tweet id [id]: Get a random tweet from the user with that ID",
+      "/tweet id [id] last: Get a random tweet from the user with that ID",
+      "/tweet name [name]: Get a random tweet from the user with that name",
+      "/tweet name [name] last: Get a random tweet from the user with that name"
    },
    patterns = {
       "^/tweet (id) ([%w_%.%-]+)$",
