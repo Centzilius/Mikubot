@@ -31,11 +31,8 @@ end
 
 return {
     description = "Andere User zu einer Chat-Gruppe hinzufügen", 
-    usage = "/invite name [user_name], !invite id [user_id]",
-    patterns = {
-      "^/invite (name) (.*)$",
-      "^/invite (id) (%d+)$"
-    }, 
+    usage = "/invite name [user_name], /invite id [user_id]",
+    patterns = {"^/invite (name) (.*)$","^/invite (id) (%d+)$"}, 
     run = run 
 }
 

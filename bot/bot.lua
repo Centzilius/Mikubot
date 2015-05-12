@@ -38,33 +38,33 @@ end
 function msg_valid(msg)
   -- Dont process outgoing messages
   if msg.out then
-    print('\27[36mNot valid: msg from us\27[39m')
+    print('\27[36mNicht gültig: Nachricht von mir\27[39m')
     return false
   end
   
   -- Before bot was started
   if msg.date < now then
-    print('\27[36mNot valid: old msg\27[39m')
+    print('\27[36mNicht gültig: alte Nachricht\27[39m')
     return false
   end
   
   if msg.unread == 0 then
-    print('\27[36mNot valid: readed\27[39m')
+    print('\27[36mNicht gültig: gelesen\27[39m')
     return false
   end
 
   if msg.service then
-    print('\27[36mNot valid: service\27[39m')
+    print('\27[36mNicht gültig: Service\27[39m')
     return false
   end
 
   if not msg.to.id then
-    print('\27[36mNot valid: To id not provided\27[39m')
+    print('\27[36mNicht gültig: To id not provided\27[39m')
     return false
   end
 
   if not msg.from.id then
-    print('\27[36mNot valid: From id not provided\27[39m')
+    print('\27[36mNicht gültig: From id not provided\27[39m')
     return false
   end
 
@@ -114,7 +114,7 @@ function match_plugin(plugin, plugin_name, msg)
   for k, pattern in pairs(plugin.patterns) do
     local matches = match_pattern(pattern, msg.text)
     if matches then
-      print("msg matches: ", pattern)
+      print("Nachricht stimmt überein mit ", pattern)
 	  
 	  if is_plugin_disabled_on_chat(plugin_name, receiver) then
         return nil
@@ -150,7 +150,7 @@ end
 -- Save the content of _config to config.lua
 function save_config( )
   serialize_to_file(_config, './data/config.lua')
-  print ('saved config into ./data/config.lua')
+  print ('Configuration in ./data/config.lua gespeichert')
 end
 
 -- Returns the config from config.lua file.
@@ -159,14 +159,14 @@ function load_config( )
   local f = io.open('./data/config.lua', "r")
   -- If config.lua doesnt exists
   if not f then
-    print ("Created new config file: data/config.lua")
+    print ("Neue Config-Datei erstellt: data/config.lua")
     create_config()
   else
     f:close()
   end
   local config = loadfile ("./data/config.lua")()
   for v,user in pairs(config.sudo_users) do
-    print("Allowed user: " .. user)
+    print("Erlaubter Benutzer: " .. user)
   end
   return config
 end
@@ -175,7 +175,7 @@ function load_cred( )
   local cf = io.open('./data/credentials.lua', "r")
   -- If credentials.lua doesnt exists
   if not cf then
-    print ("Created new credentials file: data/credentials.lua")
+    print ("Neue Credentials-Datei erstellt: data/credentials.lua")
     create_cred()
   else
     cf:close()
@@ -189,33 +189,13 @@ function create_config( )
   -- A simple config with basic plugins and ourserves as priviled user
   config = {
     enabled_plugins = {
-      "9gag",
-      "eur",
-      "echo",
-      "btc",
-      "get",
-      "giphy",
-      "google",
-      "gps",
       "help",
-      "images",
-      "img_google",
-      "location",
-      "media",
-      "plugins",
-      "channels",
-      "set",
-      "stats",
-      "time",
-      "version",
-      "weather",
-      "xkcd",
-      "youtube" },
+      "plugins" },
     sudo_users = {our_id},
     disabled_channels = {}
   }
   serialize_to_file(config, './data/config.lua')
-  print ('saved config into ./data/config.lua')
+  print ('Configuration in ./data/config.lua gespeichert')
 end
 
 function create_cred( )
@@ -243,7 +223,7 @@ function create_cred( )
   yandex_rich_content_apikey = ""
   }
   serialize_to_file(cred, './data/credentials.lua')
-  print ('saved credentials into ./data/credentials.lua')
+  print ('Credentials gespeichert in ./data/credentials.lua')
 end
 
 function on_our_id (id)
@@ -268,7 +248,7 @@ end
 -- Enable plugins in config.json
 function load_plugins()
   for k, v in pairs(_config.enabled_plugins) do
-    print("Loading plugin", v)
+    print("Lade Plugin", v)
     local t = loadfile("plugins/"..v..'.lua')()
     plugins[v] = t
   end

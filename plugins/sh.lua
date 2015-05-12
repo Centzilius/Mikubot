@@ -32,7 +32,7 @@ end
 
 return {
     description = "Führt Befehle in der Konsole aus", 
-    usage = {"Das kann nur Akamaru"},
+    usage = {"/sh kann nur Akamaru"},
     patterns = {"^/uptime", "^/sh (.*)$"}, 
     run = run,
     privileged = true

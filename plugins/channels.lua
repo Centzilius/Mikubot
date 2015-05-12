@@ -68,7 +68,7 @@ end
 
 return {
 	description = "", 
-	usage = {"Das kann nur Akamaru"},
+	usage = {"/channel kann nur Akamaru"},
 	patterns = {"^/channel? (enable)","^/channel? (disable)" }, 
 	run = run,
 	privileged = true,

@@ -11,27 +11,27 @@ local function run(msg, matches)
   local mime_type = mimetype.get_content_type_no_sub(ext)
 
   if ext == 'gif' then
-    print('send_file')
+    print('Sende Datei')
     send_document(receiver, file, rmtmp_cb, cb_extra)
 
   elseif mime_type == 'text' then
-    print('send_document')
+    print('Sende Document')
     send_document(receiver, file, rmtmp_cb, cb_extra)
   
   elseif mime_type == 'image' then
-    print('send_photo')
+    print('Sende Foto')
     send_photo(receiver, file, rmtmp_cb, cb_extra)
   
   elseif mime_type == 'audio' then
-    print('send_audio')
+    print('Sende Audio')
     send_audio(receiver, file, rmtmp_cb, cb_extra)
 
   elseif mime_type == 'video' then
-    print('send_video')
+    print('Sende Video')
     send_video(receiver, file, rmtmp_cb, cb_extra)
   
   else
-    print('send_file')
+    print('Sende Datei')
     send_document(receiver, file, rmtmp_cb, cb_extra)
   end
   

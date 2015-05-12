@@ -12,16 +12,16 @@ function update_user_stats(msg)
   local from_id = tostring(msg.from.id)
   local to_id = tostring(msg.to.id)
   local user_name = get_name(msg)
-  print ('New message from '..user_name..'['..from_id..']'..' to '..to_id)
+  print ('Neue Nachricht von '..user_name..'['..from_id..']'..' in '..to_id)
   -- If last name is nil dont save last_name.
   local user_last_name = msg.from.last_name
   local user_print_name = msg.from.print_name
   if _stats[to_id] == nil then
-    print ('New stats key to_id: '..to_id)
+    print ('Neuer stats key to_id: '..to_id)
     _stats[to_id] = {}
   end
   if _stats[to_id][from_id] == nil then
-    print ('New stats key from_id: '..to_id)
+    print ('Neuer stats key from_id: '..to_id)
     _stats[to_id][from_id] = {
       user_id = from_id,
       name = user_name,
@@ -43,10 +43,10 @@ function read_file_stats( )
   -- If file doesn't exists
   if f == nil then
     -- Create a new empty table
-    print ('Created user stats file '.._file_stats)
+    print ('"user stats file" erstellt '.._file_stats)
     serialize_to_file({}, _file_stats)
   else
-    print ('Stats loaded: '.._file_stats)
+    print ('Stats geladen: '.._file_stats)
     f:close() 
   end
   return loadfile (_file_stats)()
@@ -95,7 +95,7 @@ local function run(msg, matches)
     if msg.to.type == 'chat' or is_sudo(msg) then
       return get_stats_status(msg)
     else
-      return 'Stats works only chats'
+      return 'Stats funktioniert nur in Chats'
     end
   else 
     update_user_stats(msg)

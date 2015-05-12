@@ -15,18 +15,17 @@ local client = OAuth.new(consumer_key, consumer_secret, {
 })
 
 function run(msg, matches)
-
   if consumer_key:isempty() then
-   return "Twitter Consumer Key is empty, write it in plugins/twitter.lua"
+   return "Twitter Consumer Key ist nicht vorhanden, schreibe ihn in data/credentials.lua"
   end
   if consumer_secret:isempty() then
-   return "Twitter Consumer Secret is empty, write it in plugins/twitter.lua"
+   return "Twitter Consumer Secret ist nicht vorhanden, schreibe ihn in data/credentials.lua"
   end
   if access_token:isempty() then
-   return "Twitter Access Token is empty, write it in plugins/twitter.lua"
+   return "Twitter Access Token ist nicht vorhanden, schreibe ihn in data/credentials.lua"
   end
   if access_token_secret:isempty() then
-   return "Twitter Access Token Secret is empty, write it in plugins/twitter.lua"
+   return "Twitter Access Token Secret ist nicht vorhanden, schreibe ihn in data/credentials.lua"
   end
 
   local twitter_url = "https://api.twitter.com/1.1/statuses/show/" .. matches[1] .. ".json"
@@ -69,8 +68,8 @@ function run(msg, matches)
 end
 
 return {
-    description = "When user sends twitter URL, send text and images to origin. Requieres OAuth Key.", 
-    usage = "",
+    description = "Wenn ein Twitter Link gesendet wird, wird der Tweet gepostet", 
+    usage = {"twitter.com Link"},
     patterns = {"https://twitter.com/[^/]+/status/([0-9]+)"}, 
     run = run 
 }

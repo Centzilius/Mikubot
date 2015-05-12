@@ -18,16 +18,16 @@ local client = OAuth.new(consumer_key, consumer_secret, {
 
 function run(msg, matches)
   if consumer_key:isempty() then
-   return "Twitter Consumer Key is empty, write it in plugins/twitter_send.lua"
+   return "Twitter Consumer Key ist nicht vorhanden, schreibe ihn in data/credentials.lua"
   end
   if consumer_secret:isempty() then
-   return "Twitter Consumer Secret is empty, write it in plugins/twitter_send.lua"
+   return "Twitter Consumer Secret ist nicht vorhanden, schreibe ihn in data/credentials.lua"
   end
   if access_token:isempty() then
-   return "Twitter Access Token is empty, write it in plugins/twitter_send.lua"
+   return "Twitter Access Token ist nicht vorhanden, schreibe ihn in data/credentials.lua"
   end
   if access_token_secret:isempty() then
-   return "Twitter Access Token Secret is empty, write it in plugins/twitter_send.lua"
+   return "Twitter Access Token Secret ist nicht vorhanden, schreibe ihn in data/credentials.lua"
   end
  
     local response_code, response_headers, response_status_line, response_body = 
@@ -42,8 +42,8 @@ function run(msg, matches)
 end
 
 return {
-  description = "", 
-  usage = "",
+  description = "Sende Tweets auf Twitter! twitter.com/Mikubot_", 
+  usage = {"/tw [Text]"},
   patterns = {"^/tw (.+)"}, 
   run = run,
 }

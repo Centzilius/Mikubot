@@ -33,7 +33,7 @@ local function get_value(chat, value_name)
   end 
   local value = _values[chat][value_name]
   if ( value == nil) then
-    return "Konnte nicht finden "..value_name
+    return 'Konnte "'..value_name..' nicht finden'
   end
   return value_name.." = "..value
 end
@@ -69,11 +69,10 @@ local function lex(msg)
 end
 
 return {
-    description = "Bekommt Variable, die mit !set gesetzt wurde", 
-    usage = "/get (Variable)",
-    patterns = {
-      "^/get (%a+)$",
-      "^/get$"}, 
+    description = "Bekommt Variable, die mit /set gesetzt wurde", 
+    usage = {"/get (Variable)"},
+    patterns = {"^/get (%a+)$","^/get$"}, 
+    patterns = {"^/get (%a+)$","^/get$"}, 
     run = run,
     pre_process = lex
 }

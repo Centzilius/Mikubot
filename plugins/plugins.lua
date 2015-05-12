@@ -49,7 +49,7 @@ end
 
 
 local function enable_plugin( plugin_name )
-  print('checking if '..plugin_name..' exists')
+  print('Überprüfe ob "'..plugin_name..'" existiert')
   -- Check if plugin is enabled
   if plugin_enabled(plugin_name) then
     return 'Plugin "'..plugin_name..'" ist aktiviert!'
@@ -58,19 +58,19 @@ local function enable_plugin( plugin_name )
   if plugin_exists(plugin_name) then
     -- Add to the config table
     table.insert(_config.enabled_plugins, plugin_name)
-    print(plugin_name..' added to _config table')
+    print(plugin_name..' zu to _config table hinzugefügt')
     save_config()
     -- Reload the plugins
     return reload_plugins( )
   else
-    return 'Das Plugin "'..plugin_name..'" exestiert nicht!'
+    return 'Das Plugin "'..plugin_name..'" existiert nicht!'
   end
 end
 
 local function disable_plugin( name, chat )
   -- Check if plugins exists
   if not plugin_exists(name) then
-    return 'Das Plugin "'..plugin_name..'" exestiert nicht!'
+    return 'Das Plugin "'..plugin_name..'" existiert nicht!'
   end
   local k = plugin_enabled(name)
   -- Check if plugin is enabled
@@ -85,7 +85,7 @@ end
 
 local function disable_plugin_on_chat(receiver, plugin)
   if not plugin_exists(plugin) then
-    return "Dieses Plugin exestiert nicht!"
+    return "Dieses Plugin existiert nicht!"
   end
 
   if not _config.disabled_plugin_on_chat then
@@ -104,11 +104,11 @@ end
 
 local function reenable_plugin_on_chat(receiver, plugin)
   if not _config.disabled_plugin_on_chat then
-    return 'There aren\'t any disabled plugin.'
+    return 'Hier sind keine Plugins deaktiviert.'
   end
 
   if not _config.disabled_plugin_on_chat[receiver] then
-    return 'There aren\'t any disabled plugin for this chat.'
+    return 'Hier sind keine Plugins deaktiviert.'
   end
 
   if not _config.disabled_plugin_on_chat[receiver][plugin] then
@@ -130,14 +130,14 @@ local function run(msg, matches)
   if matches[1] == 'enable' and matches[3] == 'chat' then
     local receiver = get_receiver(msg)
     local plugin = matches[2]
-    print("enable "..plugin..' on this chat')
+    print('Aktiviere "'..plugin..'" in diesem Chat')
     return reenable_plugin_on_chat(receiver, plugin)
   end
 
   -- Enable a plugin
   if matches[1] == 'enable' then
     local plugin_name = matches[2]
-    print("enable: "..matches[2])
+    print("A+: "..matches[2])
     return enable_plugin(plugin_name)
   end
 
@@ -145,13 +145,13 @@ local function run(msg, matches)
   if matches[1] == 'disable' and matches[3] == 'chat' then
     local plugin = matches[2]
     local receiver = get_receiver(msg)
-    print("disable "..plugin..' on this chat')
+    print('Deaktiviere "'..plugin..'" in diesem Chat')
     return disable_plugin_on_chat(receiver, plugin)
   end
 
   -- Disable a plugin
   if matches[1] == 'disable' then
-    print("disable: "..matches[2])
+    print("Deaktiviere: "..matches[2])
     return disable_plugin(matches[2])
   end
 

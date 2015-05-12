@@ -48,12 +48,9 @@ function run(msg, matches)
 end
 
 return {
-  description = "Send dmm video info",
-  usage = {"/dmm (id): Send a dmm video cover and title. If not id, send a random one"},
-  patterns = {
-    "^/dmm$",
-    "^/dmm (.+)"
-  },
+  description = "Sendet dmm Video Info",
+  usage = {"/dmm","/dmm (id)"},
+  patterns = {"^/dmm$","^/dmm (.+)"},
   run = run
 }
 

@@ -27,7 +27,7 @@ local function send_generics_from_url_callback(cb_extra, success, result)
    -- The previously image to remove
    if remove_path ~= nil then
       os.remove(remove_path)
-      print("Deleted: "..remove_path)
+      print("Gelöscht: "..remove_path)
    end
 
    -- Nil or empty, exit case (no more urls)
@@ -110,23 +110,23 @@ end
 
 local function check_keys()
    if consumer_key:isempty() then
-      return "Twitter Consumer Key is empty, write it in plugins/twitter.lua"
-   end
-   if consumer_secret:isempty() then
-      return "Twitter Consumer Secret is empty, write it in plugins/twitter.lua"
-   end
-   if access_token:isempty() then
-      return "Twitter Access Token is empty, write it in plugins/twitter.lua"
-   end
-   if access_token_secret:isempty() then
-      return "Twitter Access Token Secret is empty, write it in plugins/twitter.lua"
-   end
+   return "Twitter Consumer Key ist nicht vorhanden, schreibe ihn in data/credentials.lua"
+  end
+  if consumer_secret:isempty() then
+   return "Twitter Consumer Secret ist nicht vorhanden, schreibe ihn in data/credentials.lua"
+  end
+  if access_token:isempty() then
+   return "Twitter Access Token ist nicht vorhanden, schreibe ihn in data/credentials.lua"
+  end
+  if access_token_secret:isempty() then
+   return "Twitter Access Token Secret ist nicht vorhanden, schreibe ihn in data/credentials.lua"
+  end
    return ""
 end
 
 
 local function analyze_tweet(tweet)
-   local header = "Tweet from " .. tweet.user.name .. " (@" .. tweet.user.screen_name .. ")\n" -- "Link: https://twitter.com/statuses/" .. tweet.id_str
+   local header = "Tweet von " .. tweet.user.name .. " (@" .. tweet.user.screen_name .. ")\n" -- "Link: https://twitter.com/statuses/" .. tweet.id_str
    local text = tweet.text
 
    -- replace short URLs
@@ -170,12 +170,12 @@ local function getTweet(msg, base, all)
    local response_code, response_headers, response_status_line, response_body = client:PerformRequest("GET", twitter_url, base)
 
    if response_code ~= 200 then
-      return "Can't connect, maybe the user don't exist."
+      return "Dieser User scheint nicht zu existieren."
    end
 
    local response = json:decode(response_body)
    if #response == 0 then
-      return "Can't retrieve any tweet, sorry"
+      return "Konnte keine Tweets finden"
    end
    if all then
       for i,tweet in pairs(response) do
@@ -214,7 +214,7 @@ local function run(msg, matches)
       if #matches == 4 then
          local n = tonumber(matches[4])
          if n > 10 then
-            return "You only can ask for 10 tweets at most"
+            return "Nicht so schnell bitte"
          end
          count = matches[4]
          all = true

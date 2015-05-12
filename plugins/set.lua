@@ -24,7 +24,7 @@ end
 
 return {
     description = "Setze Variable", 
-    usage = "/set [Variablenname] [Daten]",
+    usage = {"/set [Variablenname] [Daten]"},
     patterns = {"^/set (%a+) (.+)$"}, 
     run = run 
 }

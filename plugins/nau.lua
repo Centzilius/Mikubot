@@ -4,8 +4,8 @@ end
 
 return {
   description = "RTL Nau", 
-  usage = {"/nau"},
-  patterns = {"^/nau"}, 
+  usage = {"/nau","/now"},
+  patterns = {"^/nau$","^/now$"}, 
   run = run 
 }
 --by Akamaru

@@ -27,7 +27,7 @@ function save_quote(msg)
     end
 
     if quotes_table[to_id] == nil then
-        print ('New quote key to_id: '..to_id)
+        print ('Neuer quote key to_id: '..to_id)
         quotes_table[to_id] = {}
     end
 

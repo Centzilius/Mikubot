@@ -60,7 +60,7 @@ local function parseText(chat, text)
   if (ip ~= nil) then
     return mineSearch(ip, "25565", chat)
   end
-  return "FEHLER: Keine Input IP??"
+  return "FEHLER: Keine Input IP?"
 end
 
 
@@ -73,8 +73,6 @@ end
 return {
   description = "Dursucht Minecraft-Server und sendet Infos",
   usage = usage,
-  patterns = {
-    "^/mine (.*)$"
-  },
+  patterns = {"^/mine (.*)$"},
   run = run
 }

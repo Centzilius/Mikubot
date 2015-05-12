@@ -17,7 +17,7 @@ local function save_cron(msg, url, delete)
     end
   end
   serialize_to_file(cronned, 'data/isup.lua')
-  return 'Saved!'
+  return 'Gespeichert!'
 end
 
 local function is_up_socket(ip, port)
@@ -82,7 +82,7 @@ local function cron()
     for k,url in pairs(urls) do
       print('Checking', url)
       if not isup(url) then
-        local text = url..' looks DOWN from here. ??'
+        local text = url..' scheint DOWN zu sein'
         send_msg(chan, text, ok_cb, false)
       end
     end
@@ -92,20 +92,20 @@ end
 local function run(msg, matches)
   if matches[1] == 'remove' then
     if not is_sudo(msg) then 
-      return 'This command requires privileged user'
+      return 'Du darfst diesen Befehl nicht nutzen!'
     end
     return save_cron(msg, matches[2], true)
 
   elseif matches[1] == 'save' then
     if not is_sudo(msg) then 
-      return 'This command requires privileged user'
+      return 'Du darfst diesen Befehl nicht nutzen!'
     end
     return save_cron(msg, matches[2])
 
   elseif isup(matches[1]) then
-    return matches[1]..' looks UP from here. ??'
+    return matches[1]..' ist UP'
   else
-    return matches[1]..' looks DOWN from here. ??'
+    return matches[1]..' scheint DOWN zu sein'
   end
 end
 
@@ -113,8 +113,8 @@ return {
   description = "Check if a website or server is up.",
   usage = {
     "/isup [host]: Performs a HTTP request or Socket (ip:port) connexion",
-    "/isup cron [host]: Every 5mins check if host is up. (Requires privileged user)",
-    "/isup cron delete [host]: Disable checking that host."
+    "/isup save [host]: Every 5mins check if host is up. (Requires privileged user)",
+    "/isup remove [host]: Disable checking that host."
   },
   patterns = {
     "^/isup (remove) (.*)$",

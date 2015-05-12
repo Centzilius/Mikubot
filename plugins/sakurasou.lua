@@ -30,7 +30,7 @@ function run(msg, matches)
 end
 
 return {
-  description = "Sendet euch ein Char aus Sakurasou no Pet na Kanojo", 
+  description = "Sendet euch ein Charakter aus Sakurasou no Pet na Kanojo", 
   usage = {"/shiina","/Shiina","/chihiro","/Chihiro","/jin","/Jin","/misaki","/Misaki","/nanami","/Nanami","/ryuunosuke","/Ryuunosuke","/sorata","/Sorata"},
   patterns = {"^/shiina","^/Shiina","^/chihiro","^/Chihiro","^/jin","^/Jin","^/misaki","^/Misaki","^/nanami","^/Nanami","^/ryuunosuke","^/Ryuunosuke","^/sorata","^/Sorata"}, 
   run = run 

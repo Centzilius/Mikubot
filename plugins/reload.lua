@@ -5,8 +5,8 @@ function run(msg, matches)
 end
 
 return {
-    description = "", 
-    usage = "",
+    description = "Läd die Plugins neu", 
+    usage = {"/reload (kann nur Akamaru)"},
     patterns = {"^/reload$"}, 
     run = run,
   privileged = true

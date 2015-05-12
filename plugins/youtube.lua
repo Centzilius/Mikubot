@@ -33,7 +33,7 @@ end
 
 return {
   description = "Sendet YouTube-Info.", 
-  usage = "",
+  usage = {"youtube.com/watch Link","youtu.be Link"},
   patterns = {
     "youtu.be/([A-Za-z0-9-_-]+)",
     "youtube.com/watch%?v=([A-Za-z0-9-_-]+)",

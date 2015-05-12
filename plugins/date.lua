@@ -5,7 +5,7 @@ end
 
 return {
     description = "Zeigt das aktuelle Datum an", 
-    usage = "/date",
+    usage = {"/date"},
     patterns = {"^/date$"}, 
     run = run 
 }
