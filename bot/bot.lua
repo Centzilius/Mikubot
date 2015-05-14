@@ -112,7 +112,7 @@ function match_plugin(plugin, plugin_name, msg)
 
   -- Go over patterns. If one matches is enough.
   for k, pattern in pairs(plugin.patterns) do
-    local matches = match_pattern(pattern, msg.text)
+    local matches = match_pattern(pattern, msg.text, true)
     if matches then
       print("Nachricht stimmt überein mit ", pattern)
 	  
@@ -249,8 +249,16 @@ end
 function load_plugins()
   for k, v in pairs(_config.enabled_plugins) do
     print("Lade Plugin", v)
-    local t = loadfile("plugins/"..v..'.lua')()
-    plugins[v] = t
+
+    local ok, err =  pcall(function()
+      local t = loadfile("plugins/"..v..'.lua')()
+      plugins[v] = t
+    end)
+
+    if not ok then
+      print('\27[31mFehler beim laden des Plugins '..v..'\27[39m')
+      print('\27[31m'..err..'\27[39m')
+    end
   end
 end
 
