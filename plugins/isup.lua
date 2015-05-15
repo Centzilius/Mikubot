@@ -103,9 +103,9 @@ local function run(msg, matches)
     return save_cron(msg, matches[2])
 
   elseif isup(matches[1]) then
-    return matches[1]..' ist UP'
+    return matches[1]..' ist UP ✔'
   else
-    return matches[1]..' scheint DOWN zu sein'
+    return matches[1]..' scheint DOWN zu sein ❌'
   end
 end
 
@@ -124,7 +124,8 @@ return {
     "^/ping (remove) (.*)$",
     "^/ping (save) (.*)$"
   },
-  run = run
+  run = run,
+  cron = cron
 }
 
 end
