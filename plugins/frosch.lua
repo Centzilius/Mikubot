@@ -3,7 +3,7 @@
 end
 
 return {
-  description = "Sendet alle Emoticons", 
+  description = "🐸🐸🐸", 
   usage = {"/frosch","/Frosch"},
   patterns = {"^/frosch","^/Frosch"}, 
   run = run 
