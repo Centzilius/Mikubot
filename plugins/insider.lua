@@ -28,7 +28,7 @@ function run(msg, matches)
 				   'Insider: ay\nerschaffen/hauptsächlich verwendet von: Brawl\nWo eingesetzt?: anstelle von "ja"\nBemerkung: ---',
 				   'Insider: denn\nerschaffen/hauptsächlich verwendet von: Henrik\nWo eingesetzt?: Telegram\nBemerkung: anstelle von "dann"',
 				   'Insider: DaBui\nerschaffen/hauptsächlich verwendet von: Akamaru\nWo eingesetzt?: Telegram\nBemerkung: anstelle von "DaBu"; meist wenn Mr.DaBu schlafen geht',
-				   'Insider: :\\nerschaffen/hauptsächlich verwendet von: nino\nWo eingesetzt?: mehrbedeutend: nachdenklich, zweifelnd, traurig usw.\nBemerkung: eines seiner Markenzeichen',
+				   'Insider: :\\\nerschaffen/hauptsächlich verwendet von: nino\nWo eingesetzt?: mehrbedeutend: nachdenklich, zweifelnd, traurig usw.\nBemerkung: eines seiner Markenzeichen',
 				   'Insider: MeeeeeeeM\nerschaffen/hauptsächlich verwendet von: Brawl, nino\nWo eingesetzt?: FiiiiiiiiiiiiiiiiiF\nBemerkung: SooooooooooooooooS',
 				   'Insider: DJ mP\nerschaffen/hauptsächlich verwendet von: Brawl\nWo eingesetzt?: Telegram\nBemerkung: als Kurzname für masterP'}
   return answers[math.random(#answers)]
