@@ -18,16 +18,16 @@ local function returnids(cb_extra, success, result)
    local text = 'IDs fuer den Chat "' .. chatname .. '" (' .. receiver .. ')\n'
    text = text .. "Hier sind " .. result.members_num .. ' Mitglieder:\n---------\n'
    for k,v in pairs(result.members) do
-      text = text .. v.print_name .. " (user#id" .. v.id .. ")\n"
+      text = text .. v.print_name .. " (user#id" .. v.id ..")\n"
    end
    send_msg(receiver, text, ok_cb, false)
 end
 
 local function run(msg, matches)
-   if matches[1] == "/id" then
-      local text = user_print_name(msg.from) .. ' (user#id' .. msg.from.id .. ' ' .. tostring(is_sudo(msg)) .. ')'
+   if matches[1] == "/id" or matches[1] == "/myid"then
+      local text = 'Dein Name lautet "' .. user_print_name(msg.from) .. '" und deine ID ist ' .. msg.from.id .. ' ' .. tostring(is_sudo(msg))
       if is_chat_msg(msg) then
-         text = text .. '\nDu bist in der Gruppe "' .. user_print_name(msg.to) .. '" (chat#id ' .. msg.to.id  .. ')'
+         text = text .. '\nDu bist in der Gruppe "' .. user_print_name(msg.to) .. '" und die Chat ID ist ' .. msg.to.id
       end
       return text
    elseif matches[1] == "chat" then
@@ -40,11 +40,8 @@ local function run(msg, matches)
 end
 
 return {
-   description = "Zeige dir IDs und IDs aller Gruppenmitglieder an.",
-   usage = "/id, /id chat",
-   patterns = {
-      "^/id$",
-      "^/ids? (chat)"
-   },
+   description = "Zeige dir deine ID und die IDs aller Gruppenmitglieder an.",
+   usage = {"/id", "/myid"," /id chat"},
+   patterns = {"^/id$","^/myid$","^/ids? (chat)"},
    run = run
 }
