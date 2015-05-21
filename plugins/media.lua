@@ -17,6 +17,10 @@ local function run(msg, matches)
   elseif mime_type == 'text' then
     print('Sende Document')
     send_document(receiver, file, rmtmp_cb, cb_extra)
+
+  elseif mime_type == 'application' then
+    print('Sende Document')
+    send_document(receiver, file, rmtmp_cb, cb_extra)
   
   elseif mime_type == 'image' then
     print('Sende Foto')
