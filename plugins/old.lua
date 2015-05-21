@@ -6,7 +6,7 @@ end
 return {
   description = "", 
   usage = {"#old"},
-  patterns = {"^#old$"}, 
+  patterns = {"^#old$","^.#old$"}, 
   run = run 
 }
 --by Akamaru

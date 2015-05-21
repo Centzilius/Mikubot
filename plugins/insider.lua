@@ -1,5 +1,4 @@
 do
---'Insider: \nerschaffen/hauptsächlich verwendet von: \nWo eingesetzt?: \nBemerkung: '
 function run(msg, matches)
   local answers = {'Insider: eben\nerschaffen/hauptsächlich verwendet von: pegelf\nWo eingesetzt?: sehr oft in Sätzen\nBemerkung: Ein Markenzeichen von ihm, nach Mr.DaBus Meinung.',
 				   'Insider: ebenD\nerschaffen/hauptsächlich verwendet von: Andi919\nWo eingesetzt?: immer statt dem Wort "eben"\nBemerkung: das D wird absichtlich groß geschrieben',
@@ -30,7 +29,8 @@ function run(msg, matches)
 				   'Insider: DaBui\nerschaffen/hauptsächlich verwendet von: Akamaru\nWo eingesetzt?: Telegram\nBemerkung: anstelle von "DaBu"; meist wenn Mr.DaBu schlafen geht',
 				   'Insider: :\\\nerschaffen/hauptsächlich verwendet von: nino\nWo eingesetzt?: mehrbedeutend: nachdenklich, zweifelnd, traurig usw.\nBemerkung: eines seiner Markenzeichen',
 				   'Insider: MeeeeeeeM\nerschaffen/hauptsächlich verwendet von: Brawl, nino\nWo eingesetzt?: FiiiiiiiiiiiiiiiiiF\nBemerkung: SooooooooooooooooS',
-				   'Insider: DJ mP\nerschaffen/hauptsächlich verwendet von: Brawl\nWo eingesetzt?: Telegram\nBemerkung: als Kurzname für masterP'}
+				   'Insider: DJ mP\nerschaffen/hauptsächlich verwendet von: Brawl\nWo eingesetzt?: Telegram\nBemerkung: als Kurzname für masterP',
+				   'Insider: Satya Nutella\nerschaffen/hauptsächlich verwendet von: Brawl\nWo eingesetzt?: Telegram\nBemerkung: Anstelle von "Satya Nadella"'}
   return answers[math.random(#answers)]
 end
 
@@ -42,3 +42,5 @@ return {
 }
 end
 --by Akamaru
+--'Insider: \nerschaffen/hauptsächlich verwendet von: \nWo eingesetzt?: \nBemerkung: '
+--all insider from https://wiki.pegelf.de/Insiderliste

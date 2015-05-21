@@ -1,9 +1,9 @@
 
 local function callback(extra, success, result)
   if success then
-    print('File downloaded to:', result)
+    print('Datei gespeichert in:', result)
   else
-    print('Error downloading: '..extra)
+    print('Fehler beim downloaden von "'..extra..'"')
   end
 end
 
@@ -32,14 +32,9 @@ local function pre_process(msg)
 end
 
 return {
-  description = "Wenn eine Datei gesendet wird, läd Mikubot sie runter.",
-  usage = {"Irgendeine Datei"},
+  description = 'Wenn eine Datei gesendet wird, läd Mikubot sie runter.',
+  usage = {'Irgendeine Datei'},
   run = run,
-  patterns = {
-    '%[(document)%]',
-    '%[(photo)%]',
-    '%[(video)%]',
-    '%[(audio)%]'
-  },
+  patterns = {'%[(document)%]','%[(photo)%]','%[(video)%]','%[(audio)%]'},
   pre_process = pre_process
 }
