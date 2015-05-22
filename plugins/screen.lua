@@ -18,7 +18,7 @@ function run(msg, matches)
   if string.starts(msg.text, '/screen') then
     text = run_bash("scrot 'scrot.png' -e 'mv $f ~/Mikubot/tmp/'")
 	send_photo(get_receiver(msg), "tmp/scrot.png", ok_cb, false)
-    return 'Screenshot erstellt!'
+    return 'Screenshot wird gesendet!'
   end
 end
 
