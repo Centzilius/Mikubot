@@ -24,4 +24,4 @@ return {
   patterns = {"^/hdf"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

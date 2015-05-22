@@ -8,4 +8,4 @@ return {
   patterns = {"^/neorame"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

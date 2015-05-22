@@ -1,4 +1,3 @@
-do
 function run(msg, matches)
   local answers = {'Insider: eben\nerschaffen/hauptsächlich verwendet von: pegelf\nWo eingesetzt?: sehr oft in Sätzen\nBemerkung: Ein Markenzeichen von ihm, nach Mr.DaBus Meinung.',
 				   'Insider: ebenD\nerschaffen/hauptsächlich verwendet von: Andi919\nWo eingesetzt?: immer statt dem Wort "eben"\nBemerkung: das D wird absichtlich groß geschrieben',
@@ -40,7 +39,6 @@ return {
   patterns = {"^/Insider$","^/insider$"},
   run = run
 }
-end
---by Akamaru
+--by Akamaru [https://ponywave.de]
 --'Insider: \nerschaffen/hauptsächlich verwendet von: \nWo eingesetzt?: \nBemerkung: '
 --all insider from https://wiki.pegelf.de/Insiderliste

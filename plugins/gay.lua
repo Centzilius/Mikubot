@@ -47,5 +47,5 @@ return {
     patterns = {"^/gay$"}, 
     run = run 
 }
-
 end
+--Modified by Akamaru [https://ponywave.de]

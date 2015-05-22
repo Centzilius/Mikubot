@@ -1,5 +1,3 @@
-do
-
 function run(msg, matches)
   local answers = {'Ja','Nein','Eines Tages vielleicht'}
   return answers[math.random(#answers)]
@@ -12,5 +10,4 @@ return {
     patterns = {"^Magische Miesmuschel(.*)$","^magische Miesmuschel(.*)$","^Magische miesmuschel(.*)$","^magische miesmuschel(.*)$"}, 
     run = run
 }
-end
---by Akamaru
+--by Akamaru [https://ponywave.de]

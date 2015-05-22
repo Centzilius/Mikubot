@@ -17,4 +17,4 @@ return {
   patterns = {"^/kitty$","^/katze$","^/cat$","^/neko$","^/kadse$"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

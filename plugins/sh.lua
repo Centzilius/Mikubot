@@ -1,4 +1,3 @@
-
 function run_sh(msg)
      name = get_name(msg)
      text = ''

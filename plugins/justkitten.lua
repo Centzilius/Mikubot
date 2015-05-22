@@ -21,4 +21,4 @@ return {
   patterns = {"^/jk"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

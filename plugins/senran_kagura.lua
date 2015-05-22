@@ -47,4 +47,4 @@ return {
   patterns = {"^/asuka","^/Asuka","^/hibari","^/Hibari","^/ikaruga","^/Ikaruga","^/katsuragi","^/Katsuragi","^/yagyuu","^/Yagyuu","^/haruka","^/Haruka","^/hikage","^/Hikage","^/homura","^/Homura","^/mirai","^/Mirai","^/yomi","^/Yomi"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

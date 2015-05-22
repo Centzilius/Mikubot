@@ -1,4 +1,3 @@
-
 function run(msg, matches)
    return os.date("%d.%m.%Y")
 end

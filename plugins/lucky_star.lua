@@ -23,4 +23,4 @@ return {
   patterns = {"^/kagami$","^/Kagami$","^/konata$","^/Konata$","^/miyuki$","^/Miyuki$","^/tsukasa$","^/Tsukasa$"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

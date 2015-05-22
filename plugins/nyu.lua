@@ -8,4 +8,4 @@ return {
   patterns = {"^nyu","^Nyu"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

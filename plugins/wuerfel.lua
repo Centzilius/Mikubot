@@ -12,4 +12,4 @@ return {
     run = run
 }
 end
---by Akamaru
+--by Akamaru [https://ponywave.de]

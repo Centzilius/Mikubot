@@ -8,4 +8,4 @@ return {
   patterns = {"^nii-san","^Nii-san","^nissan","^Nissan"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

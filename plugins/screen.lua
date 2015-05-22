@@ -28,4 +28,4 @@ return {
     patterns = {"^/screen$"}, 
     run = run
 }
---by Akamaru [https://ponywave.de] 
+--by Akamaru [https://ponywave.de]

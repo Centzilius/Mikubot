@@ -1,4 +1,3 @@
-
 function run(msg, matches)
 	send_video(get_receiver(msg), "videos/nope.avi", ok_cb, false)
 	return 'Video wird gesendet...'
@@ -10,4 +9,4 @@ return {
   patterns = {"^nope.avi"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

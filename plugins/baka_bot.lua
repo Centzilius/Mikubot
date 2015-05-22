@@ -10,4 +10,4 @@ return {
   patterns = {"baka bot","Baka bot","baka Bot","Baka Bot","BAKA BOT"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

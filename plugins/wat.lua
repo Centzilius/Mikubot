@@ -22,7 +22,7 @@ end
 return {
   description = "Sendet eins von 6 WAT Bilder", 
   usage = {"/wat","/Wat","/WAT"},
-  patterns = {"^/wat","^/Wat","^/WAT"}, 
+  patterns = {"^/wat$","^/Wat$","^/WAT$"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

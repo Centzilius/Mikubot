@@ -1,4 +1,3 @@
-
 function run(msg, matches)
 
 	-- local g = require "./plugins/google"
@@ -46,3 +45,4 @@ return {
     patterns = {"^/pornhub (.*)$","^/ph (.*)$"}, 
     run = run 
     }
+-- Modified by Akamaru [https://ponywave.de]

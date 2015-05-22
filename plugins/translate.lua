@@ -1,7 +1,5 @@
---[[
 -- Translate text using Google Translate.
 -- http://translate.google.com/translate_a/t?client=z&ie=UTF-8&oe=UTF-8&hl=en&tl=en&text=hello
---]]
 do
 
 function translate(source_lang, target_lang, text)

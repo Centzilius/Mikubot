@@ -1,4 +1,4 @@
--- Implement a command !time [area] which uses
+-- Implement a command /time [area] which uses
 -- 2 Google APIs to get the desired result:
 --   1. Geocoding to get from area to a lat/long pair
 --   2. Timezone to get the local time in that lat/long location
@@ -75,7 +75,7 @@ end
 
 function getformattedLocalTime(area)
    if area == nil then
-      return "Die Zeit nirgendswo ist nirgendswo..."
+      return 'Die Zeit nirgendswo ist nirgendswo...'
    end
 
    lat,lng,acc = get_latlong(area)
@@ -84,7 +84,7 @@ function getformattedLocalTime(area)
    end
    local localTime, timeZoneId = get_time(lat,lng)
 
-   return "Die lokale Zeit in "..timeZoneId.." ist: ".. os.date(dateFormat,localTime) 
+   return 'Die lokale Zeit in "'..timeZoneId..'" ist: '.. os.date(dateFormat,localTime) 
 end
 
 function run(msg, matches)
@@ -93,7 +93,7 @@ end
 
 return {
     description = "Zeigt die lokale Zeit in einer Zeitzone an", 
-    usage = "/zeit [Land/Ort]",
-    patterns = {"^/zeit (.*)$","^/Zeit (.*)$"}, 
+    usage = {'/zeit [Land/Ort]'},
+    patterns = {'^/zeit (.*)$','^/Zeit (.*)$'}, 
     run = run 
 }

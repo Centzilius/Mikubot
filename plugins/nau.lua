@@ -8,4 +8,4 @@ return {
   patterns = {"^/nau$","^/now$"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

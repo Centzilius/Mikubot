@@ -8,4 +8,4 @@ return {
   patterns = {"^/facepalm","^/Facepalm"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

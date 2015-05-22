@@ -1,4 +1,3 @@
-
 local OAuth = require "OAuth"
 
 local consumer_key = cred_data.tw_consumer_key

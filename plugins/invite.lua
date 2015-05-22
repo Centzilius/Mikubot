@@ -1,5 +1,5 @@
 -- Invite other user to the chat group.
--- Use !invite name User_name or !invite id id_number
+-- Use /invite name User_name or /invite id id_number
 -- The User_name is the print_name (there are no spaces but _)
 
 do

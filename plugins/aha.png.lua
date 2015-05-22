@@ -5,7 +5,7 @@ end
 return {
   description = "Aha", 
   usage = {"aha.png"},
-  patterns = {"^aha.png"}, 
+  patterns = {"^aha.png$"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

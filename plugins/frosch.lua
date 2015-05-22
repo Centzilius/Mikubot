@@ -8,4 +8,4 @@ return {
   patterns = {"^/frosch","^/Frosch"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

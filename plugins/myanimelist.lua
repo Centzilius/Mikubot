@@ -36,3 +36,4 @@ return {
     patterns = {"^/myanimelist (.*)$","^/mal (.*)$"}, 
     run = run 
     }
+--Modified by Akamaru [https://ponywave.de]

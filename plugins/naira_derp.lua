@@ -8,4 +8,4 @@ return {
   patterns = {"^/nairad$","^/Nairad$"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

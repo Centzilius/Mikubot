@@ -1,4 +1,3 @@
-
 local quotes_file = './data/quotes.lua'
 local quotes_table
 

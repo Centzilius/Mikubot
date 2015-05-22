@@ -48,4 +48,4 @@ return {
     run = run 
 }
 end
--- Original by yagop ; Modified by Akamaru
+-- Original by yagop ; Modified by Akamaru [https://ponywave.de]

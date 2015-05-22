@@ -1,4 +1,3 @@
-
 function run(msg, matches)
 	return 'Deine Mudda is old!'
 end
@@ -9,4 +8,4 @@ return {
   patterns = {"^#old$","^.#old$"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

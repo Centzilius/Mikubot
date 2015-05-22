@@ -10,4 +10,4 @@ return {
     patterns = {"^Hallo$","^hallo$"},
 run = run
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

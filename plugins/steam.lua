@@ -70,10 +70,7 @@ end
 return {
   description = "Steam-Info",
   usage = {"store.steampowered.com/app Link","steamcommunity.com/app Link"},
-  patterns = {
-    "store.steampowered.com/app/([0-9]+)",
-	"steamcommunity.com/app/([0-9]+)"
-  },
+  patterns = {"store.steampowered.com/app/([0-9]+)","steamcommunity.com/app/([0-9]+)"},
   run = run
 }
 

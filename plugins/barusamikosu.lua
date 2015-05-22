@@ -8,4 +8,4 @@ return {
   patterns = {"^/barusamiko","^/barusamikosu","^/Balsamiko Essig"}, 
   run = run 
 }
---by Akamaru
+--by Akamaru [https://ponywave.de]

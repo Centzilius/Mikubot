@@ -47,5 +47,4 @@ return {
     patterns = {"^/img2 (.*)$","^/nsfwimg (.*)$"}, 
     run = run 
 }
-
 end
