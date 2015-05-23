@@ -17,7 +17,8 @@ local function get_pokemon(query)
 end
 
 local function run(msg, matches)
-  return get_pokemon(matches[1])
+	local name = string.lower(matches[1])
+	return get_pokemon(name)
 end
 
 return {
