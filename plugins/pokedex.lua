@@ -6,13 +6,14 @@ local function get_pokemon(query)
   local pokemon = json:decode(b)
 
   if pokemon == nil then
-    return 'No pokémon found.'
+    return 'Kein Pokemon gefunden.'
   end
   return  'Pokédex ID: ' .. pokemon.pkdx_id .. '\n'
         ..'Name: ' .. pokemon.name .. '\n'
-        ..'Weight: ' .. pokemon.weight .. '\n'
-        ..'Height: ' .. pokemon.height .. '\n'
+        ..'Gewicht: ' .. pokemon.weight .. '\n'
+        ..'Größe: ' .. pokemon.height .. '\n'
         ..'Speed: ' .. pokemon.speed .. '\n'
+		..'Spezies: ' .. pokemon.species .. '\n'
 end
 
 local function run(msg, matches)
@@ -20,8 +21,8 @@ local function run(msg, matches)
 end
 
 return {
-  description = "Pokedex searcher for Telegram",
-  usage = "/pokedex [Name/ID]: Search the pokédex for Name/ID and get info of the pokémon!",
+  description = "Pokedex für Telegram",
+  usage = "/pokedex [Name/ID]",
   patterns = {"^/pokedex (.*)$"},
   run = run
   }
