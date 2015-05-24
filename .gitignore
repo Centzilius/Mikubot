@@ -40,5 +40,4 @@ plugins/youtube_playlist.lua
 plugins/yandere.lua
 plugins/e621.lua
 plugins/random.lua
-plugins/youtube_dl.lua
 plugins/ponyfaces.lua
