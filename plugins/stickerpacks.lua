@@ -1,11 +1,25 @@
 function run(msg, matches)
-	return 'Name: Naira\nLink: https://telegram.me/addstickers/Naira\n\nName: Naira2\nLink: https://telegram.me/addstickers/Naira2\n\nName: Miku Hatsune\nLink: https://telegram.me/addstickers/MikuHatsune\n\nName: Pinkie Pie\nLink: https://telegram.me/addstickers/PinkiePie\n'
+	return
+	[[
+	Name: Naira
+	Link: https://telegram.me/addstickers/Naira
+
+	Name: Naira2
+	Link: https://telegram.me/addstickers/Naira2
+
+	Name: Miku Hatsune
+	Link: https://telegram.me/addstickers/MikuHatsune
+
+	Name: Pinkie Pie
+	Link: https://telegram.me/addstickers/PinkiePie
+
+	]]
 end
 
 return {
   description = "Sticker Pack Liste", 
-  usage = {'/stickers','/Stickers'},
-  patterns = {'^/stickers$','^/Stickers$'}, 
+  usage = {'/stickers'},
+  patterns = {'^/[S|s]tickers$'}, 
   run = run 
 }
 --by Akamaru [https://ponywave.de]
