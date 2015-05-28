@@ -36,7 +36,7 @@ local function run(msg, matches)
   local post = get_post(url)
 
   if post then
-    vardump(post)
+    --vardump(post)
     local img = URL .. post.large_file_url
     send_photo_from_url(get_receiver(msg), img)
 
