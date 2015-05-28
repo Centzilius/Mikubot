@@ -11,7 +11,7 @@ local function getRandomButts(attempt)
   local data = json:decode(res)[1]
 
   -- The OpenBoobs API sometimes returns an empty array
-  if not data and attempt < 3 then 
+  if not data and attempt <= 3 then 
     print('Keine Butts gefunden!')
     return getRandomButts(attempt)
   end

@@ -5,6 +5,7 @@ URL = require "socket.url"
 json = (loadfile "./libs/JSON.lua")()
 serpent = (loadfile "./libs/serpent.lua")()
 mimetype = (loadfile "./libs/mimetype.lua")()
+redis = (loadfile "./libs/redis.lua")()
 
 http.TIMEOUT = 10
 
@@ -55,9 +56,9 @@ function string:trim()
 end
 
 function get_http_file_name(url, headers)
-  -- Eg: fooo.var
+  -- Eg: foo.var
   local file_name = url:match("[^%w]+([%.%w]+)$")
-  -- Any delimited aphanumeric on the url
+  -- Any delimited alphanumeric on the url
   file_name = file_name or url:match("[^%w]+(%w+)[^%w]+$")
   -- Random name, hope content-type works
   file_name = file_name or str:random(5)
@@ -105,7 +106,7 @@ function download_to_file(url, file_name)
 
   file_name = file_name or get_http_file_name(url, headers)
     
-  local file_path = "/home/pi/Mikubot/tmp/"..file_name
+  local file_path = "tmp/"..file_name
   print("Gespeichert in: "..file_path)
 
   file = io.open(file_path, "w+")
@@ -138,7 +139,7 @@ function run_command(str)
   return result
 end
 
--- User has priviledges
+-- User has privileges
 function is_sudo(msg)
   local var = false
   -- Check users id in config 
@@ -210,12 +211,12 @@ function serialize_to_file(data, file, uglify)
   file:close()
 end
 
--- Retruns true if the string is empty
+-- Returns true if the string is empty
 function string:isempty()
   return self == nil or self == ''
 end
 
--- Retruns true if the string is blank
+-- Returns true if the string is blank
 function string:isblank()
   self = self:trim()
   return self:isempty()
@@ -276,7 +277,7 @@ function send_photo_from_url_callback(cb_extra, success, result)
   end
 end
 
---  Send multimple images asynchronous.
+--  Send multiple images asynchronous.
 -- param urls must be a table.
 function send_photos_from_url(receiver, urls)
   local cb_extra = {
@@ -288,7 +289,7 @@ function send_photos_from_url(receiver, urls)
 end
 
 -- Use send_photos_from_url. 
--- This fuction might be difficult to understand.
+-- This function might be difficult to understand.
 function send_photos_from_url_callback(cb_extra, success, result)
   -- cb_extra is a table containing receiver, urls and remove_path
   local receiver = cb_extra.receiver
@@ -330,7 +331,7 @@ function rmtmp_cb(cb_extra, success, result)
     os.remove(file_path)
     print(file_path.." gelöscht!")
   end
-  -- Finaly call the callback
+  -- Finally call the callback
   cb_function(cb_extra, success, result)
 end
 
@@ -394,7 +395,7 @@ function user_allowed(plugin, msg)
   return true
 end
 
--- Same as send_large_msg_callback but frienly params
+-- Same as send_large_msg_callback but friendly params
 function send_large_msg(destination, text)
   local cb_extra = {
     destination = destination,
@@ -450,12 +451,13 @@ function sleep(n)
 end
 
 -- Function to read data from files
-function load_from_file(file)
+function load_from_file(file, default_data)
   local f = io.open(file, "r+")
   -- If file doesn't exists
   if f == nil then
     -- Create a new empty table
-    serialize_to_file({}, file)
+	default_data = default_data or {}
+    serialize_to_file(default_data, file)
     print ('Erstelle Datei', file)
   else
     print ('Daten geladen von', file)
@@ -463,3 +465,10 @@ function load_from_file(file)
   end
   return loadfile (file)()
   end
+  
+  function run_bash(str)
+    local cmd = io.popen(str)
+    local result = cmd:read('*all')
+    cmd:close()
+    return result
+end

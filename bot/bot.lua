@@ -1,3 +1,7 @@
+package.path = package.path .. ';.luarocks/share/lua/5.2/?.lua'		
+  ..';.luarocks/share/lua/5.2/?/init.lua'		
+package.cpath = package.cpath .. ';.luarocks/lib/lua/5.2/?.so'		
+
 require("./bot/utils")
 
 VERSION = '2.5-reloaded'
@@ -12,10 +16,13 @@ function on_msg_receive (msg)
   local receiver = get_receiver(msg)
   
   -- vardump(msg)
+  msg = pre_process_service_msg(msg)
   if msg_valid(msg) then
     msg = pre_process_msg(msg)
-    match_plugins(msg)
-    --mark_read(receiver, ok_cb, false)
+    if msg then
+      match_plugins(msg)
+      --mark_read(receiver, ok_cb, false)
+    end
   end
 end
 
@@ -25,7 +32,7 @@ end
 function on_binlog_replay_end()
   started = true
   postpone (cron_plugins, false, 60*5.0)
-  -- See plugins/ping.lua as an example for cron
+  -- See plugins/isup.lua as an example for cron
 
   _config = load_config()
   cred_data = load_cred()
@@ -36,7 +43,7 @@ function on_binlog_replay_end()
 end
 
 function msg_valid(msg)
-  -- Dont process outgoing messages
+  -- Don't process outgoing messages
   if msg.out then
     print('\27[36mNicht gültig: Nachricht von mir\27[39m')
     return false
@@ -53,11 +60,6 @@ function msg_valid(msg)
     return false
   end
 
-  if msg.service then
-    print('\27[36mNicht gültig: Service\27[39m')
-    return false
-  end
-
   if not msg.to.id then
     print('\27[36mNicht gültig: To id not provided\27[39m')
     return false
@@ -68,13 +70,48 @@ function msg_valid(msg)
     return false
   end
 
+  if msg.from.id == our_id then
+    print('\27[36mNicht gültig: Nachricht von unserer ID\27[39m')
+    return false
+  end
+
+  if msg.to.type == 'encr_chat' then
+    print('\27[36mNicht gültig: Encrypted Chat\27[39m')
+    return false
+  end
+
+  if msg.from.id == 777000 then
+    print('\27[36mNicht gültig: Telegram Nachricht\27[39m')
+    return false
+  end
+
   return true
 end
+
+--
+function pre_process_service_msg(msg)
+   if msg.service then
+      local action = msg.action or {type=""}
+      -- Double / to discriminate of normal actions
+      msg.text = "//tgservice " .. action.type
+      msg.realservice = true
+
+      -- wipe the data to allow the bot to read service messages
+      if msg.out then
+         msg.out = false
+      end
+      if msg.from.id == our_id then
+         msg.from.id = 0
+      end
+   end
+   return msg
+end
+
 
 -- Apply plugin.pre_process function
 function pre_process_msg(msg)
   for name,plugin in pairs(plugins) do
-    if plugin.pre_process then
+    if plugin.pre_process and msg then
       msg = plugin.pre_process(msg)
     end
   end
@@ -110,7 +147,7 @@ end
 function match_plugin(plugin, plugin_name, msg)
   local receiver = get_receiver(msg)
 
-  -- Go over patterns. If one matches is enough.
+  -- Go over patterns. If one matches it's enough.
   for k, pattern in pairs(plugin.patterns) do
     local matches = match_pattern(pattern, msg.text)
     if matches then
@@ -154,7 +191,7 @@ function save_config( )
 end
 
 -- Returns the config from config.lua file.
--- If file doesnt exists, create it.
+-- If file doesn't exist, create it.
 function load_config( )
   local f = io.open('./data/config.lua', "r")
   -- If config.lua doesnt exists
@@ -186,7 +223,7 @@ end
 
 -- Create a basic config.json file and saves it.
 function create_config( )
-  -- A simple config with basic plugins and ourserves as priviled user
+  -- A simple config with basic plugins and ourselves as privileged user
   config = {
     enabled_plugins = {
       "help",

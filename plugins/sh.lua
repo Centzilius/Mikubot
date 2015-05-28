@@ -6,13 +6,6 @@ function run_sh(msg)
      return text
 end
 
-function run_bash(str)
-    local cmd = io.popen(str)
-    local result = cmd:read('*all')
-    cmd:close()
-    return result
-end
-
 function run(msg, matches)
   local receiver = get_receiver(msg)
   if string.starts(msg.text, '/sh') then

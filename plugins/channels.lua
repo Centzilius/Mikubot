@@ -40,7 +40,7 @@ end
 local function pre_process(msg)
 	local receiver = get_receiver(msg)
 	
-	-- If is sudo can reeanble the channel
+	-- If sender is sudo then re-enable the channel
 	if is_sudo(msg) then
 	  if msg.text == "/channel enable" then
 	    enable_channel(receiver)

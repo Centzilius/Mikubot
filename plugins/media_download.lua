@@ -9,7 +9,7 @@ end
 
 local function run(msg, matches)
   if msg.media then
-    if msg.media.type == 'document' then
+	if msg.media.type == 'document' then
       load_document(msg.id, callback, msg.id)
     end
     if msg.media.type == 'photo' then

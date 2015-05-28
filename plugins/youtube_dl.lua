@@ -1,10 +1,3 @@
-function run_bash(str)
-    local cmd = io.popen(str)
-    local result = cmd:read('*all')
-    cmd:close()
-    return result
-end
-
 function run(msg, matches)
   URL = matches[1]
   local receiver = get_receiver(msg)
