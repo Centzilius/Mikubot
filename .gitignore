@@ -22,7 +22,6 @@ plugins/twitch.lua
 plugins/create_sticker.lua
 plugins/derpibooru_nsfw.lua
 plugins/derpibooru.lua
-plugins/rss.lua
 plugins/meme.lua
 plugins/app_store.lua
 plugins/bitly_create.lua
@@ -41,3 +40,4 @@ plugins/yandere.lua
 plugins/e621.lua
 plugins/random.lua
 plugins/ponyfaces.lua
+plugins/rss_old.lua
