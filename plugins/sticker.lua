@@ -1,11 +1,14 @@
 function run(msg, matches)
 	if matches[1] == "nairaderp" then
 		send_document(get_receiver(msg), "sticker/naira_derp.webp", ok_cb, false)
-    elseif matches[1] == "facepalm" then
+	elseif matches[1] == "facepalm" then
 		send_document(get_receiver(msg), "sticker/facepalm.webp", ok_cb, false)
-    elseif matches[1] == "liste" then
-		return "nairaderp\nfacepalm"
-    end
+	elseif matches[1] == "all" then
+		return [[
+		/sticker nairaderp
+		/sticker facepalm
+		]]
+	end
 end
 
 return {

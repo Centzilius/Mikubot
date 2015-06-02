@@ -4,8 +4,8 @@ end
 
 return {
   description = "Nyu?", 
-  usage = {"nyu","Nyu"},
-  patterns = {"^nyu","^Nyu"}, 
+  usage = {"nyu"},
+  patterns = {"^[N|n][Y|y][U|u]$"}, 
   run = run 
 }
 --by Akamaru [https://ponywave.de]

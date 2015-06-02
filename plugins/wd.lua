@@ -6,7 +6,7 @@ end
 return {
     description = "Sagt dass ihr wieder da seid",
     usage = {"/wd"},
-    patterns = {"^/wd$"}, 
+    patterns = {"^/[w|W][d|D]$"}, 
     run = run
 }
 --by Akamaru [https://ponywave.de]
