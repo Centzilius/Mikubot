@@ -94,7 +94,6 @@ function pre_process_service_msg(msg)
       local action = msg.action or {type=""}
       -- Double / to discriminate of normal actions
       msg.text = "//tgservice " .. action.type
-      msg.realservice = true
 
       -- wipe the data to allow the bot to read service messages
       if msg.out then
@@ -112,6 +111,7 @@ end
 function pre_process_msg(msg)
   for name,plugin in pairs(plugins) do
     if plugin.pre_process and msg then
+	  -- print('Preprocess', name)
       msg = plugin.pre_process(msg)
     end
   end
@@ -134,9 +134,9 @@ local function is_plugin_disabled_on_chat(plugin_name, receiver)
     -- Checks if plugin is disabled on this chat
     for disabled_plugin,disabled in pairs(disabled_chats[receiver]) do
       if disabled_plugin == plugin_name and disabled then
-        local warning = ''
+        local warning = 'Plugin '..disabled_plugin..' ist in diesem Chat deaktiviert'
         print(warning)
-        send_msg(receiver, warning, ok_cb, false)
+        -- send_msg(receiver, warning, ok_cb, false)
         return true
       end
     end
@@ -173,7 +173,7 @@ function match_plugin(plugin, plugin_name, msg)
         end
       end
      end
-      -- One pattern matches
+      -- One patterns matches
       return
     end
   end
@@ -194,7 +194,7 @@ end
 -- If file doesn't exist, create it.
 function load_config( )
   local f = io.open('./data/config.lua', "r")
-  -- If config.lua doesnt exists
+  -- If config.lua doesn't exist
   if not f then
     print ("Neue Config-Datei erstellt: data/config.lua")
     create_config()
