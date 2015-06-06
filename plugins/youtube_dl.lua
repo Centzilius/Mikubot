@@ -7,9 +7,9 @@ function run(msg, matches)
 end
 
 return {
-    description = "Downloadet und sendet ein YouTube-Video", 
-    usage = {"/ydl [Link]"},
-    patterns = {"^/ydl (.*)$"}, 
+    description = "Downloadet und sendet ein Video von verschiedenen Seiten mit youtube-dl", 
+    usage = {"/dl [Link]"},
+    patterns = {"^/dl (https?://[%w-_%.%?%.:/%+=&]+)$"}, 
     run = run
 }
 --by Akamaru [https://ponywave.de]
