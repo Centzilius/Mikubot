@@ -29,7 +29,8 @@ local function get_msgs_user_chat(user_id, chat_id)
   local user = redis:hgetall(uhash)
   local um_hash = 'msgs:'..user_id..':'..chat_id
   user_info.msgs = tonumber(redis:get(um_hash) or 0)
-  user_info.name = user_print_name(user)..' ('..user_id..')'
+  --user_info.name = user_print_name(user)..' ('..user_id..')'
+  user_info.name = user_print_name(user)
   return user_info
 end
 
@@ -58,6 +59,7 @@ local function get_msg_num_stats(msg)
     local text = ''
     for k,user in pairs(users_info) do
       text = text..user.name..' => '..user.msgs..'\n'
+	  text = string.gsub(text, "%_", " ")
     end
 
     return text
@@ -137,7 +139,7 @@ local function run(msg, matches)
     elseif is_sudo(msg) then
       return get_bot_stats()
     else
-      return 'Stats works only on chats'
+      return 'Das funktioniert hier nicht'
     end
   end
 end
