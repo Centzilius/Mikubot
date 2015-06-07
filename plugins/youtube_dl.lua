@@ -3,7 +3,7 @@ function run(msg, matches)
   local receiver = get_receiver(msg)
     text = run_bash("rm tmp/video.mp4 && youtube-dl -o tmp/video.mp4 " .. URL)
 	send_video(get_receiver(msg), "tmp/video.mp4", ok_cb, false)
-    return 'Video wird gesendet! \nDas kann je nach Video bis zu 10 Minuten dauern!'
+    return URL .. ' wurde gedownloadet und wird jetzt gesendet! \nDas kann je nach Video sehr lang dauern! \nAlso habt Gedult!'
 end
 
 return {
