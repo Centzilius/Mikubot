@@ -51,8 +51,7 @@ local function run(msg, matches)
   if url ~= nil then
     local receiver = get_receiver(msg)
     send_photo_from_url(receiver, url)
-  --return "Source: "..url
-  return "Bild wird gesendet!"
+    return "Source: "..url
   else
     return 'Keine Boobs/Butts gefunden.' 
   end
