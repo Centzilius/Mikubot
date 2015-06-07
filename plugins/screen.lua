@@ -26,6 +26,7 @@ return {
     description = "Macht ein Screenshot vom PC auf dem der Bot läuft", 
     usage = {"/screen"},
     patterns = {"^/screen$"}, 
-    run = run
+    run = run,
+    privileged = true
 }
 --by Akamaru [https://ponywave.de]
