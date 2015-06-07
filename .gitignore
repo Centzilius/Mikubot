@@ -1,7 +1,6 @@
 res/
 .luarocks
 *.db
-plugins/alive.lua
 plugins/bitly.lua
 plugins/danbooru.lua
 plugins/deviantart.lua
@@ -41,3 +40,4 @@ plugins/e621.lua
 plugins/random.lua
 plugins/ponyfaces.lua
 plugins/rss_old.lua
+README - Kopie.md

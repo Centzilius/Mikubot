@@ -1,6 +1,6 @@
-package.path = package.path .. ';.luarocks/share/lua/5.2/?.lua'		
-  ..';.luarocks/share/lua/5.2/?/init.lua'		
-package.cpath = package.cpath .. ';.luarocks/lib/lua/5.2/?.so'		
+package.path = package.path .. ';.luarocks/share/lua/5.2/?.lua'
+  ..';.luarocks/share/lua/5.2/?/init.lua'
+package.cpath = package.cpath .. ';.luarocks/lib/lua/5.2/?.so'
 
 require("./bot/utils")
 
@@ -8,13 +8,12 @@ VERSION = '2.5-reloaded'
 
 -- This function is called when tg receive a msg
 function on_msg_receive (msg)
-
   if not started then
     return
   end
 
   local receiver = get_receiver(msg)
-  
+
   -- vardump(msg)
   msg = pre_process_service_msg(msg)
   if msg_valid(msg) then
