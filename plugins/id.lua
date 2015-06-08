@@ -19,8 +19,9 @@ local function returnids(cb_extra, success, result)
    text = text .. "Hier sind " .. result.members_num .. ' Mitglieder:\n---------\n'
    for k,v in pairs(result.members) do
       text = text .. v.print_name .. " (user#id" .. v.id ..")\n"
+	  text = string.gsub(text, "%_", " ")
    end
-   send_msg(receiver, text, ok_cb, false)
+   send_large_msg(receiver, text)
 end
 
 local function run(msg, matches)
@@ -28,6 +29,7 @@ local function run(msg, matches)
       local text = 'Dein Name lautet "' .. user_print_name(msg.from) .. '" und deine ID ist ' .. msg.from.id .. ' ' .. tostring(is_sudo(msg))
       if is_chat_msg(msg) then
          text = text .. '\nDu bist in der Gruppe "' .. user_print_name(msg.to) .. '" und die Chat ID ist ' .. msg.to.id
+		 text = string.gsub(text, "%_", " ")
       end
       return text
    elseif matches[1] == "chat" then
