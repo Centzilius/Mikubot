@@ -18,12 +18,9 @@ plugins/pagespeed_insights.lua
 plugins/ping_adress.lua
 plugins/test.lua
 plugins/twitch.lua
-plugins/create_sticker.lua
 plugins/derpibooru_nsfw.lua
 plugins/derpibooru.lua
-plugins/meme.lua
 plugins/app_store.lua
-plugins/bitly_create.lua
 plugins/dailymotion.lua
 plugins/dns.lua
 plugins/gdrive.lua
@@ -37,7 +34,6 @@ plugins/vine.lua
 plugins/youtube_playlist.lua
 plugins/yandere.lua
 plugins/e621.lua
-plugins/random.lua
 plugins/ponyfaces.lua
 plugins/rss_old.lua
 README - Kopie.md
