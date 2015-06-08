@@ -31,7 +31,7 @@ local function get_rss(url, prot)
    end
    local parsed = feedparser.parse(res)
    if parsed == nil then
-      return nil, "Error decoding the RSS.\nAre you sure that " .. url .. " it's a RSS?"
+      return nil, 'Fehler beim hinzufügen des RSS-Feeds.\nSicher, dass "' .. url .. '" einen RSS-Feed hat?'
    end
    return parsed, nil
 end
@@ -51,7 +51,7 @@ end
 local function print_subs(id)
    local uhash = get_base_redis(id)
    local subs = redis:smembers(uhash)
-   local text = id .. ' are subscribed to:\n---------\n'
+   local text = id .. ' hat folgende Feeds:\n---------\n'
    for k,v in pairs(subs) do
       text = text .. k .. ") " .. v .. '\n'
    end
@@ -67,7 +67,7 @@ local function subscribe(id, url)
    local uhash = get_base_redis(id)
 
    if redis:sismember(uhash, baseurl) then
-      return "You are already subscribed to " .. url
+      return 'Der Feed von "' .. url .. '" ist bereits abonniert'
    end
 
    local parsed, err = get_rss(url, protocol)
@@ -87,7 +87,7 @@ local function subscribe(id, url)
    redis:sadd(lhash, id)
    redis:sadd(uhash, baseurl)
 
-   return "You had been subscribed to " .. name
+   return 'Der Feed von "' .. name .. '" wurde erfolgreich abonniert'
 end
 
 local function unsubscribe(id, n)
@@ -115,7 +115,7 @@ local function unsubscribe(id, n)
       redis:del(lasthash)
    end
 
-   return "You had been unsubscribed from " .. sub
+   return 'Der Feed von "' .. sub .. '" wurde deabonniert'
 end
 
 local function cron()
@@ -160,15 +160,15 @@ local function run(msg, matches)
    end
    if matches[1] == "sync" then
       if not is_sudo(msg) then
-         return "Only sudo users can sync the RSS."
+         return 'Du kannst das nicht'
       end
       cron()
    end
-   if matches[1] == "subscribe" or matches[1] == "sub" then
+   if matches[1] == "add" or matches[1] == "sub" then
       return subscribe(id, matches[2])
    end
 
-   if matches[1] == "unsubscribe" or matches[1] == "uns" then
+   if matches[1] == "remove" or matches[1] == "uns" then
       return unsubscribe(id, matches[2])
    end
 end
@@ -178,15 +178,15 @@ return {
    description = "Manage User/Chat RSS subscriptions. If you are in a chat group, the RSS subscriptions will be of that chat. If you are in an one-to-one talk with the bot, the RSS subscriptions will be yours.",
    usage = {
       "/rss: Get your rss (or chat rss) subscriptions",
-      "/rss subscribe (url): Subscribe to that url",
-      "/rss unsubscribe (id): Unsubscribe of that id",
+      "/rss add (url): Subscribe to that url",
+      "/rss remove (id): Unsubscribe of that id",
       "/rss sync: Download now the updates and send it. Only sudo users can use this option."
    },
    patterns = {
       "^/rss$",
-      "^/rss (subscribe) (https?://[%w-_%.%?%.:/%+=&]+)$",
+      "^/rss (add) (https?://[%w-_%.%?%.:/%+=&]+)$",
       "^/rss (sub) (https?://[%w-_%.%?%.:/%+=&]+)$",
-      "^/rss (unsubscribe) (%d+)$",
+      "^/rss (remove) (%d+)$",
       "^/rss (uns) (%d+)$",
       "^/rss (sync)$"
    },
