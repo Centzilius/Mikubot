@@ -2,7 +2,6 @@ do
 
 local BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
-
 local function get_weather(location)
   print("Finde Wetter in ", location)
   local url = BASE_URL
@@ -15,23 +14,22 @@ local function get_weather(location)
   local weather = json:decode(b)
   local city = weather.name
   local country = weather.sys.country
-  local dot_temperature = round(weather.main.temp, 2)
-  local temperature = string.gsub(dot_temperature, "%.", "%,")
   local temp = 'Die Temperatur in '..city
     ..' (' ..country..')'
-    ..' beträgt '..temperature..'°C'
+    ..' beträgt '..weather.main.temp..'°C'
   local conditions = 'Die aktuelle Wetterlage ist: '
     .. weather.weather[1].description
-	
+  
   if weather.weather[1].main == 'Clear' then
-	conditions = conditions .. ' ☀'
+    conditions = conditions .. ' ☀'
   elseif weather.weather[1].main == 'Clouds' then
-	conditions = conditions .. ' ☁☁'
+    conditions = conditions .. ' ☁☁'
   elseif weather.weather[1].main == 'Rain' then
     conditions = conditions .. ' ☔'
   elseif weather.weather[1].main == 'Thunderstorm' then
-	 conditions = conditions .. ' ☔☔☔☔'
+    conditions = conditions .. ' ☔☔☔☔'
   end
+
   return temp .. '\n' .. conditions
 end
 
@@ -43,7 +41,7 @@ local function run(msg, matches)
   end
   local text = get_weather(city)
   if not text then
-    text = 'Konnte das Wetter von dieser Stadt nicht bekommen.'
+    text = 'Konnte das Wetter dieser Stadt nicht bekommen.'
   end
   return text
 end
