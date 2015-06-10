@@ -20,12 +20,30 @@ function run(msg, matches)
     return
   end
 
+  if string.starts(msg.text, '/temp') then
+    text = run_bash('vcgencmd measure_temp')
+    send_msg(receiver, text, ok_cb, false)
+    return
+  end
+
+  if string.starts(msg.text, '/volt') then
+    text = run_bash('vcgencmd measure_volts')
+    send_msg(receiver, text, ok_cb, false)
+    return
+  end
+
+  if string.starts(msg.text, '/takt') then
+    text = run_bash('vcgencmd measure_clock arm')
+    send_msg(receiver, text, ok_cb, false)
+    return
+  end
+
 end
 
 return {
     description = "Führt Befehle in der Konsole aus", 
     usage = {"/sh kann nur Akamaru"},
-    patterns = {"^/uptime", "^/sh (.*)$"}, 
+    patterns = {"^/uptime", "^/sh (.*)$","^/temp$","^/volt$","^/takt$"}, 
     run = run,
     privileged = true
 }
