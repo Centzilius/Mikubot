@@ -10,6 +10,7 @@ local function run(msg, matches)
 	end
     local b = 1
 
+	local text = string.gsub(text, "%+", "plus")
     while b ~= 0 do
         text,b = text:gsub('^+','+')
         text = text:trim()
@@ -30,7 +31,7 @@ end
 
 return {
     description = "Text To Speech",
-    usage = "!tts [whatever]",
+    usage = "/tts [whatever]",
     patterns = {
     "^/tts (.+)$",
     "^/tts(%w+) (.+)$"
