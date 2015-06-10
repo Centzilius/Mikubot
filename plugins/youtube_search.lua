@@ -1,5 +1,3 @@
-do
-
 -- HOW TO USE:
 -- 1. Go to the Google Developers Console.
 -- 2. Select a project.
@@ -9,6 +7,10 @@ do
 -- 6. Write this in your data/credentials.lua:
 -- 	  google_apikey = "YOURKEY-HERE",
 -- Your quota is 50.000.000 per day and a search takes 100 points. So if you manage to use this in one day, you're a real spammer :P
+
+do
+
+require("./plugins/youtube")
 
 local function searchYoutubeVideo(text)
   local apikey = cred_data.google_apikey
@@ -33,11 +35,15 @@ end
 function run(msg, matches)
   local text = msg.text:sub(string.len(matches[1]) + 1,-1)
   local link = searchYoutubeVideo(text)
+  local yt_code = videoId
+  local data = get_yt_data(yt_code)
+  local receiver = get_receiver(msg)
+  send_youtube_data(data, receiver, link)
   return searchYoutubeVideo(text)
 end
 
 return {
-  description = "Sucht YouTube-Video und sendet es", 
+  description = "Sucht ein YouTube-Video und sendet es", 
   usage = {"/youtube [Suchbegriff]","/yt [Suchbegriff]"},
   patterns = {"^/youtube","^/yt"}, 
   run = run 
