@@ -18,13 +18,13 @@ Kommandos
 /stats -> Zeigt die Anzahl der Nachrichten der User
 /date -> Zeigt das aktuelle Datum an
 /gif -> Sendet ein GIF von Giphy
-/plugins, /plugins enable [plugin], /plugins disable [plugin], /plugins reload, /reload -> Aktiviert, deaktiviert und lÃ¤dt Plugins
+/plugins, /plugins enable [plugin], /plugins disable [plugin], /plugins reload, /reload -> Aktiviert, deaktiviert und lädt Plugins
 /addquote [Zitat], /quote -> Zitat speichern (/addquote) oder abrufen (/quote)
 /set [Variablenname] [Daten] -> Setze Variable
 /geschlecht [Name] -> Sendet Geschlecht
-/xkcd [id] -> Sendet einen zufÃ¤lligen XKCD-Comic, wenn keine ID gegeben ist.
+/xkcd [id] -> Sendet einen zufälligen XKCD-Comic, wenn keine ID gegeben ist.
 /wiki Suchwort -> Sendet einen Wikipedia-Artikel
-/9gag -> Sendet ein zufÃ¤lliges Bild von 9GAG.com
+/9gag -> Sendet ein zufälliges Bild von 9GAG.com
 /echo [Nachricht] -> Gibt die Nachricht aus
 /translate [Text] (Ãœbersetze Text zu deutsch), /translate Zielsprache [Text], /translate Quellsprache,Zielsprache [Text] -> Ãœbersetze Text (Funktioniert zur Zeit nicht)
 /google Stichwort -> Durchsucht Google
@@ -35,7 +35,7 @@ Kommandos
 /tw [Text] -> Sendet einen Tweet
 /youtube [Suchbegriff] -> Sucht YouTube-Video und sendet es
 /hilfe -> Listet alle Kommandos auf
-/loc (Ort) -> Zeigt Informationen Ã¼ber einen Ort.
+/loc (Ort) -> Zeigt Informationen über einen Ort.
 /get (Variable) -> Bekommt Variable, die mit !set gesetzt wurde
 ```
 Es sind noch einige mehr dabei.
@@ -43,11 +43,11 @@ Es sind noch einige mehr dabei.
 Installation
 ------------
 ```bash
-# Gestet auf Ubuntu 14.04, fÃ¼r andere Distris, checke https://github.com/vysheng/tg#installation
+# Gestet auf Ubuntu 14.04, für andere Distris, checke https://github.com/vysheng/tg#installation
 $ sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev make unzip git redis-server libjansson-dev libpython-dev
 ```
 ```bash
-# Nach den AbhÃ¤ngigkeiten kommt jetzt die Installation des Bots
+# Nach den Abhängigkeiten kommt jetzt die Installation des Bots
 $ cd $HOME
 $ git clone https://github.com/Akamaru/Mikubot.git
 $ cd Mikubot
@@ -64,9 +64,9 @@ Aktiviere oder deaktiviere ein Plugin mit `/plugins enable [name-ohne-.lua]`.
 
 Deaktiviere ein aktiviertes Plugin mit `/plugins disable [name-ohne-.lua]`.
 
-Diese Kommandos benÃ¶tigen einen privilegierten User (Superuser). Superuser sind in der `data/config.lua` definiert (vom Bot generiert). Stoppe den bot und editiere die Konfigurationsdatei ggf.
+Diese Kommandos benötigen einen privilegierten User (Superuser). Superuser sind in der `data/config.lua` definiert (vom Bot generiert). Stoppe den bot und editiere die Konfigurationsdatei ggf.
 
-## User fÃ¼r die Benutzung des /tw-Befehls freischalten
+## User für die Benutzung des /tw-Befehls freischalten
 Erstelle einen Abschnitt in der config.lua:
 ```lua
 can_send_tweet = {
@@ -92,17 +92,17 @@ $ sudo stop telegram # Zum Stoppen
 ------------
 Es gibt 3 Arten, das Plugin zu nutzen:
 
-Auf deutsch Ã¼bersetzen: /translate [Text]
+Auf deutsch Übersetzen: /translate [Text]
 
 Von deutsch in andere Sprache: /translate Zielsprache [Text]
 
 Von beliebiger Sprache in beliebige Sprache: /translate Quellsprache,Zielsprache [Text]
 
 
-Wobei Quellsprache und Zielsprache die LÃ¤nderkÃ¼rzel sein mÃ¼ssen (de, en, ru, it, fr...)
+Wobei Quellsprache und Zielsprache die Länderkürzel sein müssen (de, en, ru, it, fr...)
 
 Kontaktiere mich
 ------------
-Du kannst den originalen Autor (Yagop) [Ã¼ber Telegram](https://telegram.me/yago_perez) erreichen, aber wenn du einen Bugreport erstelle willst, so [tue dies](https://github.com/yagop/telegram-bot/issues) auf GitHub.
+Du kannst den originalen Autor (Yagop) [über Telegram](https://telegram.me/yago_perez) erreichen, aber wenn du einen Bugreport erstelle willst, so [tue dies](https://github.com/yagop/telegram-bot/issues) auf GitHub.
 
-Wenn du stattdessen mich, den Autor des Forks, kontaktieren mÃ¶chtest, kannst du dies [Ã¼ber Telegram](https://telegram.me/Akamaru) tun.
+Wenn du stattdessen mich, den Autor des Forks, kontaktieren möchtest, kannst du dies [über Telegram](https://telegram.me/Akamaru) tun.
