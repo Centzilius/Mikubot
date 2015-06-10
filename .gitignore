@@ -2,7 +2,7 @@ res/
 .luarocks
 *.db
 plugins/bitly.lua
-plugins/danbooru.lua
+plugins/danbooru2.lua
 plugins/deviantart.lua
 plugins/facebook.lua
 plugins/facebook_photo.lua
