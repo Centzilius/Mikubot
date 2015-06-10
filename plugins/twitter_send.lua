@@ -38,7 +38,7 @@ function run(msg, matches)
     	 return "Fehler: "..response_code
     end
 	 local data = json:decode(response_body)
-	 return "Tweet gesendet!"
+	 return "Tweet gesendet! Sieh ihn dir an: https://twitter.com/Mikubot_/status/"..data.id_str
 end
 
 return {
