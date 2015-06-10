@@ -51,6 +51,7 @@ $ sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2
 $ cd $HOME
 $ git clone https://github.com/Akamaru/Mikubot.git
 $ cd Mikubot
+$ git clone --recursive https://github.com/vysheng/tg.git
 $ ./launch.sh install
 $ ./launch.sh # Fragt dich nach deiner Telefonnummer und dem Verifizierungscode
 ```
