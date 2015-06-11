@@ -16,10 +16,6 @@ function run(msg, matches)
 	send_photo(get_receiver(msg), "pictures/senrankagura/hanzouacademy/katsuragi.jpg", ok_cb, false)
 	end
 
-    	if string.starts(msg.text, '/yagyuu') or string.starts(msg.text, "/Yagyuu") then
-	send_photo(get_receiver(msg), "pictures/senrankagura/hanzouacademy/yagyuu.jpg", ok_cb, false)
-	end
-
     	if string.starts(msg.text, '/haruka') or string.starts(msg.text, "/Haruka") then
 	send_photo(get_receiver(msg), "pictures/senrankagura/hebijoacademy/haruka.jpg", ok_cb, false)
 	end
@@ -43,8 +39,8 @@ end
 
 return {
   description = "Sendet euch ein Senran Kagura Charakter", 
-  usage = {"/asuka","/Asuka","/hibari","/Hibari","/ikaruga","/Ikaruga","/katsuragi","/Katsuragi","/yagyuu","/Yagyuu","/haruka","/Haruka","/hikage","/Hikage","/homura","/Homura","/mirai","/Mirai","/yomi","/Yomi"},
-  patterns = {"^/asuka","^/Asuka","^/hibari","^/Hibari","^/ikaruga","^/Ikaruga","^/katsuragi","^/Katsuragi","^/yagyuu","^/Yagyuu","^/haruka","^/Haruka","^/hikage","^/Hikage","^/homura","^/Homura","^/mirai","^/Mirai","^/yomi","^/Yomi"}, 
+  usage = {"/asuka","/Asuka","/hibari","/Hibari","/ikaruga","/Ikaruga","/katsuragi","/Katsuragi","/haruka","/Haruka","/hikage","/Hikage","/homura","/Homura","/mirai","/Mirai","/yomi","/Yomi"},
+  patterns = {"^/asuka","^/Asuka","^/hibari","^/Hibari","^/ikaruga","^/Ikaruga","^/katsuragi","^/Katsuragi","^/haruka","^/Haruka","^/hikage","^/Hikage","^/homura","^/Homura","^/mirai","^/Mirai","^/yomi","^/Yomi"}, 
   run = run 
 }
 --by Akamaru [https://ponywave.de]
