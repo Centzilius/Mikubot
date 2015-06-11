@@ -1,18 +1,11 @@
-function run(msg, matches)
-	randomValue = math.random(4)
-if randomValue == 1 then
-	send_photo(get_receiver(msg), "pictures/cats/cat1.jpg", ok_cb, false)
-elseif randomValue == 2 then
-	send_photo(get_receiver(msg), "pictures/cats/cat2.jpg", ok_cb, false)
-elseif randomValue == 3 then
-	send_photo(get_receiver(msg), "pictures/cats/cat3.jpg", ok_cb, false)
-elseif randomValue == 4 then
-	send_photo(get_receiver(msg), "pictures/cats/cat4.jpg", ok_cb, false)
-end
+local function run(msg, matches)
+	local receiver = get_receiver(msg)
+	local url = 'http://thecatapi.com/api/images/get'
+		send_photo_from_url(receiver, url)
 end
 
 return {
-  description = "Sendet eins von 4 Katzenbilder", 
+  description = "Sendet ein zufälliges Katzenbild", 
   usage = {"/kitty","/katze","/cat","/neko","/kadse"},
   patterns = {"^/kitty$","^/katze$","^/cat$","^/neko$","^/kadse$"}, 
   run = run 
