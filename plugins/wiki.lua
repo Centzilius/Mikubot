@@ -1,4 +1,4 @@
-require("./plugins/google")
+require("./plugins/googlethat")
 
 function firstresult(results)
   return results[1][2]
