@@ -34,6 +34,7 @@ function run(msg, matches)
 
   local header = "Tweet von " .. response.user.name .. " (@" .. response.user.screen_name .. ")\n"
   local text = response.text
+		text = string.gsub(text, "&amp;", "&")
   
   -- replace short URLs
   if response.entities.url then
