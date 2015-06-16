@@ -96,7 +96,8 @@ local function pre_process(msg)
     end
 
   else 
-    print('Whitelist not enabled or is sudo')
+    --print('Whitelist not enabled or is sudo')
+    print('')
   end
 
   return msg
@@ -204,7 +205,7 @@ return {
     "^/(ban) (user) (%d+)$",
     "^/(ban) (delete) (%d+)$",
     "^/(kick) (%d+)$",
-    "^//tgservice (.+)$",
+    --"^//tgservice (.+)$",
   }, 
   run = run,
   pre_process = pre_process,
