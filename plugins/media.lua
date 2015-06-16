@@ -43,7 +43,7 @@ end
 
 return {
     description = "Wenn ein User eine Medien-Datei sendet (gif, mp4, pdf, etc.), wird es gedownloadet und gesendet.", 
-    usage = {"Irgendeine Datei"},
+    usage = {""},
     patterns = {
     	"(https?://[%w-_%.%?%.:/%+=&]+%.(gif))$",
     	"(https?://[%w-_%.%?%.:/%+=&]+%.(mp4))$",
