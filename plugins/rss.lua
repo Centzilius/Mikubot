@@ -136,7 +136,7 @@ local function cron()
       for k2, v2 in pairs(newentr) do
          local title = v2.title or 'No title'
          local link = v2.link or v2.id or 'No Link'
-         text = text .. "[rss](" .. link .. ") - " .. title .. '\n'
+         text = text .. '[RSS] '.. title .. '\n(' .. link .. ')\n' 
       end
       if text ~= '' then
          local newlast = newentr[1].id
@@ -161,14 +161,16 @@ local function run(msg, matches)
    if matches[1] == "sync" then
       if not is_sudo(msg) then
          return 'Du kannst das nicht'
+	  else
+		 return 'RSS aktualisiert'
       end
       cron()
    end
-   if matches[1] == "add" or matches[1] == "sub" then
+   if matches[1] == "add" then
       return subscribe(id, matches[2])
    end
 
-   if matches[1] == "remove" or matches[1] == "uns" then
+   if matches[1] == "remove" then
       return unsubscribe(id, matches[2])
    end
 end
@@ -185,9 +187,7 @@ return {
    patterns = {
       "^/rss$",
       "^/rss (add) (https?://[%w-_%.%?%.:/%+=&]+)$",
-      "^/rss (sub) (https?://[%w-_%.%?%.:/%+=&]+)$",
       "^/rss (remove) (%d+)$",
-      "^/rss (uns) (%d+)$",
       "^/rss (sync)$"
    },
    run = run,
