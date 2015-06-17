@@ -1,66 +1,179 @@
-require("./plugins/googlethat")
+-- http://git.io/vUA4M
+local socket = require "socket"
+local JSON = require "cjson"
 
-function firstresult(results)
-  return results[1][2]
+local wikiusage = {
+  "/wiki [Begriff]: Poste Artikel von der deutschen Wikipedia",
+  "/wiki(lang) [Begriff]: Poste Artikel aus anderer Sprache. Beispiel: /wikien Hello",
+  "/wiki search [Begriff]: Suche Text auf der deutschen Wikipedia",
+  "/wiki(lang) search [Begriff]: Suche Text auf einer anderssprachigen Wikipedia. Beispiel: /wikien search Hello",
+}
+
+local Wikipedia = {
+  -- http://meta.wikimedia.org/wiki/List_of_Wikipedias
+  wiki_server = "https://%s.wikipedia.org",
+  wiki_path = "/w/api.php",
+  wiki_load_params = {
+    action = "query",
+    prop = "extracts",
+    format = "json",
+    exchars = 300,
+    exsectionformat = "plain",
+    explaintext = "",
+    redirects = ""
+  },
+  wiki_search_params = {
+    action = "query",
+	 list = "search",
+    srlimit = 20,
+	 format = "json",
+  },
+  default_lang = "de",
+}
+
+function Wikipedia:getWikiServer(lang)
+  return string.format(self.wiki_server, lang or self.default_lang)
 end
 
-function wikiapilink(wikiurl)
-  local wikipattern="^http://de.wikipedia.org/wiki/(.*)$"
-  local matches = { string.match(wikiurl, wikipattern) }
-  local queryterm=matches[1]
-  local apilink = "http://de.wikipedia.org/w/index.php?action=raw&title="..queryterm
-  return apilink
-end
+--[[
+--  return decoded JSON table from Wikipedia
+--]]
+function Wikipedia:loadPage(text, lang, intro, plain, is_search)
+  local request, sink = {}, {}
+  local query = ""
+  local parsed
 
-
-function getwikifromapi(apilink)
-  -- Do the request
-  local res, code = https.request(apilink)
-  if code ~=200 then return "Ein Fehler ist aufgetreten" end
-  local data = res
-  local wikitext=data
-  return wikitext
-end
-
-function plaintext(wikitext)
-  local plaintext=string.gsub(wikitext,"{{Infobox.-\n}}\n","")
-  plaintext=string.gsub(wikitext,"{{Medienbox.-\n}}\n","")
-  plaintext=string.gsub(wikitext,"<!--.--->","")  
-  plaintext=string.gsub(plaintext,"Datei:.-]]","")
-  plaintext=string.gsub(plaintext,"{{.-}}","")
-  plaintext=string.gsub(plaintext,"[%[%|%]%]]","")
-  plaintext=string.gsub(plaintext,"<ref.->.-</ref>","")
-  local firstsectionindex=string.find(plaintext,"==")
-  if firstsectionindex~=nil then
-    plaintext=string.sub(plaintext,1,firstsectionindex-1)
+  if is_search then
+    for k,v in pairs(self.wiki_search_params) do
+      query = query .. k .. '=' .. v .. '&'
+    end
+    parsed = URL.parse(self:getWikiServer(lang))
+    parsed.path = self.wiki_path
+    parsed.query = query .. "srsearch=" .. URL.escape(text)
+  else
+    self.wiki_load_params.explaintext = plain and "" or nil
+    for k,v in pairs(self.wiki_load_params) do
+      query = query .. k .. '=' .. v .. '&'
+    end
+    parsed = URL.parse(self:getWikiServer(lang))
+    parsed.path = self.wiki_path
+    parsed.query = query .. "titles=" .. URL.escape(text)
   end
-  return plaintext
+
+  -- HTTP request
+  request['url'] = URL.build(parsed)
+  print(request['url'])
+  request['method'] = 'GET'
+  request['sink'] = ltn12.sink.table(sink)
+  
+  local httpRequest = parsed.scheme == 'http' and http.request or https.request
+  local code, headers, status = socket.skip(1, httpRequest(request))
+
+  if not headers or not sink then
+    return nil
+  end
+
+  local content = table.concat(sink)
+  if content ~= "" then
+    local ok, result = pcall(JSON.decode, content)
+    if ok and result then
+      return result
+    else
+      return nil
+    end
+  else 
+    return nil
+  end
 end
 
-function formatwikiforsending(wikitext,url)
-  -- local stringtosend=title.."\n==="
-  local stringtosend=plaintext(wikitext).."\n"
-  stringtosend=stringtosend.."- "..url
-  return stringtosend
+-- extract intro passage in wiki page
+function Wikipedia:wikintro(text, lang)
+  local result = self:loadPage(text, lang, true, true)
+
+  if result and result.query then
+
+    local query = result.query
+    if query and query.normalized then
+      text = query.normalized[1].to or text
+    end
+
+    local page = query.pages[next(query.pages)]
+
+    if page and page.extract then
+	  local lang = lang or "de"
+      return text..":\n"..page.extract.."\n -- https://"..lang..".wikipedia.org/"..text
+    else
+      local text = "Extract nicht gefunden für: "..text
+      text = text..'\n'..table.concat(wikiusage, '\n')
+      return text
+    end
+  else
+    return "Ein Fehler ist aufgetreten."
+  end
 end
 
+-- search for term in wiki
+function Wikipedia:wikisearch(text, lang)
+  local result = self:loadPage(text, lang, true, true, true)
 
-function scrapewiki(results)
-  local url=firstresult(results)
-  local tosend=formatwikiforsending(getwikifromapi(wikiapilink(url)),url)
-  return tosend
+  if result and result.query then
+    local titles = ""
+	 for i,item in pairs(result.query.search) do
+      titles = titles .. "\n" .. item["title"]
+	 end
+	 titles = titles ~= "" and titles or "Keine Ergebnisse gefunden"
+	 return titles
+  else
+    return "Ein Fehler ist aufgetreten."
+  end
+
 end
 
-function run(msg, matches)
-  vardump(matches)
-  local results = googlethat(matches[1].." site:de.wikipedia.org")
-  return scrapewiki(results)
-end
+local function run(msg, matches)
+  -- TODO: Remember language (i18 on future version)
+  -- TODO: Support for non Wikipedias but Mediawikis
+  local search, term, lang
+  if matches[1] == "search" then
+    search = true
+	 term = matches[2]
+	 lang = nil
+  elseif matches[2] == "search" then
+    search = true
+	 term = matches[3]
+	 lang = matches[1]
+  else
+    term = matches[2]
+	 lang = matches[1]
+  end
+  if not term then
+    term = lang
+    lang = nil
+  end
+  if term == "" then
+    local text = "Befehle:\n"
+    text = text..table.concat(wikiusage, '\n')
+    return text
+  end
 
+  local result
+  if search then
+    result = Wikipedia:wikisearch(term, lang)
+  else
+    -- TODO: Show the link
+    result = Wikipedia:wikintro(term, lang)
+  end
+  return result
+end
 
 return {
-  description = "Sendet einen Wikipedia-Artikel",
-  usage = {"/wiki [Suchwort]","de.wikipedia.org Link"},
-  patterns = {"^/wiki (.*)$","^%.[w|W]iki (.*)$","de.wikipedia.org/wiki/([A-Za-z0-9-_-]+)"},
-    run = run
-  }
+  description = "Sendet Wikipedia Artikel",
+  usage = wikiusage,
+  patterns = {
+    "^/[Ww]iki(%w+) (search) (.+)$",
+    "^/[Ww]iki (search) ?(.*)$",
+    "^/[Ww]iki(%w+) (.+)$",
+    "^/[Ww]iki ?(.*)$",
+	"de.wikipedia.org/wiki/([A-Za-z0-9-_-]+)"
+  },
+  run = run
+}
