@@ -21,7 +21,7 @@ end
 return {
   description = "Einfach mal die Fresse halten!", 
   usage = {"/hdf"},
-  patterns = {"^/hdf"}, 
+  patterns = {"^/[H|h][D|d][F|f]$"}, 
   run = run 
 }
 --by Akamaru [https://ponywave.de]
