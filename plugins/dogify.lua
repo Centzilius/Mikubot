@@ -8,7 +8,7 @@ local function run(msg, matches)
       local receiver = get_receiver(msg)
       send_photo_from_url(receiver, url)
    else
-      return 'Konnte kein Bild mit "' .. matches[1] .. '" erstellen'
+      return 'Konnte kein Bild mit "' .. matches[1] .. '" erstellen.'
    end
 end
 

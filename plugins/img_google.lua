@@ -1,4 +1,3 @@
-
 do
 
 function getGoogleImage(text)
