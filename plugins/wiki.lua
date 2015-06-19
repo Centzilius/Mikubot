@@ -101,8 +101,9 @@ function Wikipedia:wikintro(text, lang)
 
     if page and page.extract then
 	  local lang = lang or "de"
-	  local title_enc = URL.escape(page.title)
-      return text..":\n"..page.extract.."\n -- https://"..lang..".wikipedia.org/wiki/"..title_enc
+	  local title = page.title
+	  local title_enc = URL.escape(title)
+      return title..":\n"..page.extract.."\n -- https://"..lang..".wikipedia.org/wiki/"..title_enc
     else
       local text = '"'..text..'" nicht gefunden.'
       return text
