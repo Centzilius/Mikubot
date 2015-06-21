@@ -161,8 +161,6 @@ local function run(msg, matches)
    if matches[1] == "sync" then
       if not is_sudo(msg) then
          return 'Du kannst das nicht'
-	  else
-		 return 'RSS aktualisiert'
       end
       cron()
    end
