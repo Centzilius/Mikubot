@@ -2,6 +2,17 @@
 local socket = require "socket"
 local JSON = require "cjson"
 
+local decodetext
+do
+    local char, gsub, tonumber = string.char, string.gsub, tonumber
+    local function _(hex) return char(tonumber(hex, 16)) end
+
+    function decodetext(s)
+        s = gsub(s, '%%(%x%x)', _)
+        return s
+    end
+end
+
 local wikiusage = {
   "/wiki [Begriff]: Poste Artikel von der deutschen Wikipedia",
   "/wiki(lang) [Begriff]: Poste Artikel aus anderer Sprache. Beispiel: /wikien Hello",
@@ -88,6 +99,7 @@ end
 
 -- extract intro passage in wiki page
 function Wikipedia:wikintro(text, lang)
+  local text = decodetext(text)
   local result = self:loadPage(text, lang, true, true)
 
   if result and result.query then
@@ -160,7 +172,6 @@ local function run(msg, matches)
   if search then
     result = Wikipedia:wikisearch(term, lang)
   else
-    -- TODO: Show the link
     result = Wikipedia:wikintro(term, lang)
   end
   return result
@@ -174,7 +185,7 @@ return {
     "^/[Ww]iki (search) ?(.*)$",
     "^/[Ww]iki(%w+) (.+)$",
     "^/[Ww]iki ?(.*)$",
-	"de.wikipedia.org/wiki/([A-Za-z0-9-_-]+)"
+	"de.wikipedia.org/wiki/(.+)"
   },
   run = run
 }
