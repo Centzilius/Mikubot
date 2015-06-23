@@ -58,7 +58,7 @@ function run(msg, matches)
 return {
   description = "Postet URL-Titel", 
   usage = {"Irgendein Link"},
-  patterns = {"^(https?://[%w-_%.%?%.:,/%+=&#]+)$",}, 
+  patterns = {"^(https?://[%w-_%.%?%.:,/%+=&#!]+)$",}, 
   run = run 
 }
 end
