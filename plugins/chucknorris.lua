@@ -1,16 +1,13 @@
-function getChuckNorris()
-  b = http.request("http://api.icndb.com/jokes/random/")
-  response = json:decode(b)
-  return response.value.joke
+local function chuck()
+  local random = http.request("http://api.icndb.com/jokes/random")
+  local decode = json:decode(random)
+  local joke = decode.value.joke
+  return joke
 end
 
-function run(msg, matches)
-  local j = getChuckNorris()
-  if (j == nil) then
-    return "Huch, da lief was falsch!"
-  else
-    return j
-  end
+local function run(msg)
+  local joke = chuck()
+  return unescape_html(joke)
 end
 
 return {
