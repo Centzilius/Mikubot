@@ -49,8 +49,8 @@ return {
    description = "Sendet einen Screenshot einer Webseite.",
    usage = "/webshot [URL]//scrot [URL]",
    patterns = {
-      "^/webshot (https?://[%w-_%.%?%.:,/%+=&#!]+)$",
-	  "^/scrot (https?://[%w-_%.%?%.:,/%+=&#!]+)$"
+      "^/webshot ([%w-_%.%?%.:,/%+=&#!]+)$",
+	  "^/scrot ([%w-_%.%?%.:,/%+=&#!]+)$"
    },
    run = run
 }
