@@ -37,3 +37,5 @@ plugins/e621.lua
 plugins/ponyfaces.lua
 plugins/rss_old.lua
 plugins/gfycat.lua
+plugins/yourls.lua
+plugins/youtube_channel.lua

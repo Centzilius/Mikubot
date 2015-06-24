@@ -256,7 +256,9 @@ function create_cred( )
   tw_access_token_secret = "",
   x_mashape_key = "",
   yandex_translate_apikey = "",
-  yandex_rich_content_apikey = ""
+  yandex_rich_content_apikey = "",
+  yourls_site_url = "",
+  yourls_signature_token = ""
   }
   serialize_to_file(cred, './data/credentials.lua')
   print ('Credentials gespeichert in ./data/credentials.lua')
