@@ -34,10 +34,19 @@ function run(msg, matches)
   if not url then
     return "Kein Bild gefunden."
   end
+  
+  if string.ends(url, ".svg") then
+      return "Fehler beim laden des Bildes."
+  end
 
   print("Bilder-URL: ", url)
+  if string.ends(url, ".gif") then
+    send_document_from_url(receiver, url)
+    	return "Source: "..url
+  else
     send_photo_from_url(receiver, url)
-    return "Source: "..url
+	return "Source: "..url
+  end
 end
 
 return {
