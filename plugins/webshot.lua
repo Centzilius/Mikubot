@@ -3,7 +3,7 @@ local helpers = require "OAuth.helpers"
 local base = 'https://screenshotmachine.com/'
 local url = base .. 'processor.php'
 
-local function get_webshot_url(param)
+local function get_webshot_url(param, size)
    local response_body = {}
    local request_constructor = {
       url = url,
@@ -20,7 +20,7 @@ local function get_webshot_url(param)
 
    local arguments = {
       urlparam = param,
-      size = "X",
+      size = size,
 	  cacheLimit = "0"
    }
 
@@ -36,7 +36,14 @@ local function get_webshot_url(param)
 end
 
 local function run(msg, matches)
-   local find = get_webshot_url(matches[1])
+   if matches[2] == nil then
+     webshot_url = matches[1]
+	 size = "X"
+   else
+     webshot_url = matches[2]
+	 size = string.upper(matches[1])
+   end
+   local find = get_webshot_url(webshot_url, size)
    if find then
       local imgurl = base .. find
       local receiver = get_receiver(msg)
@@ -46,11 +53,16 @@ end
 
 
 return {
-   description = "Sendet einen Screenshot einer Webseite.",
-   usage = "/webshot [URL]//scrot [URL]",
-   patterns = {
-      "^/webshot ([%w-_%.%?%.:,/%+=&#!]+)$",
-	  "^/scrot ([%w-_%.%?%.:,/%+=&#!]+)$"
-   },
-   run = run
+  description = "Sendet einen Screenshot einer Website.",
+  usage = {
+    "/scrot [URL]: Fertigt Bild mit Größe 1024x768 (X) an",
+	"/scrot [T|S|E|N|M|L|X|F] [URL]: Fertigt Bild mit bestimmter Größe an (T = tiny, F = full)"
+  },
+  patterns = {
+    "^/webshot ([T|t|S|s|E|e|N|n|M|m|L|l|X|x|F|f]) (https?://[%w-_%.%?%.:,/%+=&#!]+)$",
+	"^/scrot ([T|t|S|s|E|e|N|n|M|m|L|l|X|x|F|f]) (https?://[%w-_%.%?%.:,/%+=&#!]+)$",
+    "^/webshot (https?://[%w-_%.%?%.:,/%+=&#!]+)$",
+	"^/scrot (https?://[%w-_%.%?%.:,/%+=&#!]+)$"
+  },
+  run = run
 }
