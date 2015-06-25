@@ -125,7 +125,7 @@ end
 
 
 local function analyze_tweet(tweet)
-   local header = "Tweet von " .. tweet.user.name .. " (@" .. tweet.user.screen_name .. ")\n" -- "Link: https://twitter.com/statuses/" .. tweet.id_str
+   local header = "Tweet von " .. tweet.user.name .. " (@" .. tweet.user.screen_name .. ")\nLink: https://twitter.com/statuses/" .. tweet.id_str .. "\n"
    local text = tweet.text
 
    -- replace short URLs
@@ -147,6 +147,7 @@ local function analyze_tweet(tweet)
             table.insert(urls, v.media_url)
          end
          text = text:gsub(v.url, "")  -- Replace the URL in text
+		 text = unescape(text)
       end
    end
 
@@ -157,6 +158,7 @@ end
 local function sendTweet(receiver, tweet)
    local header, text, urls = analyze_tweet(tweet)
    -- send the parts
+   local text = unescape(text)
    send_msg(receiver, header .. "\n" .. text, ok_cb, false)
    send_all_files(receiver, urls)
    return nil
@@ -189,6 +191,9 @@ local function getTweet(msg, base, all)
    return nil
 end
 
+function isint(n)
+   return n==math.floor(n)
+end
 
 local function run(msg, matches)
    local checked = check_keys()
@@ -199,7 +204,11 @@ local function run(msg, matches)
    local base = {include_rts = 1}
 
    if matches[1] == 'id' then
-      base.user_id = matches[2]
+      local userid = tonumber(matches[2])
+      if userid == nil or not isint(userid) then
+         return "The id of a user is a number, check this web: http://gettwitterid.com/"
+      end
+      base.user_id = userid
    elseif matches[1] == 'name' then
       base.screen_name = matches[2]
    else
@@ -221,9 +230,7 @@ local function run(msg, matches)
    end
    base.count = count
 
-   getTweet(msg, base, all)
-
-   return nil
+   return getTweet(msg, base, all)
 end
 
 
