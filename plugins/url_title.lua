@@ -14,6 +14,7 @@ function getTitle(page)
   s = string.gsub(s, "&amp;", "&")
   s = string.gsub(s, "&#39;", "'")
   s = string.gsub(s, "&ndash;", "–")
+  s = string.gsub(s, "&raquo;", "»")
 
   -- Put all the tags in lowercase.
   s = string.gsub(s, "(<[^ >]+)", string.lower)
@@ -49,16 +50,16 @@ function run(msg, matches)
 	  string.match(msg.text, "twitch.tv") or
 	  string.match(msg.text, "steamcommunity.com/app/") or
 	  string.match(msg.text, "deviantart.com") then
-    print('Invalide, da "'..title..'"')
+    print('Nicht gültig, da "'..title..'"')
   else
     return title
   end
   end
 
 return {
-  description = "Postet URL-Titel", 
-  usage = {"Irgendein Link"},
-  patterns = {"^(https?://[%w-_%.%?%.:,/%+=&#!]+)$",}, 
+  description = "Postet den URL-Titel", 
+  usage = {""},
+  patterns = {"^(https?://[%w-_%.%?%.:,/%+=&#!]+)$"}, 
   run = run 
 }
 end
