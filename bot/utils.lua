@@ -527,6 +527,17 @@ function load_from_file(file, default_data)
     return result
 end
 
+function unescape(str)
+  str = string.gsub( str, '&lt;', '<' )
+  str = string.gsub( str, '&gt;', '>' )
+  str = string.gsub( str, '&quot;', '"' )
+  str = string.gsub( str, '&apos;', "'" )
+  str = string.gsub( str, '&#(%d+);', function(n) return string.char(n) end )
+  str = string.gsub( str, '&#x(%d+);', function(n) return string.char(tonumber(n,16)) end )
+  str = string.gsub( str, '&amp;', '&' ) -- Be sure to do this after all others
+  return str
+end
+
 -- See http://stackoverflow.com/a/14899740
 function unescape_html(str)
   local map = { 

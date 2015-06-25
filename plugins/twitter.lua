@@ -34,7 +34,6 @@ function run(msg, matches)
 
   local header = "Tweet von " .. response.user.name .. " (@" .. response.user.screen_name .. ")\n"
   local text = response.text
-		text = string.gsub(text, "&amp;", "&")
   
   -- replace short URLs
   if response.entities.url then
@@ -58,6 +57,7 @@ function run(msg, matches)
 
   -- send the parts 
   local receiver = get_receiver(msg)
+  local text = unescape(text)
   send_msg(receiver, header .. "\n" .. text, ok_cb, false)
   for k, v in pairs(images) do
     local file = download_to_file(v)
