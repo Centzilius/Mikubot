@@ -82,7 +82,7 @@ return {
   usage = "",
   patterns = {
     "youtu.be/([A-Za-z0-9-_-]+)",
-    "youtube.com/watch%?v=([A-Za-z0-9-_-]+)",
+    "youtube.com/watch%?v=([A-Za-z0-9-_-]+)"
   },
   run = run 
 }
