@@ -44,7 +44,7 @@ Installation
 ------------
 ```bash
 # Gestet auf Ubuntu 14.04, für andere Distris, checke https://github.com/vysheng/tg#installation
-$ sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev make unzip git redis-server libjansson-dev libpython-dev
+$ sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev make unzip git redis-server g++ libjansson-dev libpython-dev expat libexpat1-dev
 ```
 ```bash
 # Nach den Abhängigkeiten kommt jetzt die Installation des Bots
