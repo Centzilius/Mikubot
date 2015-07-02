@@ -15,6 +15,8 @@ function getTitle(page)
   s = string.gsub(s, "&#39;", "'")
   s = string.gsub(s, "&ndash;", "–")
   s = string.gsub(s, "&raquo;", "»")
+  s = string.gsub(s, "&#8220;", "“")
+  s = string.gsub(s, "&#8221;", "”")
 
   -- Put all the tags in lowercase.
   s = string.gsub(s, "(<[^ >]+)", string.lower)
