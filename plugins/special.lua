@@ -16,11 +16,21 @@ function run(msg, matches)
 	send_photo(get_receiver(msg), "pictures/neorame.jpg", ok_cb, false)
     elseif string.match(msg.text, "^/[N|n][A|a][U|u]$") then
 	send_photo(get_receiver(msg), "pictures/nau.jpg", ok_cb, false)
-    end
+    elseif string.match(msg.text, "^/[F|f][T|t][T|t]$") then
+	return [[(╯°□°)╯︵ ┻━┻ FLIP THAT TABLE.
+┻━┻ ︵ ヽ(°□°ヽ) FLIP THIS TABLE.
+┻━┻ ︵ ＼(`0`)/ ︵ ┻━┻ FLIP ALL THE TABLES
+ಠ_ಠ Child. . .
+ಠ_ಠ Put.
+ಠ__ಠ The tables.
+ಠ___ಠ Back.
+(╮°-°)╮┳━┳
+(╯°□°)╯︵ ┻━┻ NEVER]]
+	end
 end
 
 return {
-    description = "",
+    description = "Ein Plugin mit nutzlosen Befehlen",
     usage = {""},
     patterns = {"^[R|r][I|i][C|c][H|h] [B|b][I|i][T|t][C|c][H|h]$",
 				"^#[O|o][L|l][D|d]$",
@@ -30,7 +40,8 @@ return {
 				"^[N|n][I|i][I|i](-)[S|s][A|a][N|n]$",
 				"^[N|n][I|i][S|s][S|s][A|a][N|n]$",
 				"^/[N|n][E|e][O|o][R|r][A|a][M|m][E|e]$",
-				"^/[N|n][A|a][U|u]$"
+				"^/[N|n][A|a][U|u]$",
+				"^/[F|f][T|t][T|t]$"
 				},
     run = run
 }
