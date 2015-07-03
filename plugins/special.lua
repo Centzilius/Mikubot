@@ -26,6 +26,14 @@ function run(msg, matches)
 ಠ___ಠ Back.
 (╮°-°)╮┳━┳
 (╯°□°)╯︵ ┻━┻ NEVER]]
+    elseif string.match(msg.text, "^/[N|n][B|b][C|c]$") then
+	return [[¯\_(ツ)_/¯]]
+    elseif string.match(msg.text, "^/[I|i][D|d][C|c]$") then
+	return [[¯\_(ツ)_/¯]]
+    elseif string.match(msg.text, "^/[L|l][F|f]$") then
+	return '(͡° ͜ʖ ͡°)'
+    elseif string.match(msg.text, "^/[L|l][O|o][D|d]$") then
+	return 'ಠ_ಠ'
 	end
 end
 
@@ -41,7 +49,11 @@ return {
 				"^[N|n][I|i][S|s][S|s][A|a][N|n]$",
 				"^/[N|n][E|e][O|o][R|r][A|a][M|m][E|e]$",
 				"^/[N|n][A|a][U|u]$",
-				"^/[F|f][T|t][T|t]$"
+				"^/[F|f][T|t][T|t]$",
+				"^/[N|n][B|b][C|c]$",
+				"^/[I|i][D|d][C|c]$",
+				"^/[L|l][F|f]$",
+				"^/[L|l][O|o][D|d]$"
 				},
     run = run
 }
