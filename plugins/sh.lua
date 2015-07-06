@@ -22,8 +22,8 @@ function run(msg, matches)
 
   if string.starts(msg.text, '/temp') then
     text = run_bash('vcgencmd measure_temp')
-    send_msg(receiver, text, ok_cb, false)
-    return
+    text = string.gsub(text, "temp=", " ")
+    return "Die CPU Temperatur beträgt" ..text
   end
 
   if string.starts(msg.text, '/volt') then
@@ -61,7 +61,7 @@ end
 return {
     description = "Führt Befehle in der Konsole aus", 
     usage = {"/sh kann nur Akamaru"},
-    patterns = {"^/uptime","^/sh (.*)$","^/temp$","^/volt$","^/takt$","^/screen$","^/update$","^/upgrade$"}, 
+    patterns = {"^/uptime$","^/sh (.*)$","^/temp$","^/volt$","^/takt$","^/screen$","^/update$","^/upgrade$"}, 
     run = run,
     privileged = true
 }
