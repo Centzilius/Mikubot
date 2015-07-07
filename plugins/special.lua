@@ -26,9 +26,7 @@ function run(msg, matches)
 ಠ___ಠ Back.
 (╮°-°)╮┳━┳
 (╯°□°)╯︵ ┻━┻ NEVER]]
-    elseif string.match(msg.text, "^/[N|n][B|b][C|c]$") then
-	return [[¯\_(ツ)_/¯]]
-    elseif string.match(msg.text, "^/[I|i][D|d][C|c]$") then
+    elseif string.match(msg.text, "^/[N|n][B|b][C|c]$") or string.match(msg.text, "^/[I|i][D|d][C|c]$") then
 	return [[¯\_(ツ)_/¯]]
     elseif string.match(msg.text, "^/[L|l][F|f]$") then
 	return '(͡° ͜ʖ ͡°)'
