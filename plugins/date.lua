@@ -1,5 +1,5 @@
 function run(msg, matches)
-	text = os.date("Heute ist %A der %d. %B (%m) %Y und es ist %H:%M:%S %p Uhr")
+	text = os.date("Heute ist %A, der %d. %B %Y und es ist %H:%M:%S Uhr [%p]")
 	
 	-- Days
 	text = string.gsub(text, "Monday", "Montag")
