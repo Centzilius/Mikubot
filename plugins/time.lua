@@ -92,7 +92,7 @@ function getformattedLocalTime(area)
 	text = string.gsub(text, "Wednesday", "Mittwoch")
 	text = string.gsub(text, "Thursday", "Donnerstag")
 	text = string.gsub(text, "Friday", "Freitag")
-	text = string.gsub(text, "Saturday", "Samsstag")
+	text = string.gsub(text, "Saturday", "Samstag")
 	text = string.gsub(text, "Sunday", "Sonntag")
 	
 	-- Months
