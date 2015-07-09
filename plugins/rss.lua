@@ -136,7 +136,7 @@ local function cron()
       for k2, v2 in pairs(newentr) do
          local title = v2.title or 'No title'
          local link = v2.link or v2.id or 'No Link'
-         text = text .. '[RSS] '.. title .. '\n(' .. link .. ')\n' 
+         text = text .. '[RSS] '.. title .. '\n(' .. link .. ')\n\n' 
       end
       if text ~= '' then
          local newlast = newentr[1].id
@@ -159,9 +159,6 @@ local function run(msg, matches)
       return print_subs(id)
    end
    if matches[1] == "sync" then
-      if not is_sudo(msg) then
-         return 'Du kannst das nicht'
-      end
       cron()
    end
    if matches[1] == "add" then
@@ -189,5 +186,6 @@ return {
       "^/rss (sync)$"
    },
    run = run,
-   cron = cron
+   cron = cron,
+   privileged = true
 }
