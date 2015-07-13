@@ -1,5 +1,5 @@
 function getUrbanDictionary(text)
-  local topic = string.match(text, "/ud (.+)")
+  local topic = string.match(text, "/ud (.+)") or string.match(text, "http://([A-Za-z0-9-_-]+).urbanup.com/")
   topic = url_encode(topic)
   b = http.request("http://api.urbandictionary.com/v0/define?term=" .. topic)
   res = json:decode(b)
@@ -34,6 +34,8 @@ end
 return {
     description = "Zeigt eine Urban Dictionary Definition",
     usage = {"/ud [Begriff]"},
-    patterns = {"^/ud (.*)$"},
+    patterns = {"^/ud (.*)$",
+				"^http://([A-Za-z0-9-_-]+).urbanup.com/"
+				},
     run = run
 }
