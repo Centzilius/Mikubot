@@ -51,8 +51,9 @@ function run(msg, matches)
       string.match(title, "eBay</title>") or
 	  string.match(msg.text, "twitch.tv") or
 	  string.match(msg.text, "steamcommunity.com/app/") or
-	  string.match(msg.text, "deviantart.com") then
-    print('Nicht gültig, da "'..title..'"')
+	  string.match(msg.text, "deviantart.com") or
+	  string.match(msg.text, "urbanup.com/") then
+    print('Ungültig, da "'..title..'"')
   else
     return title
   end
