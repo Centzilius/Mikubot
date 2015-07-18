@@ -14,7 +14,7 @@ end
 return {
   description = "Sendet ein zufälliges Katzenbild", 
   usage = {"/kitty","/katze","/cat","/neko","/kadse"},
-  patterns = {"^/kitty$","^/katze$","^/cat$","^/neko$","^/kadse$","^/kitty (.*)$","^/katze (.*)$","^/cat (.*)$","^/neko (.*)$","^/kadse (.*)$",}, 
+  patterns = {"^/kitty$","^/katze$","^/cat$","^/kadse$","^/kitty (.*)$","^/katze (.*)$","^/cat (.*)$","^/kadse (.*)$",}, 
   run = run 
 }
 --by Akamaru [https://ponywave.de]
