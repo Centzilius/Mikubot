@@ -52,7 +52,8 @@ function run(msg, matches)
 	  string.match(msg.text, "twitch.tv") or
 	  string.match(msg.text, "steamcommunity.com/app/") or
 	  string.match(msg.text, "deviantart.com") or
-	  string.match(msg.text, "urbanup.com/") then
+	  string.match(msg.text, "urbanup.com/") or
+	  string.match(msg.text, "urbandictionary.com/define.php") then
     print('Ungültig, da "'..title..'"')
   else
     return title
