@@ -3,6 +3,7 @@ local function run(msg, matches)
 	local url = 'http://i.gifeye.com/'..matches[1]..'.gif'
 		print("GIF URL: "..url)
 		send_document_from_url(receiver, url)
+		return 'Source: http://gifeye.com/'..matches[1]
 end
 
 return {
