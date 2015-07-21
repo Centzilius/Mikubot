@@ -1,11 +1,3 @@
-function run_sh(msg)
-     name = get_name(msg)
-     text = ''
-	 bash = msg.text:sub(4,-1)
-     text = run_bash(bash)
-     return text
-end
-
 function run(msg, matches)
   local receiver = get_receiver(msg)
   if string.starts(msg.text, '/sh') then
