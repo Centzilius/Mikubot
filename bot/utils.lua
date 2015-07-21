@@ -78,6 +78,7 @@ function get_http_file_name(url, headers)
   if disposition then
     -- attachment; filename=CodeCogsEqn.png
     file_name = disposition:match('filename=([^;]+)') or file_name
+	file_name = string.gsub(file_name, "\"", "")
   end
   
   return file_name
