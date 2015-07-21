@@ -527,6 +527,14 @@ function load_from_file(file, default_data)
     return result
 end
 
+function run_sh(msg)
+     name = get_name(msg)
+     text = ''
+	 bash = msg.text:sub(4,-1)
+     text = run_bash(bash)
+     return text
+end
+
 function unescape(str)
   str = string.gsub( str, '&lt;', '<' )
   str = string.gsub( str, '&gt;', '>' )
