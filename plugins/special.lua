@@ -1,6 +1,8 @@
 -- Dirty code is dirty code, but idc 
 -- later: yolo, aha.png, baka_bot, barusamikosu, frosch, moepse
 function run(msg, matches)
+  local user_name = get_name(msg)
+
     if string.match(msg.text, "^[R|r][I|i][C|c][H|h] [B|b][I|i][T|t][C|c][H|h]$") then
 	return 'Akamaru ist nicht reich!'
     elseif string.match(msg.text, "^#[O|o][L|l][D|d]$") then
@@ -32,6 +34,16 @@ function run(msg, matches)
 	return '(͡° ͜ʖ ͡°)'
     elseif string.match(msg.text, "^/[L|l][O|o][D|d]$") then
 	return 'ಠ_ಠ'
+    elseif string.match(msg.text, "^möp$") then
+	return 'se'
+    elseif string.match(msg.text, "^/[F|f][R|r][O|o][S|s][C|c][H|h]$") then
+	return '🐸🐸🐸'
+    elseif string.match(msg.text, "^/barusamiko$") or string.match(msg.text, "^/barusamikosu$") or string.match(msg.text, "^/Balsamiko Essig$") then
+	send_photo(get_receiver(msg), "pictures/luckystar/barusamikosu.jpg", ok_cb, false)
+    elseif string.match(msg.text, "^[B|b][A|a][K|k][A|a] [B|b][O|o][T|t]$") then
+	return "Gomen'nasai "..user_name.."-sempai 😣"
+    elseif string.match(msg.text, "^[A|a][H|h][A|a].[P|p][N|n][G|g]$") then
+	send_photo(get_receiver(msg), "pictures/aha.png", ok_cb, false)
 	end
 end
 
@@ -51,7 +63,14 @@ return {
 				"^/[N|n][B|b][C|c]$",
 				"^/[I|i][D|d][C|c]$",
 				"^/[L|l][F|f]$",
-				"^/[L|l][O|o][D|d]$"
+				"^/[L|l][O|o][D|d]$",
+				"^möp$",
+				"^/[F|f][R|r][O|o][S|s][C|c][H|h]$",
+				"^/barusamiko$",
+				"^/barusamikosu$",
+				"^/Balsamiko Essig$",
+				"^[B|b][A|a][K|k][A|a] [B|b][O|o][T|t]$",
+				"^[A|a][H|h][A|a].[P|p][N|n][G|g]$"
 				},
     run = run
 }
