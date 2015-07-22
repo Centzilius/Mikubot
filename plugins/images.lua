@@ -3,6 +3,8 @@ do
 function run(msg, matches)
   local url = matches[1]
   local receiver = get_receiver(msg)
+  local url = string.gsub(url, "https://img.centzilius.de", "http://img.centzilius.de")
+  local url = string.gsub(url, "https://img.pegelf.de", "http://img.pegelf.de")
   send_photo_from_url(receiver, url)
 end
 
