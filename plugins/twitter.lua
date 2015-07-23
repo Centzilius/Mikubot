@@ -62,7 +62,6 @@ function run(msg, matches)
   for k, v in pairs(images) do
     local file = download_to_file(v)
     send_photo(receiver, file, ok_cb, false)
-    delay_s(1)
   end
   
   return nil
