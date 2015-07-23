@@ -60,9 +60,13 @@ return {
   },
   patterns = {
     "^/webshot ([T|t|S|s|E|e|N|n|M|m|L|l|X|x|F|f]) ([%w-_%.%?%.:,/%+=&#!]+)$",
-	"^/scrot ([T|t|S|s|E|e|N|n|M|m|L|l|X|x|F|f]) ([%w-_%.%?%.:,/%+=&#!]+)$",
+    "^/webshot ([T|t|S|s|E|e|N|n|M|m|L|l|X|x|F|f]) (https?://[%w-_%.%?%.:,/%+=&#!]+)$",
     "^/webshot ([%w-_%.%?%.:,/%+=&#!]+)$",
-	"^/scrot ([%w-_%.%?%.:,/%+=&#!]+)$"
+    "^/webshot (https?://[%w-_%.%?%.:,/%+=&#!]+)$",
+	"^/scrot ([T|t|S|s|E|e|N|n|M|m|L|l|X|x|F|f]) ([%w-_%.%?%.:,/%+=&#!]+)$",
+	"^/scrot ([T|t|S|s|E|e|N|n|M|m|L|l|X|x|F|f]) (https?://[%w-_%.%?%.:,/%+=&#!]+)$",
+	"^/scrot ([%w-_%.%?%.:,/%+=&#!]+)$",
+	"^/scrot (https?://[%w-_%.%?%.:,/%+=&#!]+)$"
   },
   run = run
 }
