@@ -28,6 +28,16 @@ function run(msg, matches)
 ಠ___ಠ Back.
 (╮°-°)╮┳━┳
 (╯°□°)╯︵ ┻━┻ NEVER]]
+    elseif string.match(msg.text, "^/[F|f][T|t][F|f]$") then
+	return [[(╯┳┳)╯︵ ಠ‾ಠ FLIP THAT FATHER.
+ಠ‾ಠ ︵ ヽ(┳┳ヽ) FLIP THIS FATHER.
+ಠ‾ಠ ︵ ＼(┳┳)/ ︵ ಠ‾ಠ FLIP ALL THE FATHERS
+┳━┳ Child. . .
+┳━┳ Put.
+┳━━┳ The Fathers.
+┳━━━┳ Back.
+(╮┳┳)╮ಠ_ಠ
+(╯┳┳)╯︵ ಠ‾ಠ NEVER]]
     elseif string.match(msg.text, "^/[N|n][B|b][C|c]$") or string.match(msg.text, "^/[I|i][D|d][C|c]$") then
 	return [[¯\_(ツ)_/¯]]
     elseif string.match(msg.text, "^/[L|l][F|f]$") then
@@ -60,6 +70,7 @@ return {
 				"^/[N|n][E|e][O|o][R|r][A|a][M|m][E|e]$",
 				"^/[N|n][A|a][U|u]$",
 				"^/[F|f][T|t][T|t]$",
+				"^/[F|f][T|t][F|f]$",
 				"^/[N|n][B|b][C|c]$",
 				"^/[I|i][D|d][C|c]$",
 				"^/[L|l][F|f]$",
