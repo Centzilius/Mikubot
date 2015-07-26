@@ -42,3 +42,7 @@ plugins/youtube_channel.lua
 plugins/pr0gramm.lua
 plugins/licht.lua
 plugins/dantest.lua
+plugins/flickr.lua
+plugins/flickr_search.lua
+plugins/google_books.lua
+plugins/safebrowsing.lua

@@ -240,6 +240,7 @@ function create_cred( )
   cloudconvert_apikey = "",
   derpibooru_apikey = "",
   fb_access_token = "",
+  flickr_apikey = "",
   ftp_site = "",
   ftp_username = "",
   ftp_password = "",

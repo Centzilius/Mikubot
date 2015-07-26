@@ -16,6 +16,8 @@ elseif randomValue == 7 then
 	send_photo(get_receiver(msg), "pictures/wat/wat7.jpg", ok_cb, false)
 elseif randomValue == 8 then
 	send_photo(get_receiver(msg), "pictures/wat/wat8.jpg", ok_cb, false)
+--elseif randomValue == 9 then
+	--send_document(get_receiver(msg), "pictures/wat/wat9.gif", ok_cb, false)
 end
 end
 
