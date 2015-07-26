@@ -66,7 +66,7 @@ function send_youtube_data(data, receiver)
   local minutes = minutes % 60
   local duration = string.format("%02d:%02d",  minutes, seconds)
   
-  local text = title..'\n(Hochgeladen von: '..uploader..', '..viewCount..' mal angesehen, '..duration..' Minuten, '..likeCount..' Likes und '..dislikeCount..' Dislikes, '..commentCount..' Kommentare)\n'
+  local text = 'Titel: '..title..'\nUploader: '..uploader..'\nAufrufe: '..viewCount..'\nLänge: '..duration..' Minuten\nLikes: '..likeCount..'\nDislikes: '..dislikeCount..'\nKommentare: '..commentCount..'\n'
   send_msg(receiver, text, ok_cb, false)
 end
 
