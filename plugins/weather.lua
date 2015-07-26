@@ -4,6 +4,7 @@ local BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
 local function get_weather(location)
   print("Finde Wetter in ", location)
+  local location = string.gsub(location," ","+")
   local url = BASE_URL
   url = url..'?q='..location
   url = url..'&lang=de&units=metric'
@@ -14,9 +15,7 @@ local function get_weather(location)
   local weather = json:decode(b)
   local city = weather.name
   local country = weather.sys.country
-  local temp = 'Die Temperatur in '..city
-    ..' (' ..country..')'
-    ..' beträgt '..weather.main.temp..'°C'
+  local temp = 'Die Temperatur in '..city..' (' ..country..')'..' beträgt '..weather.main.temp..'°C'
   local conditions = 'Die aktuelle Wetterlage ist: '
     .. weather.weather[1].description
   
