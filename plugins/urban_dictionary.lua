@@ -25,7 +25,7 @@ end
 function run(msg, matches)
   local text = getUrbanDictionary(msg.text)
   if (text == nil) then
-    return "Nichts gefunden!"
+    return '"'..text..'" nicht gefunden.'
   else
     return text
   end
