@@ -54,6 +54,8 @@ function run(msg, matches)
 	return "Gomen'nasai "..user_name.."-sempai 😣"
     elseif string.match(msg.text, "^[A|a][H|h][A|a].[P|p][N|n][G|g]$") then
 	send_photo(get_receiver(msg), "pictures/aha.png", ok_cb, false)
+    elseif string.match(msg.text, "^~?[P|p][O||o][I|i]$") then
+	send_photo(get_receiver(msg), "pictures/poi.jpg", ok_cb, false)
 	end
 end
 
@@ -81,7 +83,8 @@ return {
 				"^/barusamikosu$",
 				"^/Balsamiko Essig$",
 				"^[B|b][A|a][K|k][A|a] [B|b][O|o][T|t]$",
-				"^[A|a][H|h][A|a].[P|p][N|n][G|g]$"
+				"^[A|a][H|h][A|a].[P|p][N|n][G|g]$",
+				"^~?[P|p][O||o][I|i]$"
 				},
     run = run
 }
