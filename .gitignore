@@ -46,3 +46,4 @@ plugins/flickr.lua
 plugins/flickr_search.lua
 plugins/google_books.lua
 plugins/safebrowsing.lua
+plugins/stats2.lua
