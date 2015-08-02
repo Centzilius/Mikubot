@@ -12,3 +12,4 @@ return {
     patterns = {"^/pic (.*)$"}, 
     run = run
 }
+--by Akamaru [https://ponywave.de]

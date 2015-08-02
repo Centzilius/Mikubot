@@ -10,3 +10,4 @@ return {
     patterns = {"^/rename (.*)$"}, 
     run = run
 }
+--by Akamaru [https://ponywave.de]
