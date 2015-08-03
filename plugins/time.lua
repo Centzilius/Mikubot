@@ -7,7 +7,7 @@
 -- If you have a google api key for the geocoding/timezone api
 api_key  = nil
 base_api = "https://maps.googleapis.com/maps/api"
-dateFormat = "%A, der %d. %B %Y und es ist %H:%M:%S Uhr [%p]"
+dateFormat = "%A, der %d. %B %Y und es ist %H:%M:%S Uhr"
 
 -- Need the utc time for the google api
 function utctime()
@@ -114,7 +114,7 @@ end
 
 function run(msg, matches)
   if string.match(msg.text, "^/[Z|z]eit$") or string.match(msg.text, "^/[T|t]ime$") then
-  text = os.date("Es ist %H:%M:%S Uhr [%p]")
+  text = os.date("Es ist %H:%M:%S Uhr")
    return text
    else
    return getformattedLocalTime(matches[1])
