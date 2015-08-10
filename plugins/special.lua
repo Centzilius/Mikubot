@@ -60,6 +60,15 @@ function run(msg, matches)
 	send_photo(get_receiver(msg), "pictures/thyme.jpg", ok_cb, false)
     elseif string.match(msg.text, "^[Yy][Oo][Ll][Oo]$") then
 	return 'Hä YOLO?'
+    elseif string.match(msg.text, "^/[Kk][Aa][Pp][Pp][Aa]$") then
+       return [[⠀⠀⠀⠀⣀⣀⣬⣥⣽⣿⣧⣤⢀⠀⠀⠀
+⠀⠀⠀⠂⢯⣧⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀
+⠀⢨⣽⣾⣿⣿⣿⣿⡿⠛⠃⠉⠛⣿⣿⠀
+⠀⠘⣿⣿⣿⡟⠁⠁⠀⠀⠀⠀⠨⣟⢿⠀
+⠀⠀⠩⢿⠀⠀⠶⠾⢿⡿⠉⠿⣿⡿⢟⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣩⣦⣾⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠠⡦⣺⣿⡿⣹⡏⠀
+⠀⠀⠀⠀⠀⠀⠻⠅⢄⡀⢈⣻⠟⠀⠀⠀]]
 	end
 end
 
@@ -90,7 +99,8 @@ return {
 				"^[A|a][H|h][A|a].[P|p][N|n][G|g]$",
 				"^~?[P|p][O||o][I|i]$",
 				"^/[Tt][Hh][Yy][Mm][Ee]$",
-				"^[Yy][Oo][Ll][Oo]$"
+				"^[Yy][Oo][Ll][Oo]$",
+				"^/[Kk][Aa][Pp][Pp][Aa]$"
 				},
     run = run
 }
