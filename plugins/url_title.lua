@@ -7,6 +7,8 @@ function getTitle(page)
   s = string.gsub(s, "\n", " ")
   s = string.gsub(s, " *< *", "<")
   s = string.gsub(s, " *> *", ">")
+  
+  -- Character encoding
   s = string.gsub(s, "&#124;", "|")
   s = string.gsub(s, "&#8249;", "‹")
   s = string.gsub(s, "&lt;", "<")
@@ -18,12 +20,21 @@ function getTitle(page)
   s = string.gsub(s, "&#8211;", "–")
   s = string.gsub(s, "&#8220;", "“")
   s = string.gsub(s, "&#8221;", "”")
+  s = string.gsub(s, "&#8364;", "€")
+  
+  -- Ä Ö Ü
   s = string.gsub(s, "&auml;", "ä")
   s = string.gsub(s, "&Auml;", "Ä")
+  s = string.gsub(s, "&#228;", "ä")
+  s = string.gsub(s, "&#196;", "Ä")
   s = string.gsub(s, "&ouml;", "ö")
   s = string.gsub(s, "&Ouml;", "Ö")
+  s = string.gsub(s, "&#246;", "ö")
+  s = string.gsub(s, "&#214;", "Ö")
   s = string.gsub(s, "&uuml;", "ü")
   s = string.gsub(s, "&Uuml;", "Ü")
+  s = string.gsub(s, "&#252;", "ü")
+  s = string.gsub(s, "&#220;", "Ü")
 
   -- Put all the tags in lowercase.
   s = string.gsub(s, "(<[^ >]+)", string.lower)
