@@ -151,6 +151,8 @@ function match_plugin(plugin, plugin_name, msg)
     local matches = match_pattern(pattern, msg.text)
     if matches then
       print("Nachricht stimmt überein mit ", pattern)
+	  -- Send typing
+      --if pattern ~= ".*" then send_typing(receiver, ok_cb, true) end
 	  
 	  if is_plugin_disabled_on_chat(plugin_name, receiver) then
         return nil
