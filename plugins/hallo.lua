@@ -6,8 +6,8 @@ end
 
 return {
     description = "Miku sagt Hallo zu euch",
-    usage = {"Hallo","hallo"},
-    patterns = {"^Hallo$","^hallo$"},
+    usage = {"Hallo"},
+    patterns = {"^[Hh][Aa][Ll][Ll][Oo]"},
 run = run
 }
 --by Akamaru [https://ponywave.de]
