@@ -12,6 +12,14 @@ function run(msg, matches)
 
 	Name: Pinkie Pie
 	Link: https://telegram.me/addstickers/PinkiePie
+	
+	Name: Sinnloser Scheiß
+	Link: https://telegram.me/addstickers/grummipol
+	
+	Name: Gronkh
+	Link: https://telegram.me/addstickers/Gronkh
+	
+	Stickerpacks by @Akamaru
 
 	]]
 end
