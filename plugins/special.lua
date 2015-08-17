@@ -1,5 +1,12 @@
 -- Dirty code is dirty code, but idc 
 -- later: yolo, aha.png, baka_bot, barusamikosu, frosch, moepse
+
+require "socket"
+
+function sleep(sec)
+    socket.select(nil, nil, sec)
+end
+
 function run(msg, matches)
   local user_name = get_name(msg)
 
@@ -69,6 +76,10 @@ function run(msg, matches)
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣩⣦⣾⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠠⡦⣺⣿⡿⣹⡏⠀
 ⠀⠀⠀⠀⠀⠀⠻⠅⢄⡀⢈⣻⠟⠀⠀⠀]]
+    elseif string.match(msg.text, "[Ii] [Ww][Ii][Ss][Hh] [Ss][Qq][Uu][Ii][Dd][Ss] [Ww][Ee][Rr][Ee] [Rr][Ee][Aa][Ll]") then
+	send_photo(get_receiver(msg), "pictures/squid.jpg", ok_cb, false)
+	--sleep(2)
+	return 'They are'
 	end
 end
 
@@ -100,7 +111,8 @@ return {
 				"^~?[P|p][O||o][I|i]$",
 				"^/[Tt][Hh][Yy][Mm][Ee]$",
 				"^[Yy][Oo][Ll][Oo]$",
-				"^/[Kk][Aa][Pp][Pp][Aa]$"
+				"^/[Kk][Aa][Pp][Pp][Aa]$",
+				"[Ii] [Ww][Ii][Ss][Hh] [Ss][Qq][Uu][Ii][Dd][Ss] [Ww][Ee][Rr][Ee] [Rr][Ee][Aa][Ll]"
 				},
     run = run
 }
