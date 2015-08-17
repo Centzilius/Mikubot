@@ -14,7 +14,7 @@ end
 return {
   description = "Es ist so still hier",
   usage = {"Stille","*Stille*"},
-  patterns = {"^[Ss][Tt][Ii][Ll][Ll][Ee].?$","^(*)[Ss][Tt][Ii][Ll][Ll][Ee](*)$"},
+  patterns = {"^[Ss][Tt][IiUu][Ll][Ll][Ee].?$","^(*)[Ss][Tt][Ii][Ll][Ll][Ee](*)$"},
   run = run
 }
 end

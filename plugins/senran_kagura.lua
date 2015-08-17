@@ -1,46 +1,42 @@
 function run(msg, matches)
 
-	if string.starts(msg.text, '/asuka') or string.starts(msg.text, "/Asuka") then
+	if string.match(msg.text, '^/[Aa][Ss][Uu][Kk][Aa]$') then
 		send_photo(get_receiver(msg), "pictures/senrankagura/hanzouacademy/asuka.jpg", ok_cb, false)
-	end
-
-    	if string.starts(msg.text, '/hibari') or string.starts(msg.text, "/Hibari") then
+	elseif string.match(msg.text, '^/[Hh][Ii][Bb][Aa][Rr][Ii]$') then
 		send_photo(get_receiver(msg), "pictures/senrankagura/hanzouacademy/hibari.jpg", ok_cb, false)
-	end
-
-    	if string.starts(msg.text, '/ikaruga') or string.starts(msg.text, "/Ikaruga") then
-	send_photo(get_receiver(msg), "pictures/senrankagura/hanzouacademy/ikaruga.jpg", ok_cb, false)
-	end
-
-    	if string.starts(msg.text, '/katsuragi') or string.starts(msg.text, "/Katsuragi") then
-	send_photo(get_receiver(msg), "pictures/senrankagura/hanzouacademy/katsuragi.jpg", ok_cb, false)
-	end
-
-    	if string.starts(msg.text, '/haruka') or string.starts(msg.text, "/Haruka") then
-	send_photo(get_receiver(msg), "pictures/senrankagura/hebijoacademy/haruka.jpg", ok_cb, false)
-	end
-
-    	if string.starts(msg.text, '/hikage') or string.starts(msg.text, "/Hikage") then
-	send_photo(get_receiver(msg), "pictures/senrankagura/hebijoacademy/hikage.jpg", ok_cb, false)
-	end
-
-    	if string.starts(msg.text, '/homura') or string.starts(msg.text, "/Homura") then
-	send_photo(get_receiver(msg), "pictures/senrankagura/hebijoacademy/homura.jpg", ok_cb, false)
-	end
-
-    	if string.starts(msg.text, '/mirai') or string.starts(msg.text, "/Mirai") then
-	send_photo(get_receiver(msg), "pictures/senrankagura/hebijoacademy/mirai.jpg", ok_cb, false)
-	end
-
-    	if string.starts(msg.text, '/yomi') or string.starts(msg.text, "/Yomi") then
+	elseif string.match(msg.text, '^/[Ii][Kk][Aa][Gg][Uu][Rr][Aa]$') then
+		send_photo(get_receiver(msg), "pictures/senrankagura/hanzouacademy/ikaruga.jpg", ok_cb, false)
+	elseif string.match(msg.text, '^/[Kk][Aa][Tt][Ss][Uu][Rr][Aa][Gg][Ii]$') then
+		send_photo(get_receiver(msg), "pictures/senrankagura/hanzouacademy/katsuragi.jpg", ok_cb, false)
+	--elseif string.match(msg.text, '^/[Yy][Aa][Gg][Yy][Uu][Uu]$') then
+		--send_photo(get_receiver(msg), "pictures/senrankagura/hanzouacademy/yagyuu.jpg", ok_cb, false)
+	elseif string.match(msg.text, '^/[Hh][Aa][Rr][Uu][Gg][Aa]$') then
+		send_photo(get_receiver(msg), "pictures/senrankagura/hebijoacademy/haruka.jpg", ok_cb, false)
+	elseif string.match(msg.text, '^/[Hh][Ii][Kk][Aa][Gg][Ee]$') then
+		send_photo(get_receiver(msg), "pictures/senrankagura/hebijoacademy/hikage.jpg", ok_cb, false)
+	elseif string.match(msg.text, '^/[Hh][Oo][Mm][Uu][Rr][Aa]$') then
+		send_photo(get_receiver(msg), "pictures/senrankagura/hebijoacademy/homura.jpg", ok_cb, false)
+	elseif string.match(msg.text, '^/[Mm][Ii][Rr][Aa][Ii]$') then
+		send_photo(get_receiver(msg), "pictures/senrankagura/hebijoacademy/mirai.jpg", ok_cb, false)
+	elseif string.match(msg.text, '^/[Yy][Oo][Mm][Ii]$') then
 		send_photo(get_receiver(msg), "pictures/senrankagura/hebijoacademy/yomi.jpg", ok_cb, false)
 	end
 end
 
 return {
   description = "Sendet euch ein Senran Kagura Charakter", 
-  usage = {"/asuka","/Asuka","/hibari","/Hibari","/ikaruga","/Ikaruga","/katsuragi","/Katsuragi","/haruka","/Haruka","/hikage","/Hikage","/homura","/Homura","/mirai","/Mirai","/yomi","/Yomi"},
-  patterns = {"^/asuka","^/Asuka","^/hibari","^/Hibari","^/ikaruga","^/Ikaruga","^/katsuragi","^/Katsuragi","^/haruka","^/Haruka","^/hikage","^/Hikage","^/homura","^/Homura","^/mirai","^/Mirai","^/yomi","^/Yomi"}, 
+  usage = {"/asuka","/hibari","/ikaruga","/katsuragi","/haruka","/hikage","/homura","/mirai","/yomi"},
+  patterns = {'^/[Aa][Ss][Uu][Kk][Aa]$',
+			  '^/[Hh][Ii][Bb][Aa][Rr][Ii]$',
+			  '^/[Ii][Kk][Aa][Gg][Uu][Rr][Aa]$',
+			  '^/[Kk][Aa][Tt][Ss][Uu][Rr][Aa][Gg][Ii]$',
+			  --'^/[Yy][Aa][Gg][Yy][Uu][Uu]$',
+			  '^/[Hh][Aa][Rr][Uu][Gg][Aa]$',
+			  '^/[Hh][Ii][Kk][Aa][Gg][Ee]$',
+			  '^/[Hh][Oo][Mm][Uu][Rr][Aa]$',
+			  '^/[Mm][Ii][Rr][Aa][Ii]$',
+			  '^/[Yy][Oo][Mm][Ii]$'
+			  }, 
   run = run 
 }
 --by Akamaru [https://ponywave.de]
