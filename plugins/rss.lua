@@ -136,6 +136,7 @@ local function cron()
       for k2, v2 in pairs(newentr) do
          local title = v2.title or 'No title'
          local link = v2.link or v2.id or 'No Link'
+		 --text = string.gsub(text, "\n", "")
          text = text .. '[RSS] '.. title .. '\n(' .. link .. ')\n\n' 
       end
       if text ~= '' then
