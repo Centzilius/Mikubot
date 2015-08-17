@@ -8,8 +8,8 @@ end
 function run(msg, matches)
   local pics = {
 		-- add more below!
-		["anime"] = "/media/AA05-A04B/sfw/anime/",
-		["mlp"] = "/media/AA05-A04B/sfw/mlp/"
+		["anime"] = "/home/pi/USB/sfw/anime/",
+		["mlp"] = "/home/pi/USB/sfw/mlp/"
 		}
 
   local receiver = get_receiver(msg)

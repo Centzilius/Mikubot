@@ -50,3 +50,4 @@ plugins/stats2.lua
 plugins/help2.lua
 plugins/miiverse.lua
 plugins/videotogif.lua
+plugins/music163.lua

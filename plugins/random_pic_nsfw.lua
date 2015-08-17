@@ -8,7 +8,7 @@ end
 function run(msg, matches)
   local pics = {
 		-- add more below!
-		["/nsfw"] = "/media/AA05-A04B/nsfw/"
+		["/nsfw"] = "/home/pi/USB/nsfw/"
 		}
 
   local receiver = get_receiver(msg)
