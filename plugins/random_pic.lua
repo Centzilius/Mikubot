@@ -7,10 +7,11 @@ end
 	 
 function run(msg, matches)
   local pics = {
-		-- add more below!
-		["anime"] = "/home/pi/USB/sfw/anime/",
-		["mlp"] = "/home/pi/USB/sfw/mlp/"
-		}
+			 -- add more below!
+			 ["test"] = "../USB/test/",
+		  	 ["anime"] = "../USB/sfw/anime/",
+			 ["mlp"] = "../USB/sfw/mlp/"
+			 }
 
   local receiver = get_receiver(msg)
   local imgtype = matches[1]
@@ -20,9 +21,13 @@ function run(msg, matches)
 	print("Sende... "..img)
   if string.ends(img, ".gif") then
     send_document(receiver, img, function() end, function() end)
-  else
+  elseif string.ends(img, ".jpg") or string.ends(img, ".jpeg") or string.ends(img, ".png") then
     send_photo(receiver, img, function() end, function() end)
+  else
+    return "Fehler: " .. img
   end
+  else
+	return '"'..imgtype..'" gibt es nicht.\nEs gibt:\nanime\nmlp'
   end
 end
 	 

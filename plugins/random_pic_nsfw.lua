@@ -19,9 +19,13 @@ function run(msg, matches)
 	print("Sende... "..img)
   if string.ends(img, ".gif") then
     send_document(receiver, img, function() end, function() end)
-  else
+  elseif string.ends(img, ".jpg") or string.ends(img, ".jpeg") or string.ends(img, ".png") then
     send_photo(receiver, img, function() end, function() end)
+  else
+    return "Fehler: " .. img
   end
+  else
+	return '"'..imgtype..'" gibt es nicht.\n'
   end
 end
 	 
