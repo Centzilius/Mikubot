@@ -15,6 +15,7 @@ function getTitle(page)
   s = string.gsub(s, "&gt;", ">")
   s = string.gsub(s, "&amp;", "&")
   s = string.gsub(s, "&#39;", "'")
+  s = string.gsub(s, "&#8217;", "'")
   s = string.gsub(s, "&ndash;", "–")
   s = string.gsub(s, "&raquo;", "»")
   s = string.gsub(s, "&#8211;", "–")
@@ -64,6 +65,7 @@ function run(msg, matches)
       title == "Moved Permanently" or 
 	  title == "Redirection" or
 	  title == "Object moved" or
+	  title == "Error 404 (Not Found)!!1" or
 	  string.match(title, "on Steam") or
 	  string.match(title, "521: Web server is down") or
       string.match(title, "eBay</title>") or
