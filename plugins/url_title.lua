@@ -70,6 +70,7 @@ function run(msg, matches)
 	  string.match(title, "521: Web server is down") or
       string.match(title, "eBay</title>") or
 	  string.match(msg.text, "twitch.tv") or
+	  string.match(msg.text, "twitter.com") or
 	  string.match(msg.text, "steamcommunity.com/app/") or
 	  string.match(msg.text, "deviantart.com") or
 	  string.match(msg.text, "urbanup.com/") or
