@@ -19,6 +19,9 @@ function run(msg, matches)
 	Name: Gronkh
 	Link: https://telegram.me/addstickers/Gronkh
 	
+	Name: Sword Art Online
+	Link: https://telegram.me/addstickers/SwordArtOnlinePack
+	
 	Stickerpacks by @Akamaru
 
 	]]
