@@ -18,10 +18,12 @@ function getTitle(page)
   s = string.gsub(s, "&#8217;", "'")
   s = string.gsub(s, "&ndash;", "–")
   s = string.gsub(s, "&raquo;", "»")
+  s = string.gsub(s, "&#187;", "»")
   s = string.gsub(s, "&#8211;", "–")
   s = string.gsub(s, "&#8220;", "“")
   s = string.gsub(s, "&#8221;", "”")
   s = string.gsub(s, "&#8364;", "€")
+  s = string.gsub(s, "&#223;", "ß")
   
   -- Ä Ö Ü
   s = string.gsub(s, "&auml;", "ä")
