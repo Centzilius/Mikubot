@@ -1,3 +1,41 @@
+feedparser = (loadfile "./libs/feedparser.lua")()
+
+local function unescape_for_rss(str)
+  -- Character encoding
+  str = string.gsub(str, "&#124;", "|")
+  str = string.gsub(str, "&#8249;", "‹")
+  str = string.gsub(str, "&lt;", "<")
+  str = string.gsub(str, "&gt;", ">")
+  str = string.gsub(str, "&#39;", "'")
+  str = string.gsub(str, "&#8217;", "'")
+  str = string.gsub(str, "&ndash;", "–")
+  str = string.gsub(str, "&raquo;", "»")
+  str = string.gsub(str, "&#187;", "»")
+  str = string.gsub(str, "&#8211;", "–")
+  str = string.gsub(str, "&#8220;", "“")
+  str = string.gsub(str, "&#8221;", "”")
+  str = string.gsub(str, "&#8364;", "€")
+  str = string.gsub(str, "&#223;", "ß")
+  
+  -- Ä Ö Ü
+  str = string.gsub(str, "&auml;", "ä")
+  str = string.gsub(str, "&Auml;", "Ä")
+  str = string.gsub(str, "&#228;", "ä")
+  str = string.gsub(str, "&#196;", "Ä")
+  str = string.gsub(str, "&ouml;", "ö")
+  str = string.gsub(str, "&Ouml;", "Ö")
+  str = string.gsub(str, "&#246;", "ö")
+  str = string.gsub(str, "&#214;", "Ö")
+  str = string.gsub(str, "&uuml;", "ü")
+  str = string.gsub(str, "&Uuml;", "Ü")
+  str = string.gsub(str, "&#252;", "ü")
+  str = string.gsub(str, "&#220;", "Ü")
+  -- str = string.gsub( str, '&#(%d+);', function(n) return string.char(n) end ) <- There is a bug, but I don't know!?
+  str = string.gsub( str, '&#x(%d+);', function(n) return string.char(tonumber(n,16)) end )
+  str = string.gsub( str, '&amp;', '&' ) -- Be sure to do this after all others
+  return str
+end
+
 local function get_base_redis(id, option, extra)
    local ex = ''
    if option ~= nil then
@@ -27,7 +65,7 @@ local function get_rss(url, prot)
       res, code = https.request(url)
    end
    if code ~= 200 then
-      return nil, "Error while doing the petition to " .. url
+      return nil, "Fehler beim Erreichen von " .. url
    end
    local parsed = feedparser.parse(res)
    if parsed == nil then
@@ -92,14 +130,14 @@ end
 
 local function unsubscribe(id, n)
    if #n > 3 then
-      return "I don't think that you have that many subscriptions."
+      return "Du kannst nicht mehr als drei Feeds abonnieren!"
    end
    n = tonumber(n)
 
    local uhash = get_base_redis(id)
    local subs = redis:smembers(uhash)
    if n < 1 or n > #subs then
-      return "Subscription id out of range!"
+      return "Abonnement-ID zu hoch!"
    end
    local sub = subs[n]
    local lhash = get_base_redis(sub, "subs")
@@ -123,6 +161,7 @@ local function cron()
    local keys = redis:keys(get_base_redis("*", "subs"))
    for k,v in pairs(keys) do
       local base = string.match(v, "rss:(.+):subs")  -- Get the URL base
+	  --print('RSS: '..base)
       local prot = redis:get(get_base_redis(base, "protocol"))
       local last = redis:get(get_base_redis(base, "last_entry"))
       local url = prot .. "://" .. base
@@ -132,12 +171,16 @@ local function cron()
       end
       local newentr = get_new_entries(last, parsed.entries)
       local subscribers = {}
-      local text = ''  -- Send only one message with all updates
+      local text = ''  -- Send one message per feed with the latest entries
       for k2, v2 in pairs(newentr) do
-         local title = v2.title or 'No title'
-         local link = v2.link or v2.id or 'No Link'
-		 --text = string.gsub(text, "\n", "")
-         text = text .. '[RSS] '.. title .. '\n(' .. link .. ')\n\n' 
+         local title = v2.title or 'Kein Titel'
+         local link = v2.link or v2.id or 'Kein Link'
+		 if v2.content then 
+		   content = string.sub(unescape_for_rss(v2.content:gsub("%b<>", "")), 1, 250) .. '...'
+		 else
+		   content = string.sub(unescape_for_rss(v2.summary:gsub("%b<>", "")), 1, 250) .. '...'
+		 end
+		 text = text .. '[RSS] '.. title .. '\n'..content..'\n\n(' .. link .. ')\n\n'
       end
       if text ~= '' then
          local newlast = newentr[1].id
@@ -173,12 +216,12 @@ end
 
 
 return {
-   description = "Manage User/Chat RSS subscriptions. If you are in a chat group, the RSS subscriptions will be of that chat. If you are in an one-to-one talk with the bot, the RSS subscriptions will be yours.",
+   description = "RSS-Feed Reader",
    usage = {
-      "/rss: Get your rss (or chat rss) subscriptions",
-      "/rss add (url): Subscribe to that url",
-      "/rss remove (id): Unsubscribe of that id",
-      "/rss sync: Download now the updates and send it. Only sudo users can use this option."
+      "/rss: Feed-Abos anzeigen",
+      "/rss add (url): Diesen Feed abonnieren",
+      "/rss remove (id): Diesen Feed deabonnieren",
+      "/rss sync: Feeds aktualisieren"
    },
    patterns = {
       "^/rss$",
