@@ -1,5 +1,4 @@
--- Dirty code is dirty code, but idc 
--- later: yolo, aha.png, baka_bot, barusamikosu, frosch, moepse
+-- Dirty code is dirty code, but idc
 
 require "socket"
 
@@ -10,22 +9,22 @@ end
 function run(msg, matches)
   local user_name = get_name(msg)
 
-    if string.match(msg.text, "^[R|r][I|i][C|c][H|h] [B|b][I|i][T|t][C|c][H|h]$") then
+    if string.match(msg.text, "^[Rr][Ii][Cc][Hh] [Bb][Ii][Tt][Cc][Hh]$") then
 	return 'Akamaru ist nicht reich!'
-    elseif string.match(msg.text, "^#[O|o][L|l][D|d]$") then
+    elseif string.match(msg.text, "^#[Oo][Ll][Dd]$") then
 	return 'Deine Mudda is old!'
-    elseif string.match(msg.text, "^[N|n][Y|y][U|u]$") then
+    elseif string.match(msg.text, "^[Nn][Yy][Uu]$") then
 	send_photo(get_receiver(msg), "pictures/nyu.jpg", ok_cb, false)
-    elseif string.match(msg.text, "^[N|n][O|o][P|p][E|e].[A|a][V|v][I|i]$") then
+    elseif string.match(msg.text, "^[Nn][Oo][Pp][Ee].[Aa][Vv][Ii]$") then
 	send_video(get_receiver(msg), "videos/nope.avi", ok_cb, false)
 	return 'Video wird gesendet...'
-    elseif string.match(msg.text, "^[N|n][I|i][I|i][S|s][A|a][N|n]$") or string.match(msg.text, "^[N|n][I|i][I|i](-)[S|s][A|a][N|n]$") or string.match(msg.text, "^[N|n][I|i][S|s][S|s][A|a][N|n]$") then
+    elseif string.match(msg.text, "^[Nn][Ii][Ii][Ss][Aa][Nn]$") or string.match(msg.text, "^[Nn][Ii][Ii](-)[Ss][Aa][Nn]$") or string.match(msg.text, "^[Nn][Ii][Ss][Ss][Aa][Nn]$") then
 	send_photo(get_receiver(msg), "pictures/Nii-san.jpg", ok_cb, false)
-    elseif string.match(msg.text, "^/[N|n][E|e][O|o][R|r][A|a][M|m][E|e]$") then
+    elseif string.match(msg.text, "^/[Nn][Ee][Oo][Rr][Aa][Mm][Ee]$") then
 	send_photo(get_receiver(msg), "pictures/neorame.jpg", ok_cb, false)
-    elseif string.match(msg.text, "^/[N|n][A|a][U|u]$") then
+    elseif string.match(msg.text, "^/[Nn][Aa][Uu]$") then
 	send_photo(get_receiver(msg), "pictures/nau.jpg", ok_cb, false)
-    elseif string.match(msg.text, "^/[F|f][T|t][T|t]$") then
+    elseif string.match(msg.text, "^/[Ff][Tt][Tt]$") then
 	return [[(╯°□°)╯︵ ┻━┻ FLIP THAT TABLE.
 ┻━┻ ︵ ヽ(°□°ヽ) FLIP THIS TABLE.
 ┻━┻ ︵ ＼(`0`)/ ︵ ┻━┻ FLIP ALL THE TABLES
@@ -35,7 +34,7 @@ function run(msg, matches)
 ಠ___ಠ Back.
 (╮°-°)╮┳━┳
 (╯°□°)╯︵ ┻━┻ NEVER]]
-    elseif string.match(msg.text, "^/[F|f][T|t][F|f]$") then
+    elseif string.match(msg.text, "^/[Ff][Tt][Ff]$") then
 	return [[(╯┳┳)╯︵ ಠ‾ಠ FLIP THAT FATHER.
 ಠ‾ಠ ︵ ヽ(┳┳ヽ) FLIP THIS FATHER.
 ಠ‾ಠ ︵ ＼(┳┳)/ ︵ ಠ‾ಠ FLIP ALL THE FATHERS
@@ -45,23 +44,23 @@ function run(msg, matches)
 ┳━━━┳ Back.
 (╮┳┳)╮ಠ_ಠ
 (╯┳┳)╯︵ ಠ‾ಠ NEVER]]
-    elseif string.match(msg.text, "^/[N|n][B|b][C|c]$") or string.match(msg.text, "^/[I|i][D|d][C|c]$") then
+    elseif string.match(msg.text, "^/[Nn][Bb][Cc]$") or string.match(msg.text, "^/[Ii][Dd][Cc]$") then
 	return [[¯\_(ツ)_/¯]]
-    elseif string.match(msg.text, "^/[L|l][F|f]$") then
+    elseif string.match(msg.text, "^/[Ll][Ff]$") then
 	return '( ͡° ͜ʖ ͡°)'
-    elseif string.match(msg.text, "^/[L|l][O|o][D|d]$") then
+    elseif string.match(msg.text, "^/[Ll][Oo][Dd]$") then
 	return 'ಠ_ಠ'
-    elseif string.match(msg.text, "^möp$") then
+    elseif string.match(msg.text, "^[Mm]ö[Pp]$") or string.match(msg.text, "^[Mm][Ee][Ee][Pp]$") then
 	return 'se'
-    elseif string.match(msg.text, "^/[F|f][R|r][O|o][S|s][C|c][H|h]$") then
+    elseif string.match(msg.text, "^/[Ff][Rr][Oo][Ss][Cc][Hh]$") then
 	return '🐸🐸🐸'
-    elseif string.match(msg.text, "^/barusamiko$") or string.match(msg.text, "^/barusamikosu$") or string.match(msg.text, "^/Balsamiko Essig$") then
+    elseif string.match(msg.text, "^/[Bb][Aa][Rr][Uu][Ss][Aa][Mm][Ii][Kk][Oo][Ss][Uu]$") or string.match(msg.text, "^/[Bb][Aa][Ll][Ss][Aa][Mm][Ii][Kk][Oo] [Ee][Ss][Ss][Ii][Gg]$") then
 	send_photo(get_receiver(msg), "pictures/luckystar/barusamikosu.jpg", ok_cb, false)
-    elseif string.match(msg.text, "^[B|b][A|a][K|k][A|a] [B|b][O|o][T|t]$") then
+    elseif string.match(msg.text, "^[Bb][Aa][Kk][Aa] [Bb][Oo][Tt]$") then
 	return "Gomen'nasai "..user_name.."-sempai 😣"
-    elseif string.match(msg.text, "^[A|a][H|h][A|a].[P|p][N|n][G|g]$") then
+    elseif string.match(msg.text, "^[Aa][Hh][Aa].[Pp][Nn][Gg]$") then
 	send_photo(get_receiver(msg), "pictures/aha.png", ok_cb, false)
-    elseif string.match(msg.text, "^~?[P|p][O||o][I|i]$") then
+    elseif string.match(msg.text, "^~?[Pp][Oo][Ii]$") then
 	send_photo(get_receiver(msg), "pictures/poi.jpg", ok_cb, false)
     elseif string.match(msg.text, "^/[Tt][Hh][Yy][Mm][Ee]$") then
 	send_photo(get_receiver(msg), "pictures/thyme.jpg", ok_cb, false)
@@ -80,39 +79,42 @@ function run(msg, matches)
 	send_photo(get_receiver(msg), "pictures/squid.jpg", ok_cb, false)
 	--sleep(2)
 	return 'They are'
+    elseif string.match(msg.text, "[Ff][Gg][Tt]") then
+	return 'Deine Mudda is fgt!'
 	end
 end
 
 return {
     description = "Ein Plugin mit nutzlosen Befehlen",
     usage = {""},
-    patterns = {"^[R|r][I|i][C|c][H|h] [B|b][I|i][T|t][C|c][H|h]$",
-				"^#[O|o][L|l][D|d]$",
-				"^[N|n][Y|y][U|u]$",
-				"^[N|n][O|o][P|p][E|e].[A|a][V|v][I|i]$",
-				"^[N|n][I|i][I|i][S|s][A|a][N|n]$",
-				"^[N|n][I|i][I|i](-)[S|s][A|a][N|n]$",
-				"^[N|n][I|i][S|s][S|s][A|a][N|n]$",
-				"^/[N|n][E|e][O|o][R|r][A|a][M|m][E|e]$",
-				"^/[N|n][A|a][U|u]$",
-				"^/[F|f][T|t][T|t]$",
-				"^/[F|f][T|t][F|f]$",
-				"^/[N|n][B|b][C|c]$",
-				"^/[I|i][D|d][C|c]$",
-				"^/[L|l][F|f]$",
-				"^/[L|l][O|o][D|d]$",
-				"^möp$",
-				"^/[F|f][R|r][O|o][S|s][C|c][H|h]$",
-				"^/barusamiko$",
-				"^/barusamikosu$",
-				"^/Balsamiko Essig$",
-				"^[B|b][A|a][K|k][A|a] [B|b][O|o][T|t]$",
-				"^[A|a][H|h][A|a].[P|p][N|n][G|g]$",
-				"^~?[P|p][O||o][I|i]$",
+    patterns = {"^[Rr][Ii][Cc][Hh] [Bb][Ii][Tt][Cc][Hh]$",
+				"^#[Oo][Ll][Dd]$",
+				"^[Nn][Yy][Uu]$",
+				"^[Nn][Oo][Pp][Ee].[Aa][Vv][Ii]$",
+				"^[Nn][Ii][Ii][Ss][Aa][Nn]$",
+				"^[Nn][Ii][Ii](-)[Ss][Aa][Nn]$",
+				"^[Nn][Ii][Ss][Ss][Aa][Nn]$",
+				"^/[Nn][Ee][Oo][Rr][Aa][Mm][Ee]$",
+				"^/[Nn][Aa][Uu]$",
+				"^/[Ff][Tt][Tt]$",
+				"^/[Ff][Tt][Ff]$",
+				"^/[Nn][Bb][Cc]$",
+				"^/[Ii][Dd][Cc]$",
+				"^/[Ll][Ff]$",
+				"^/[Ll][Oo][Dd]$",
+				"^[Mm]ö[Pp]$",
+				"^[Mm][Ee][Ee][Pp]$",
+				"^/[Ff][Rr][Oo][Ss][Cc][Hh]$",
+				"^/[Bb][Aa][Rr][Uu][Ss][Aa][Mm][Ii][Kk][Oo][Ss][Uu]$",
+				"^/[Bb][Aa][Ll][Ss][Aa][Mm][Ii][Kk][Oo] [Ee][Ss][Ss][Ii][Gg]$",
+				"^[Bb][Aa][Kk][Aa] [Bb][Oo][Tt]$",
+				"^[Aa][Hh][Aa].[Pp][Nn][Gg]$",
+				"^~?[Pp][Oo][Ii]$",
 				"^/[Tt][Hh][Yy][Mm][Ee]$",
 				"^[Yy][Oo][Ll][Oo]$",
 				"^/[Kk][Aa][Pp][Pp][Aa]$",
-				"[Ii] [Ww][Ii][Ss][Hh] [Ss][Qq][Uu][Ii][Dd][Ss] [Ww][Ee][Rr][Ee] [Rr][Ee][Aa][Ll]"
+				"[Ii] [Ww][Ii][Ss][Hh] [Ss][Qq][Uu][Ii][Dd][Ss] [Ww][Ee][Rr][Ee] [Rr][Ee][Aa][Ll]",
+				"[Ff][Gg][Tt]"
 				},
     run = run
 }
