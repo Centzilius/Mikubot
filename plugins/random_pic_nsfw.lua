@@ -8,7 +8,8 @@ end
 function run(msg, matches)
   local pics = {
 		-- add more below!
-		["/nsfw"] = "/home/pi/USB/nsfw/"
+		["/nsfw"] = "/home/pi/USB/nsfw/",
+		["/nsfw gif"] = "/home/pi/USB/nsfw/gifs/"
 		}
 
   local receiver = get_receiver(msg)
@@ -31,8 +32,8 @@ end
 	 
 return {
     description = "Sendet ein zufälliges Bild (NSFW)", 
-    usage = {"/nsfw"},
-    patterns = {"^/nsfw$"}, 
+    usage = {"/nsfw (gif)"},
+    patterns = {"^/nsfw$","^/nsfw gif$"}, 
     run = run 
 }
 end
