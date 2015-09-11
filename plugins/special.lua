@@ -80,7 +80,7 @@ function run(msg, matches)
 	--sleep(2)
 	return 'They are'
     elseif string.match(msg.text, "[Ff][Gg][Tt]") then
-	return 'Deine Mudda is fgt!'
+	return --'Deine Mudda is fgt!'
 	end
 end
 
