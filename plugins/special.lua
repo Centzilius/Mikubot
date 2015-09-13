@@ -9,22 +9,22 @@ end
 function run(msg, matches)
   local user_name = get_name(msg)
 
-    if string.match(msg.text, "^[Rr][Ii][Cc][Hh] [Bb][Ii][Tt][Cc][Hh]$") then
+    if string.match(msg.text, "[Rr][Ii][Cc][Hh] [Bb][Ii][Tt][Cc][Hh]") then
 	return 'Akamaru ist nicht reich!'
-    elseif string.match(msg.text, "^#[Oo][Ll][Dd]$") then
+    elseif string.match(msg.text, "[Oo][Ll][Dd]") then
 	return 'Deine Mudda is old!'
-    elseif string.match(msg.text, "^[Nn][Yy][Uu]$") then
+    elseif string.match(msg.text, "[Nn][Yy][Uu]") then
 	send_photo(get_receiver(msg), "pictures/nyu.jpg", ok_cb, false)
-    elseif string.match(msg.text, "^[Nn][Oo][Pp][Ee].[Aa][Vv][Ii]$") then
+    elseif string.match(msg.text, "[Nn][Oo][Pp][Ee].[Aa][Vv][Ii]") then
 	send_video(get_receiver(msg), "videos/nope.avi", ok_cb, false)
 	return 'Video wird gesendet...'
-    elseif string.match(msg.text, "^[Nn][Ii][Ii][Ss][Aa][Nn]$") or string.match(msg.text, "^[Nn][Ii][Ii](-)[Ss][Aa][Nn]$") or string.match(msg.text, "^[Nn][Ii][Ss][Ss][Aa][Nn]$") then
+    elseif string.match(msg.text, "[Nn][Ii][Ii][Ss][Aa][Nn]") or string.match(msg.text, "[Nn][Ii][Ii](-)[Ss][Aa][Nn]") or string.match(msg.text, "[Nn][Ii][Ss][Ss][Aa][Nn]") then
 	send_photo(get_receiver(msg), "pictures/Nii-san.jpg", ok_cb, false)
-    elseif string.match(msg.text, "^/[Nn][Ee][Oo][Rr][Aa][Mm][Ee]$") then
+    elseif string.match(msg.text, "[Nn][Ee][Oo][Rr][Aa][Mm][Ee]") then
 	send_photo(get_receiver(msg), "pictures/neorame.jpg", ok_cb, false)
-    elseif string.match(msg.text, "^/[Nn][Aa][Uu]$") then
+    elseif string.match(msg.text, "[Nn][Aa][Uu]") then
 	send_photo(get_receiver(msg), "pictures/nau.jpg", ok_cb, false)
-    elseif string.match(msg.text, "^/[Ff][Tt][Tt]$") then
+    elseif string.match(msg.text, "[Ff][Tt][Tt]") then
 	return [[(╯°□°)╯︵ ┻━┻ FLIP THAT TABLE.
 ┻━┻ ︵ ヽ(°□°ヽ) FLIP THIS TABLE.
 ┻━┻ ︵ ＼(`0`)/ ︵ ┻━┻ FLIP ALL THE TABLES
@@ -34,7 +34,7 @@ function run(msg, matches)
 ಠ___ಠ Back.
 (╮°-°)╮┳━┳
 (╯°□°)╯︵ ┻━┻ NEVER]]
-    elseif string.match(msg.text, "^/[Ff][Tt][Ff]$") then
+    elseif string.match(msg.text, "[Ff][Tt][Ff]") then
 	return [[(╯┳┳)╯︵ ಠ‾ಠ FLIP THAT FATHER.
 ಠ‾ಠ ︵ ヽ(┳┳ヽ) FLIP THIS FATHER.
 ಠ‾ಠ ︵ ＼(┳┳)/ ︵ ಠ‾ಠ FLIP ALL THE FATHERS
@@ -44,29 +44,29 @@ function run(msg, matches)
 ┳━━━┳ Back.
 (╮┳┳)╮ಠ_ಠ
 (╯┳┳)╯︵ ಠ‾ಠ NEVER]]
-    elseif string.match(msg.text, "^/[Nn][Bb][Cc]$") or string.match(msg.text, "^/[Ii][Dd][Cc]$") then
+    elseif string.match(msg.text, "[Nn][Bb][Cc]") or string.match(msg.text, "[Ii][Dd][Cc]") then
 	return [[¯\_(ツ)_/¯]]
-    elseif string.match(msg.text, "^/[Ll][Ff]$") then
+    elseif string.match(msg.text, "[Ll][Ff]") then
 	return '( ͡° ͜ʖ ͡°)'
-    elseif string.match(msg.text, "^/[Ll][Oo][Dd]$") then
+    elseif string.match(msg.text, "[Ll][Oo][Dd]") then
 	return 'ಠ_ಠ'
-    elseif string.match(msg.text, "^[Mm]ö[Pp]$") or string.match(msg.text, "^[Mm][Ee][Ee][Pp]$") then
+    elseif string.match(msg.text, "[Mm]ö[Pp]") or string.match(msg.text, "[Mm][Ee][Ee][Pp]") then
 	return 'se'
-    elseif string.match(msg.text, "^/[Ff][Rr][Oo][Ss][Cc][Hh]$") then
+    elseif string.match(msg.text, "[Ff][Rr][Oo][Ss][Cc][Hh]") then
 	return '🐸🐸🐸'
-    elseif string.match(msg.text, "^/[Bb][Aa][Rr][Uu][Ss][Aa][Mm][Ii][Kk][Oo][Ss][Uu]$") or string.match(msg.text, "^/[Bb][Aa][Ll][Ss][Aa][Mm][Ii][Kk][Oo] [Ee][Ss][Ss][Ii][Gg]$") then
+    elseif string.match(msg.text, "[Bb][Aa][Rr][Uu][Ss][Aa][Mm][Ii][Kk][Oo][Ss][Uu]") or string.match(msg.text, "[Bb][Aa][Ll][Ss][Aa][Mm][Ii][Kk][Oo] [Ee][Ss][Ss][Ii][Gg]") then
 	send_photo(get_receiver(msg), "pictures/luckystar/barusamikosu.jpg", ok_cb, false)
-    elseif string.match(msg.text, "^[Bb][Aa][Kk][Aa] [Bb][Oo][Tt]$") then
+    elseif string.match(msg.text, "[Bb][Aa][Kk][Aa] [Bb][Oo][Tt]") then
 	return "Gomen'nasai "..user_name.."-sempai 😣"
-    elseif string.match(msg.text, "^[Aa][Hh][Aa].[Pp][Nn][Gg]$") then
+    elseif string.match(msg.text, "[Aa][Hh][Aa].[Pp][Nn][Gg]") then
 	send_photo(get_receiver(msg), "pictures/aha.png", ok_cb, false)
-    elseif string.match(msg.text, "^~?[Pp][Oo][Ii]$") then
+    elseif string.match(msg.text, "[Pp][Oo][Ii]") then
 	send_photo(get_receiver(msg), "pictures/poi.jpg", ok_cb, false)
-    elseif string.match(msg.text, "^/[Tt][Hh][Yy][Mm][Ee]$") then
+    elseif string.match(msg.text, "[Tt][Hh][Yy][Mm][Ee]") then
 	send_photo(get_receiver(msg), "pictures/thyme.jpg", ok_cb, false)
-    elseif string.match(msg.text, "^[Yy][Oo][Ll][Oo]$") then
+    elseif string.match(msg.text, "[Yy][Oo][Ll][Oo]") then
 	return 'Hä YOLO?'
-    elseif string.match(msg.text, "^/[Kk][Aa][Pp][Pp][Aa]$") then
+    elseif string.match(msg.text, "[Kk][Aa][Pp][Pp][Aa]") then
        return [[⠀⠀⠀⠀⣀⣀⣬⣥⣽⣿⣧⣤⢀⠀⠀⠀
 ⠀⠀⠀⠂⢯⣧⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀
 ⠀⢨⣽⣾⣿⣿⣿⣿⡿⠛⠃⠉⠛⣿⣿⠀
@@ -81,6 +81,8 @@ function run(msg, matches)
 	return 'They are'
     elseif string.match(msg.text, "[Ff][Gg][Tt]") then
 	return --'Deine Mudda is fgt!'
+    elseif string.match(msg.text, "[Kk][Ii][Ll][Ll]") then
+	return user_name..' tötet '..matches[1]
 	end
 end
 
@@ -114,7 +116,8 @@ return {
 				"^[Yy][Oo][Ll][Oo]$",
 				"^/[Kk][Aa][Pp][Pp][Aa]$",
 				"[Ii] [Ww][Ii][Ss][Hh] [Ss][Qq][Uu][Ii][Dd][Ss] [Ww][Ee][Rr][Ee] [Rr][Ee][Aa][Ll]",
-				"[Ff][Gg][Tt]"
+				"[Ff][Gg][Tt]",
+				"^/[Kk][Ii][Ll][Ll] (.*)"
 				},
     run = run
 }
