@@ -177,8 +177,10 @@ local function cron()
          local link = v2.link or v2.id or 'Kein Link'
 		 if v2.content then 
 		   content = string.sub(unescape_for_rss(v2.content:gsub("%b<>", "")), 1, 250) .. '...'
-		 else
+		 elseif v2.summary then
 		   content = string.sub(unescape_for_rss(v2.summary:gsub("%b<>", "")), 1, 250) .. '...'
+		 else
+		   content = ''
 		 end
 		 text = text .. '[RSS] '.. title .. '\n'..content..'\n\n(' .. link .. ')\n\n'
       end
