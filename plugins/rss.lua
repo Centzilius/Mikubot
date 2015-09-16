@@ -17,6 +17,7 @@ local function unescape_for_rss(str)
   str = string.gsub(str, "&#8221;", "”")
   str = string.gsub(str, "&#8364;", "€")
   str = string.gsub(str, "&#223;", "ß")
+  str = string.gsub(str, "&#160;", " ")
   
   -- Ä Ö Ü
   str = string.gsub(str, "&auml;", "ä")
@@ -162,7 +163,7 @@ local function cron()
    local keys = redis:keys(get_base_redis("*", "subs"))
    for k,v in pairs(keys) do
       local base = string.match(v, "rss:(.+):subs")  -- Get the URL base
-	  --print('Checke RSS: '..base)
+	  print('Checke RSS: '..base)
       local prot = redis:get(get_base_redis(base, "protocol"))
       local last = redis:get(get_base_redis(base, "last_entry"))
       local url = prot .. "://" .. base
