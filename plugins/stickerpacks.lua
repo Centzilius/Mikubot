@@ -13,6 +13,9 @@ function run(msg, matches)
 	Name: Pinkie Pie
 	Link: https://telegram.me/addstickers/PinkiePie
 	
+	Name: Sharks
+	Link: https://telegram.me/addstickers/Sharks
+	
 	Name: Sinnloser Scheiß
 	Link: https://telegram.me/addstickers/grummipol
 	
@@ -23,7 +26,6 @@ function run(msg, matches)
 	Link: https://telegram.me/addstickers/SwordArtOnlinePack
 	
 	Stickerpacks by @Akamaru
-
 	]]
 end
 
