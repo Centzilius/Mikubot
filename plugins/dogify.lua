@@ -15,6 +15,6 @@ end
 return {
    description = "Erstelle ein Doge Bild mit Wörtern",
    usage = {"/dogify das/was/du/willst"},
-   patterns = {"^/dogify (.+)$"},
+   patterns = {"^/dogify (.+)$","^/doge (.+)$"},
    run = run
 }

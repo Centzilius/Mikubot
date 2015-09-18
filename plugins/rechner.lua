@@ -7,7 +7,6 @@ local function mathjs(exp)
   local text = nil
   if c == 200 then
     text = 'Das Ergebnis ist '..b
-  
   elseif c == 400 then
     text = b
   else
