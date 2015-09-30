@@ -1,65 +1,75 @@
-local quotes_file = './data/quotes.lua'
-local quotes_table
+do
 
-function read_quotes_file()
-    local f = io.open(quotes_file, "r+")
+local function save_quote(msg)
+  if msg.text:sub(11):isempty() then
+    return "Benutzung: !addquote [Zitat]"
+  end
+  
+  local quote = msg.text:sub(11)
+  local hash = get_redis_hash(msg, 'quotes')
+  print('Saving quote to redis set '..hash)
+  redis:sadd(hash, quote)
+  return 'Gespeichert: "'..quote..'"'
+end
 
-    if f == nil then
-        print ('Erstelle neue Zitat Datei '..quotes_file)
-        serialize_to_file({}, quotes_file)
+local function delete_quote(msg)
+  if msg.text:sub(11):isempty() then
+    return "Benutzung: !delquote [Zitat]"
+  end
+  
+  local quote = msg.text:sub(11)
+  local hash = get_redis_hash(msg, 'quotes')
+  print('Deleting quote from redis set '..hash)
+  if redis:sismember(hash, quote) == true then
+    redis:srem(hash, quote)
+    return 'Zitat erfolgreich gelöscht!'
+  else
+    return 'Dieses Zitat existiert nicht.'
+  end
+end
+
+local function get_quote(msg)
+  local to_id = tostring(msg.to.id)
+  local hash = get_redis_hash(msg, 'quotes')
+  
+  if hash then
+    print('Getting quote from redis set '..hash)
+  	quotes_table = redis:smembers(hash)
+	if not quotes_table[1] then
+	  return 'Es wurden noch keine Zitate gespeichert.\nSpeichere doch welche mit !addquote [Zitat]'
+	else
+	  return quotes_table[math.random(1,#quotes_table)]
+	end
+  end
+end
+
+local function run(msg, matches)
+  if string.match(msg.text, "/quote$") then
+    return get_quote(msg)
+  elseif matches[1] == "addquote" then
+    return save_quote(msg)
+  elseif matches[1] == "delquote" then
+    if not is_sudo(msg) then
+      return "Du bist kein Superuser. Dieser Vorfall wird gemeldet."
     else
-        print ('Zitate geladen: '..quotes_file)
-        f:close()
-    end
-    return loadfile (quotes_file)()
-end
-
-function save_quote(msg)
-    local to_id = tostring(msg.to.id)
-
-    if msg.text:sub(11):isempty() then
-        return "Verwendung: /addquote [Text]"
-    end
-
-    if quotes_table == nil then
-        quotes_table = {}
-    end
-
-    if quotes_table[to_id] == nil then
-        print ('Neuer quote key to_id: '..to_id)
-        quotes_table[to_id] = {}
-    end
-
-    local quotes = quotes_table[to_id]
-    quotes[#quotes+1] = msg.text:sub(11)
-
-    serialize_to_file(quotes_table, quotes_file)
-
-    return "Neues Zitat hinzugefügt!"
-end
-
-function get_quote(msg)
-    local to_id = tostring(msg.to.id)
-    local quotes_phrases
-
-    quotes_table = read_quotes_file()
-    quotes_phrases = quotes_table[to_id]
-
-    return quotes_phrases[math.random(1,#quotes_phrases)]
-end
-
-function run(msg, matches)
-    if string.match(msg.text, "/quote$") then
-        return get_quote(msg)
-    elseif string.match(msg.text, "/addquote (.+)$") then
-        quotes_table = read_quotes_file()
-        return save_quote(msg)
-    end
+      return delete_quote(msg)
+	end
+  end
 end
 
 return {
-    description = "Speichert Zitate",
-    usage = {"/addquote [Text]","/quote",},
-    patterns = {"^/addquote (.+)$","^/quote$",},
-    run = run
+  description = "Zitate speichern, löschen und abrufen.",
+  usage = {
+    "/addquote [Zitat]: Fügt Zitat hinzu.",
+	"/quote: Gibt zufälliges Zitat aus.",
+	"/delquote [Zitat]: Löscht das Zitat (nur Superuser)"
+  },
+  patterns = {
+    "^/(delquote) (.+)$",
+    "^/(addquote) (.+)$",
+    "^/quote$"
+  },
+  run = run
 }
+
+end

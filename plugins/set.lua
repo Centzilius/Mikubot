@@ -1,30 +1,52 @@
-local _file_values = './data/values.lua'
+local function save_value(msg, name, value)
+  if (not name or not value) then
+    return "Benutzung: !set Variable Wert"
+  end
 
-local function save_value(chat, text )
-	var_name, var_value = string.match(text, "/set (%a+) (.+)")
-	if (var_name == nil or var_value == nil) then
-		return "Benutzung: /set var_name value"
-	end
-	if _values[chat] == nil then
-		_values[chat] = {}
-	end
-	_values[chat][var_name] = var_value
+  local hash = get_redis_hash(msg, 'variables')
+  if hash then
+     print('Saving variable to redis hash '..hash)
+    redis:hset(hash, name, value)
+    return "Gespeichert: "..name.." = "..value
+  end
+end
 
-	-- Save values to file
-	serialize_to_file(_values, _file_values)
-	
-	return "Gespeichert: "..var_name.." = "..var_value
+local function delete_value(msg, name, value)
+  if msg.to.type == 'chat' then
+    hash = 'chat:'..msg.to.id..':variables'
+  end
+  if msg.to.type == 'user' then
+    hash = 'user:'..msg.from.id..':variables'
+  end
+  if redis:hexists(hash, name) == true then
+    print('Deleting variable from redis hash '..hash)
+    redis:hdel(hash, name, value)
+    return 'Variable "'..name..'" erfolgreich gelöscht!'
+  else
+    return 'Du kannst keine Variable löschen, die nicht existiert .-.'
+  end
 end
 
 local function run(msg, matches)
-	local chat_id = tostring(msg.to.id)
-	local text = save_value(chat_id, msg.text)
-	return text
+  local name = string.sub(matches[1], 1, 50)
+  local value = string.sub(matches[2], 1, 1000)
+
+  if value == "nil" then
+    text = delete_value(msg, name, value)
+  else
+    text = save_value(msg, name, value)
+  end
+  return text
 end
 
 return {
-    description = "Setze Variable", 
-    usage = {"/set [Variablenname] [Daten]"},
-    patterns = {"^/set (%a+) (.+)$"}, 
-    run = run 
+  description = "Setzt Variablen, nutze !get zum Abrufen.", 
+  usage = {
+    "/set [Variable] [Wert]: Speichert eine Variable mit einem Wert.",
+	"/set (Variable) nil: Löscht Variable"
+  },
+  patterns = {
+    "^/set ([^%s]+) (.+)$"
+  }, 
+  run = run 
 }
