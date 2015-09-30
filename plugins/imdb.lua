@@ -1,10 +1,14 @@
 do
 
-local BASE_URL = 'http://www.imdbapi.com'
+local BASE_URL = 'https://www.omdbapi.com'
 
-function get_imdb_data (movie)
-  local url = BASE_URL..'/?t='..movie
-  local res,code  = http.request(url)
+function get_imdb_data (movie, id)
+  if id then
+    url = BASE_URL..'/?i=tt'..movie
+  else
+    url = BASE_URL..'/?t='..movie
+  end
+  local res,code  = https.request(url)
   if code ~= 200 then return "HTTP-FEHLER" end
   local data = json:decode(res)
   return data
@@ -17,6 +21,7 @@ function send_imdb_data(data, receiver)
   else
     local title = data.Title
 	local release = data.Released
+	if data.Type ~= "movie" then Type = '\nTyp: '..data.Type else Type = '' end
 	if data.Runtime ~= "N/A" then runtime = '\nLaufzeit: '..data.Runtime else runtime = '' end
 	if data.Genre ~= "N/A" then genre = '\nGenre: '..data.Genre else genre = '' end
 	local director = data.Director
@@ -33,8 +38,8 @@ function send_imdb_data(data, receiver)
 	  score = ''
 	end
 	local link = 'http://imdb.com/title/'..data.imdbID
-	local text = title..'\nErscheinungsdatm: '..release..runtime..genre..'\nDirector: '..director..writer..'\nSchauspieler: '..actors..plot..score..'\n-- '..link
-    if data.Poster ~= "N/A" then
+	local text = title..Type..'\nErscheinungsdatm: '..release..runtime..genre..'\nDirector: '..director..writer..'\nSchauspieler: '..actors..plot..score..'\n-- '..link
+	if data.Poster ~= "N/A" then
 	  local image_url = data.Poster
       local cb_extra = {
         receiver=receiver,
@@ -48,8 +53,13 @@ function send_imdb_data(data, receiver)
 end
 
 function run(msg, matches)
-  local movie = matches[1]:gsub(' ', '+')
-  local data = get_imdb_data(movie)
+  if matches[2] then
+    local movie = matches[2]
+	data = get_imdb_data(movie, true)
+  else
+    local movie = url_encode(matches[1]:gsub(' ', '+'))
+    data = get_imdb_data(movie, nil)
+  end
   local receiver = get_receiver(msg)
   send_imdb_data(data, receiver)
 end
