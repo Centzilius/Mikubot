@@ -564,3 +564,12 @@ function unescape_html(str)
   end)
   return new
 end
+
+function get_redis_hash(msg, var)
+  if msg.to.type == 'chat' then
+    return 'chat:'..msg.to.id..':'..var
+  end
+  if msg.to.type == 'user' then
+    return 'user:'..msg.from.id..':'..var
+  end
+end

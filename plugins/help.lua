@@ -39,7 +39,7 @@ do
       end
     else
       plugin = plugins[name]
-      if not plugin then return nil end
+      if not plugin then return 'Dieses Plugin existiert nicht.' end
     end
 
     local text = ""
