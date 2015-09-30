@@ -1,14 +1,17 @@
 function run(msg, matches)
 	return
 	[[
+	Name: Gronkh
+	Link: https://telegram.me/addstickers/Gronkh
+
+	Name: Miku Hatsune
+	Link: https://telegram.me/addstickers/MikuHatsune
+	
 	Name: Naira
 	Link: https://telegram.me/addstickers/Naira
 
 	Name: Naira2
 	Link: https://telegram.me/addstickers/Naira2
-
-	Name: Miku Hatsune
-	Link: https://telegram.me/addstickers/MikuHatsune
 
 	Name: Pinkie Pie
 	Link: https://telegram.me/addstickers/PinkiePie
@@ -19,11 +22,11 @@ function run(msg, matches)
 	Name: Sinnloser Scheiß
 	Link: https://telegram.me/addstickers/grummipol
 	
-	Name: Gronkh
-	Link: https://telegram.me/addstickers/Gronkh
-	
 	Name: Sword Art Online
 	Link: https://telegram.me/addstickers/SwordArtOnlinePack
+	
+	Name: Würfel
+	Link: https://telegram.me/addstickers/Wuerfel
 	
 	Stickerpacks by @Akamaru
 	]]
