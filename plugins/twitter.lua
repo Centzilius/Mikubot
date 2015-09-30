@@ -15,6 +15,7 @@ local client = OAuth.new(consumer_key, consumer_secret, {
 })
 
 function run(msg, matches)
+
   if consumer_key:isempty() then
    return "Twitter Consumer Key ist nicht vorhanden, schreibe ihn in data/credentials.lua"
   end
@@ -36,7 +37,7 @@ function run(msg, matches)
   local text = response.text
   
   -- replace short URLs
-  if response.entities.url then
+  if response.entities.urls then
     for k, v in pairs(response.entities.urls) do 
         local short = v.url
         local long = v.expanded_url
@@ -70,6 +71,6 @@ end
 return {
     description = "Wenn ein Twitter Link gesendet wird, wird der Tweet gepostet", 
     usage = {"twitter.com Link"},
-    patterns = {"https://twitter.com/[^/]+/status/([0-9]+)"}, 
+    patterns = {"twitter.com/[^/]+/status/([0-9]+)"}, 
     run = run 
 }
