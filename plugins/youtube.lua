@@ -2,9 +2,18 @@ do
 
 local BASE_URL = 'https://www.googleapis.com/youtube/v3'
 
+function table.contains(table, element)
+  for _, value in pairs(table) do
+    if value == element then
+      return true
+    end
+  end
+  return false
+end
+
 function get_yt_data (yt_code)
   local apikey = cred_data.google_apikey
-  local url = BASE_URL..'/videos?part=snippet,statistics,contentDetails&key='..apikey..'&id='..yt_code..'&fields=items(snippet(channelTitle,localized(title,description)),statistics(viewCount,likeCount,dislikeCount,commentCount),contentDetails(duration))'
+  local url = BASE_URL..'/videos?part=snippet,statistics,contentDetails&key='..apikey..'&id='..yt_code..'&fields=items(snippet(channelTitle,localized(title,description)),statistics(viewCount,likeCount,dislikeCount,commentCount),contentDetails(duration,regionRestriction))'
   local res,code  = https.request(url)
   if code ~= 200 then return "HTTP-FEHLER" end
   local data = json:decode(res).items[1]
@@ -52,13 +61,19 @@ end
 
 function send_youtube_data(data, receiver)
   local title = data.snippet.localized.title
-  -- local description = data.items[1].snippet.localized.description
+  -- local description = data.snippet.localized.description
   local uploader = data.snippet.channelTitle
   local viewCount = data.statistics.viewCount
   local likeCount = data.statistics.likeCount
   local dislikeCount = data.statistics.dislikeCount
   local commentCount = data.statistics.commentCount
   local totalseconds = convertISO8601Time(data.contentDetails.duration)
+  if data.contentDetails.regionRestriction then
+	 blocked = data.contentDetails.regionRestriction.blocked
+	 blocked = table.contains(blocked, "DE")
+  else
+	 blocked = false
+  end
 
   -- convert s to mm:ss
   local seconds = totalseconds % 60
@@ -67,7 +82,10 @@ function send_youtube_data(data, receiver)
   local duration = string.format("%02d:%02d",  minutes, seconds)
   
   local text = 'Titel: '..title..'\nUploader: '..uploader..'\nAufrufe: '..viewCount..'\nLänge: '..duration..' Minuten\nLikes: '..likeCount..'\nDislikes: '..dislikeCount..'\nKommentare: '..commentCount..'\n'
-  send_msg(receiver, text, ok_cb, false)
+  if blocked == true then
+	text = text..'\n🚫 ACHTUNG! Video ist in Deutschland gesperrt!'
+  end
+	send_msg(receiver, text, ok_cb, false)
 end
 
 function run(msg, matches)

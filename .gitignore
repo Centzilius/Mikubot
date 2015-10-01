@@ -52,3 +52,4 @@ plugins/miiverse.lua
 plugins/videotogif.lua
 plugins/music163.lua
 plugins/love_calculator.lua
+plugins/get_image.lua
