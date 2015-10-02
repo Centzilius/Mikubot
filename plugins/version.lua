@@ -1,7 +1,5 @@
-do
-
 function run(msg, matches)
-  return 'Mikubot '.. VERSION ..' by Akamaru'
+  return  'Mikubot V.'..VERSION..' by @Akamaru. \n\nSourcecode: https://ponywave.de/a/mikubot'
 end
 
 return {
@@ -10,4 +8,3 @@ return {
   patterns = {"^/version$","^/v$"}, 
   run = run 
 }
-end
