@@ -45,9 +45,9 @@ function run(msg, matches)
 	  print("Bilder-URL: ", url)
 	  
 	  if string.ends(url, ".gif") then
-		failed = not send_document_from_url(receiver, url)
+		failed = not send_document_from_url(receiver, url, nil, nil, true)
 	  elseif string.ends(url, ".jpg") or string.ends(url, ".jpeg") or string.ends(url, ".png") then
-		failed = not send_photo_from_url(receiver, url, nil, nil, false)
+		failed = not send_photo_from_url(receiver, url, nil, nil, true)
 	  end
 	  
 	  nofTries = nofTries + 1

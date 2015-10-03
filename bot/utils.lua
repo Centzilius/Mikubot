@@ -255,17 +255,18 @@ end
 
 -- Download the image and send to receiver, it will be deleted.
 -- cb_function and cb_extra are optionals callback
-function send_photo_from_url(receiver, url, cb_function, cb_extra, sendErrMsg)
+function send_photo_from_url(receiver, url, cb_function, cb_extra, sendNotErrMsg)
   -- If callback not provided
   cb_function = cb_function or ok_cb
   cb_extra = cb_extra or false
   local file_path = download_to_file(url, false)
   if not file_path then -- Error
-	if sendErrMsg then
+	if sendNotErrMsg then
+	  return false		
+	else
 	  local text = 'Fehler beim Laden des Bildes'
       send_msg(receiver, text, cb_function, cb_extra)
 	end
-	return false
   else
     print("Datei Pfad: "..file_path)
     _send_photo(receiver, file_path, cb_function, cb_extra)
@@ -287,6 +288,21 @@ function send_photo_from_url_callback(cb_extra, success, result, sendErrMsg)
     print("Datei Pfad: "..file_path)
     _send_photo(receiver, file_path, ok_cb, false)
   end
+end
+
+-- Same as above, but with send_as_document		
+function send_document_from_url_callback(cb_extra, success, result)		
+  local receiver = cb_extra.receiver		
+  local url = cb_extra.url		
+  		
+  local file_path = download_to_file(url, false)		
+  if not file_path then -- Error		
+    local text = 'Fehler beim Herunterladen des Dokumentes'		
+    send_msg(receiver, text, ok_cb, false)		
+  else		
+    print("Datei Pfad: "..file_path)		
+    _send_document(receiver, file_path, ok_cb, false)		
+  end		
 end
 
 --  Send multiple images asynchronous.
@@ -361,11 +377,24 @@ end
 
 -- Download the image and send to receiver, it will be deleted.
 -- cb_function and cb_extra are optionals callback
-function send_document_from_url(receiver, url, cb_function, cb_extra)
+function send_document_from_url(receiver, url, cb_function, cb_extra, sendNotErrMsg)
+  -- If callback not provided		
+  cb_function = cb_function or ok_cb		
+  cb_extra = cb_extra or false		
+  
   local file_path = download_to_file(url, false)
-  print("Datei Pfad: "..file_path)
-  _send_document(receiver, file_path, cb_function, cb_extra)
-  return true
+  if not file_path then  -- Error
+    if sendNotErrMsg then
+	  return false
+	else		
+	  local text = 'Fehler beim Herunterladen des Dokumentes'		
+      send_msg(receiver, text, cb_function, cb_extra)		
+	end		
+  else		
+    print("Datei Pfad: "..file_path)		
+    _send_document(receiver, file_path, cb_function, cb_extra)		
+	return true		
+  end
 end
 
 -- Parameters in ?a=1&b=2 style
