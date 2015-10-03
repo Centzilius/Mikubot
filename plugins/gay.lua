@@ -22,30 +22,45 @@ function getGay(text)
   end
 
   -- Random image from table
-  local i = math.random(#data.results)
-  return data.results[i].url
+  -- local i = math.random(#data.results)
+  -- return data.results[i].url
+  return data.results
 end
 
 function run(msg, matches)
   local receiver = get_receiver(msg)
   local text = matches[1]
-  local url = getGay(text)
   
-  if not url then
+  local results = getGay(text)
+  if not results then
     return "Kein Bild gefunden."
   end
+  local i = math.random(#results)
+  local url = nil;
   
-  if string.ends(url, ".svg") then
-      return "Fehler beim laden des Bildes."
+  local failed = true
+  local nofTries = 0
+  while failed and nofTries < #results do  
+	  url = results[i].url;
+	  print("Bilder-URL: ", url)
+	  
+	  if string.ends(url, ".gif") then
+		failed = not send_document_from_url(receiver, url, nil, nil, true)
+	  elseif string.ends(url, ".jpg") or string.ends(url, ".jpeg") or string.ends(url, ".png") then
+		failed = not send_photo_from_url(receiver, url, nil, nil, true)
+	  end
+	  
+	  nofTries = nofTries + 1
+	  i = i+1
+	  if i > #results then
+		i = 1
+	  end 
   end
-
-  print("Bilder-URL: ", url)
-  if string.ends(url, ".gif") then
-    send_document_from_url(receiver, url)
-    	return "Source: "..url
+  
+  if failed then
+	  return "Fehler beim Laden des Bildes."
   else
-    send_photo_from_url(receiver, url)
-	return "Source: "..url
+	  return "Source: "..url
   end
 end
 
