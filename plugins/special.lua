@@ -78,7 +78,7 @@ function run(msg, matches)
 	send_photo(get_receiver(msg), "pictures/aha.png", ok_cb, false)
 	
     elseif string.match(msg.text, "[Pp][Oo][Ii]") then
-	send_photo(get_receiver(msg), "pictures/poi.jpg", ok_cb, false)
+	send_document(get_receiver(msg), "sticker/poi.webp", ok_cb, false)
 	
     elseif string.match(msg.text, "[Tt][Hh][Yy][Mm][Ee]") then
 	send_photo(get_receiver(msg), "pictures/thyme.jpg", ok_cb, false)
@@ -101,8 +101,8 @@ function run(msg, matches)
 	--sleep(2)
 	return 'They are'
 	
-    elseif string.match(msg.text, "[Ff][Gg][Tt]") then
-	return --'Deine Mudda is fgt!'
+    --elseif string.match(msg.text, "[Ff][Gg][Tt]") then
+	--return 'Deine Mudda is fgt!'
 	
     elseif string.match(msg.text, "[Kk][Ii][Ll][Ll]") then
 	return user_name..' tötet '..matches[1]
@@ -143,7 +143,7 @@ return {
 				"^[Yy][Oo][Ll][Oo]$",
 				"^/[Kk][Aa][Pp][Pp][Aa]$",
 				"[Ii] [Ww][Ii][Ss][Hh] [Ss][Qq][Uu][Ii][Dd][Ss] [Ww][Ee][Rr][Ee] [Rr][Ee][Aa][Ll]",
-				"[Ff][Gg][Tt]",
+				--"[Ff][Gg][Tt]",
 				"^/[Kk][Ii][Ll][Ll] (.*)",
 				"^[Ii][Nn][Ll][Oo][Vv][Ee]$"
 				},

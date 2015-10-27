@@ -1,38 +1,53 @@
-local function googlethat(query)
-  local api        = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&safe=active&hl=de&"
+function googlethat(query)
+  local BASE_URL = 'https://www.googleapis.com/customsearch/v1'
+  local apikey = cred_data.google_apikey
+  local cseid = cred_data.google_cse_id
+  local number = 5 -- Set number of results 
+
+  local api        = BASE_URL.."/?key="..apikey.."&cx="..cseid.."&gl=de&num="..number.."&safe=medium&fields=searchInformation%28formattedSearchTime,formattedTotalResults%29,items%28title,link%29&"
   local parameters = "q=".. (URL.escape(query) or "")
 
   -- Do the request
   local res, code = https.request(api..parameters)
-  if code ~=200 then return nil  end
+  if code ~=200 then return nil end
   local data = json:decode(res)
+  if data.searchInformation.formattedTotalResults == "0" then return nil end
   
-  local results = {}
-  for key,result in ipairs(data.responseData.results) do
+  local results={}
+  for key,result in ipairs(data.items) do
     table.insert(results, {
-	  result.titleNoFormatting,
-      result.unescapedUrl or result.url
+	  result.title,
+      result.link
     })
   end
-  return results
+  
+  local stats = data.searchInformation.formattedTotalResults..' Ergebnisse, gefunden in '..data.searchInformation.formattedSearchTime..' Sekunden'
+  return results, stats
 end
 
-local function stringlinks(results)
+function stringlinks(results, stats)
   local stringresults=""
   for key,val in ipairs(results) do
     stringresults=stringresults..val[1].." - "..val[2].."\n"
   end
-  return stringresults
+  return stringresults..stats
 end
 
-local function run(msg, matches)
-   local results = googlethat(matches[1])
-   return stringlinks(results)
+function run(msg, matches)
+  local results, stats = googlethat(matches[1])
+  if results == nil then
+    return 'Nichts gefunden!'
+  else
+    return stringlinks(results, stats)
+  end
 end
 
 return {
-  description = "Durchsucht Google und sendet die ersten 5 Ergebnisse",
-  usage = {"/google [Begriff]","/Google [Begriff]"},
-  patterns = {"^/google (.*)$","^/Google (.*)$"},
-  run = run
+   description = "Durchsucht Google",
+   usage = "/google [Suchbegriff]: Durchsucht Google",
+   patterns = {
+      "^/[Gg][Oo][Oo][Gg][Ll][Ee] (.*)$",
+      "^%.[Gg][Oo][Oo][Gg][Ll][Ee] (.*)$"
+   },
+   run = run
 }

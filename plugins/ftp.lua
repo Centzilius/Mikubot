@@ -1,7 +1,5 @@
 do
 
-local ftp = (loadfile "./libs/ftp.lua")()
-
 local function send_ftp_data (text_file, receiver)
   local BASE_URL = cred_data.ftp_site
   local username = cred_data.ftp_username
@@ -16,6 +14,10 @@ local function send_ftp_data (text_file, receiver)
 end
 
 local function run(msg, matches)
+  if not ftp then
+    print('ftp Library wird zum ersten Mal geladen...')
+    ftp = (loadfile "./libs/ftp.lua")()
+  end
   local text_file = matches[1]
   local receiver = get_receiver(msg)
   send_ftp_data(text_file, receiver)

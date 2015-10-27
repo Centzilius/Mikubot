@@ -109,16 +109,16 @@ end
 
 local function check_keys()
    if consumer_key:isempty() then
-   return "Twitter Consumer Key ist nicht vorhanden, schreibe ihn in data/credentials.lua"
+   return "Twitter Consumer Key ist nicht vorhanden."
   end
   if consumer_secret:isempty() then
-   return "Twitter Consumer Secret ist nicht vorhanden, schreibe ihn in data/credentials.lua"
+   return "Twitter Consumer Secret ist nicht vorhanden."
   end
   if access_token:isempty() then
-   return "Twitter Access Token ist nicht vorhanden, schreibe ihn in data/credentials.lua"
+   return "Twitter Access Token ist nicht vorhanden."
   end
   if access_token_secret:isempty() then
-   return "Twitter Access Token Secret ist nicht vorhanden, schreibe ihn in data/credentials.lua"
+   return "Twitter Access Token Secret ist nicht vorhanden."
   end
    return ""
 end
@@ -129,7 +129,7 @@ local function analyze_tweet(tweet)
    local text = tweet.text
 
    -- replace short URLs
-   if tweet.entities.url then
+   if tweet.entities.urls then
       for k, v in pairs(tweet.entities.urls) do
          local short = v.url
          local long = v.expanded_url

@@ -27,9 +27,9 @@ local function run(msg, matches)
 	local text = string.gsub(text, "ß", "ss")
 	local text = string.gsub(text, "%&", "und")
 	local url = "http://translate.google.com/translate_tts?tl="..lang.."&q="..text.."&ie=UTF-8&total=1&idx=0&client=t"
-    local file = download_to_file(url)
+    local file = download_to_file(url, text..'.mp3')
 	if file == nil then
-	  return "Google hat den Zugriff auf die API geblockt. URL: "..url
+	  return "Ein Fehler ist aufgetreten, besuche die URL eventuell direkt?\n"..url
 	end
     local cb_extra = {file_path=file}
     send_audio(receiver, file, rmtmp_cb, cb_extra)

@@ -8,7 +8,9 @@ end
 return {
     description = "Ist der Bot noch da?",
     usage = {"Miku"},
-    patterns = {"^[M|m]iku(?)$","^[M|m]iku$"}, 
+    patterns = {"^[Mm][Ii][Kk][Uu](?)$",
+				"^[Mm][Ii][Kk][Uu]$"
+				}, 
     run = run
 }
 --by Akamaru [https://ponywave.de]

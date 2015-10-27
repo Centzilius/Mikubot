@@ -2,11 +2,16 @@ feedparser = (loadfile "./libs/feedparser.lua")()
 
 local function unescape_for_rss(str)
   -- Character encoding
+  str = string.gsub(str, "&acute;", "´")
   str = string.gsub(str, "&gt;", ">")
   str = string.gsub(str, "&lt;", "<")
   str = string.gsub(str, "&mdash;", "—")
+  str = string.gsub(str, "&nabla;", "∇")
   str = string.gsub(str, "&ndash;", "–")
+  str = string.gsub(str, "&Psi;", "ψ")
+  str = string.gsub(str, "&psi;", "ψ")
   str = string.gsub(str, "&raquo;", "»")
+  str = string.gsub(str, "&szlig;", "ß")
   str = string.gsub(str, "&#39;", "'")
   str = string.gsub(str, "&#124;", "|")
   str = string.gsub(str, "&#160;", " ")
@@ -33,7 +38,7 @@ local function unescape_for_rss(str)
   str = string.gsub(str, "&Uuml;", "Ü")
   str = string.gsub(str, "&#252;", "ü")
   str = string.gsub(str, "&#220;", "Ü")
-  -- str = string.gsub( str, '&#(%d+);', function(n) return string.char(n) end ) <- There is a bug, but I don't know!?
+  
   str = string.gsub( str, '&#x(%d+);', function(n) return string.char(tonumber(n,16)) end )
   str = string.gsub( str, '&amp;', '&' ) -- Be sure to do this after all others
   return str
@@ -185,7 +190,7 @@ local function cron()
 		 else
 		   content = ''
 		 end
-		 text = text .. '[RSS] '.. title .. '\n'..content..'\n\n(' .. link .. ')\n\n'
+		 text = text .. '[RSS] '.. title .. '\n'..content..'\n\n' .. link .. '\n\n'
       end
       if text ~= '' then
          local newlast = newentr[1].id
@@ -222,11 +227,11 @@ end
 
 return {
    description = "RSS-Feed Reader",
-   usage = {
-      "/rss: Feed-Abos anzeigen",
-      "/rss add (url): Diesen Feed abonnieren",
-      "/rss remove (id): Diesen Feed deabonnieren",
-      "/rss sync: Feeds aktualisieren"
+   usage = {"RSS Befehle kann nur Sudo\n",
+      "/rss (Feed-Abos anzeigen)",
+      "/rss add [URL] (Diesen Feed abonnieren)",
+      "/rss remove [NR] (Diesen Feed deabonnieren)",
+      "/rss sync (Feeds aktualisieren)"
    },
    patterns = {
       "^/rss$",

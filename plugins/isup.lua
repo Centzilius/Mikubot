@@ -1,25 +1,79 @@
 do
-local socket = require("socket")
-local cronned = load_from_file('data/isup.lua')
 
-local function save_cron(msg, url, delete)
-  local origin = get_receiver(msg)
-  if not cronned[origin] then
-    cronned[origin] = {}
-  end
-  if not delete then
-    table.insert(cronned[origin], url)
-  else
-    for k,v in pairs(cronned[origin]) do
-      if v == url then
-        table.remove(cronned[origin], k)
-      end
-    end
-  end
-  serialize_to_file(cronned, 'data/isup.lua')
-  return 'Gespeichert!'
+local function prot_url(url)
+   local url, h = string.gsub(url, "http://", "")
+   local url, hs = string.gsub(url, "https://", "")
+   local protocol = "http"
+   if hs == 1 then
+      protocol = "https"
+   end
+   return url, protocol
 end
 
+local function get_base_redis(id, option, extra)
+   local ex = ''
+   if option ~= nil then
+      ex = ex .. ':' .. option
+      if extra ~= nil then
+         ex = ex .. ':' .. extra
+      end
+   end
+   return 'isup:' .. id .. ex
+end
+
+local function print_cron(id)
+   local uhash = get_base_redis(id)
+   local subs = redis:smembers(uhash)
+   local text = id .. ' prüft folgende Webseiten:\n---------\n'
+   for k,v in pairs(subs) do
+      text = text .. k .. ") " .. v .. '\n'
+   end
+   return text
+end
+
+local function save_cron(id, url)
+  local url = string.lower(url)
+  local baseurl, protocol = prot_url(url)
+  local prothash = get_base_redis(baseurl, "protocol")
+  local checkhash = get_base_redis(baseurl, "check")
+  local uhash = get_base_redis(id)
+  
+   if redis:sismember(uhash, baseurl) then
+      return url..' wird bereits geprüft.'
+   end
+   
+   print('Saving...')
+   redis:set(prothash, protocol)
+   redis:sadd(checkhash, id)
+   redis:sadd(uhash, baseurl)
+  return url.." wird jetzt alle fünf Minuten geprüft!"
+end
+
+local function delete_cron(id, n)
+   n = tonumber(n)
+
+   local uhash = get_base_redis(id)
+   local subs = redis:smembers(uhash)
+   if n < 1 or n > #subs then
+      return "ID zu hoch!"
+   end
+   local sub = subs[n]
+   local lhash = get_base_redis(sub, "check")
+
+   redis:srem(uhash, sub)
+   redis:srem(lhash, id)
+
+   local left = redis:smembers(lhash)
+   if #left < 1 then -- no one subscribed, remove it
+      local prothash = get_base_redis(sub, "protocol")
+	  local downhash = get_base_redis(sub, "down")
+      redis:del(prothash)
+	  redis:del(downhash)
+   end
+
+   return sub.." wird nicht mehr geprüft."
+end
+  
 local function is_up_socket(ip, port)
   print('Connect to', ip, port)
   local c = socket.try(socket.tcp())
@@ -73,56 +127,96 @@ local function isup(url)
   else
     result = is_up_http(url)
   end
-
   return result
 end
 
 local function cron()
-  for chan, urls in pairs(cronned) do
-    for k,url in pairs(urls) do
-      print('Checking', url)
-      if not isup(url) then
-        local text = url..' scheint DOWN zu sein'
-        send_msg(chan, text, ok_cb, false)
-      end
+  local keys = redis:keys(get_base_redis("*", "check"))
+  for k,v in pairs(keys) do
+    local base = string.match(v, "isup:(.+):check")  -- Get the URL base
+
+	print('ISUP: '..base)
+	local prot = redis:get(get_base_redis(base, "protocol"))
+	local url = prot .. "://" .. base
+	local hash = 'isup:'..base..':down'
+	local isdown = redis:get(hash)
+	if not isup(url) then
+	  if isdown ~= 'true' then
+	    redis:set(hash, 'true')
+	    local text = url..' ist DOWN! ❌'
+          for e, receiver in pairs(redis:smembers(v)) do
+            send_msg(receiver, text, ok_cb, false)
+          end
+	  else
+	    print(base..' ist immer noch down')
+	  end
+    else
+	  if isdown == 'true' then
+	    redis:set(hash, 'false')
+		local text = url..' ist wieder UP! ✅'
+        for e, receiver in pairs(redis:smembers(v)) do
+          send_msg(receiver, text, ok_cb, false)
+        end
+	  end
     end
   end
 end
 
 local function run(msg, matches)
-  if matches[1] == 'remove' then
-    if not is_sudo(msg) then 
-      return 'Du darfst diesen Befehl nicht nutzen!'
-    end
-    return save_cron(msg, matches[2], true)
+   local id = "user#id" .. msg.from.id
 
-  elseif matches[1] == 'save' then
+   if is_chat_msg(msg) then
+      id = "chat#id" .. msg.to.id
+   end
+
+   
+  if matches[1] == 'cron show' then
     if not is_sudo(msg) then 
-      return 'Du darfst diesen Befehl nicht nutzen!'
+      return 'Du darfst diesen Befehl nicht benutzen!'
     end
-    return save_cron(msg, matches[2])
+    return print_cron(id)
+	
+  elseif matches[1] == 'cron check' then
+    if not is_sudo(msg) then 
+      return 'Du darfst diesen Befehl nicht benutzen!'
+    end
+    return cron()
+	
+  elseif matches[1] == 'cron delete' then
+    if not is_sudo(msg) then 
+      return 'Du darfst diesen Befehl nicht benutzen!'
+    end
+    return delete_cron(id, matches[2])
+
+  elseif matches[1] == 'cron' then
+    if not is_sudo(msg) then 
+      return 'Du darfst diesen Befehl nicht benutzen!'
+    end
+    return save_cron(id, matches[2])
 
   elseif isup(matches[1]) then
-    return matches[1]..' ist UP ✔'
+    return matches[1]..' ist UP! ✅'
   else
-    return matches[1]..' scheint DOWN zu sein ❌'
+    return matches[1]..' ist DOWN! ❌'
   end
 end
 
 return {
-  description = "Check if a website or server is up.",
+  description = "Checkt, ob eine Webseite up ist.",
   usage = {
-    "/isup [host]: Performs a HTTP request or Socket (ip:port) connexion",
-    "/isup save [host]: Every 5mins check if host is up. (Requires privileged user)",
-    "/isup remove [host]: Disable checking that host."
+    "/isup [Host]: Checkt, ob die Seite up ist",
+    "/isup cron [Host]: Checkt diese Seite alle 5 Minuten (nur Superuser)",
+	"/isup cron check: Prüfe alle Seiten jetzt",
+	"/isup cron show: Listet alle zu prüfenden Seiten auf",
+    "/isup cron delete [ID]: Checkt diese Seite nicht mehr"
   },
   patterns = {
-    "^/isup (remove) (.*)$",
-    "^/isup (save) (.*)$",
+    "^/isup (cron check)$",
+    "^/isup (cron show)$",
+    "^/isup (cron delete) (%d+)$",
+    "^/isup (cron) (.*)$",
     "^/isup (.*)$",
-    "^/ping (.*)$",
-    "^/ping (remove) (.*)$",
-    "^/ping (save) (.*)$"
+    "^/ping (.*)$"
   },
   run = run,
   cron = cron

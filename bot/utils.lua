@@ -1,10 +1,10 @@
-URL = require "socket.url"
-http = require "socket.http"
-https = require "ssl.https"
+http = require("socket.http")
+https = require("ssl.https")
 ltn12 = require "ltn12"
-serpent = require "serpent"
-feedparser = require "feedparser"
+URL = require("socket.url")
+feedparser = require ("feedparser")
 json = (loadfile "./libs/JSON.lua")()
+serpent = (loadfile "./libs/serpent.lua")()
 mimetype = (loadfile "./libs/mimetype.lua")()
 redis = (loadfile "./libs/redis.lua")()
 
@@ -19,7 +19,7 @@ function get_receiver(msg)
   end
   if msg.to.type == 'encr_chat' then
     return msg.to.print_name
-  end
+ end
 end
 
 function is_chat_msg( msg )
@@ -45,15 +45,9 @@ function string:split(sep)
   return fields
 end
 
--- DEPRECATED
-function string.trim(s)
-  print("string.trim(s) is DEPRECATED use string:trim() instead")
-  return s:gsub("^%s*(.-)%s*$", "%1")
-end
-
 -- Removes spaces
-function string:trim()
-  return self:gsub("^%s*(.-)%s*$", "%1")
+function string.trim(s)
+  return s:gsub("^%s*(.-)%s*$", "%1")
 end
 
 function get_http_file_name(url, headers)
@@ -63,17 +57,18 @@ function get_http_file_name(url, headers)
   file_name = file_name or url:match("[^%w]+(%w+)[^%w]+$")
   -- Random name, hope content-type works
   file_name = file_name or str:random(5)
-  
-  local content_type = headers["content-type"]
+
+  local content_type = headers["content-type"] 
   
   local extension = nil
   if content_type then
-    extension = mimetype.get_mime_extension(content_type)
+    extension = mimetype.get_mime_extension(content_type) 
   end
+
   if extension then
     file_name = file_name.."."..extension
   end
-
+  
   local disposition = headers["content-disposition"]
   if disposition then
     -- attachment; filename=CodeCogsEqn.png
@@ -95,7 +90,7 @@ function download_to_file(url, file_name)
     url = url,
     sink = ltn12.sink.table(respbody),
     redirect = true
-  }
+ }
 
   -- nil, code, headers, status
   local response = nil
@@ -147,16 +142,15 @@ function run_command(str)
   return result
 end
 
--- User has privileges
 function is_sudo(msg)
-  local var = false
-  -- Check users id in config
-  for v,user in pairs(_config.sudo_users) do
-    if user == msg.from.id then
-      var = true
-    end
-  end
-  return var
+   local var = false
+   -- Check if user id is in sudoers table
+   for v,user in pairs(sudo_users) do
+      if string.match(user, msg.from.id) then 
+         var = true
+      end
+   end
+   return var
 end
 
 function can_use_bot(msg)
@@ -172,11 +166,11 @@ end
 
 -- Returns the name of the sender
 function get_name(msg)
-  local name = msg.from.first_name
-  if name == nil then
-    name = msg.from.id
-  end
-  return name
+   local name = msg.from.first_name
+   if name == nil then
+      name = msg.from.id
+   end
+   return name
 end
 
 -- Returns at table of lua files inside plugins
@@ -278,31 +272,30 @@ end
 function send_photo_from_url_callback(cb_extra, success, result, sendErrMsg)
   local receiver = cb_extra.receiver
   local url = cb_extra.url
+  
   local file_path = download_to_file(url, false)
   if not file_path then -- Error
-    if sendErrMsg then
-      local text = 'Fehler beim Laden des Bildes'
-      send_msg(receiver, text, ok_cb, false)
-	end
+    local text = 'Fehler beim Herunterladen des Bildes'
+    send_msg(receiver, text, ok_cb, false)
   else
     print("Datei Pfad: "..file_path)
     _send_photo(receiver, file_path, ok_cb, false)
   end
 end
 
--- Same as above, but with send_as_document		
-function send_document_from_url_callback(cb_extra, success, result)		
-  local receiver = cb_extra.receiver		
-  local url = cb_extra.url		
-  		
-  local file_path = download_to_file(url, false)		
-  if not file_path then -- Error		
-    local text = 'Fehler beim Herunterladen des Dokumentes'		
-    send_msg(receiver, text, ok_cb, false)		
-  else		
-    print("Datei Pfad: "..file_path)		
-    _send_document(receiver, file_path, ok_cb, false)		
-  end		
+-- Same as above, but with send_as_document
+function send_document_from_url_callback(cb_extra, success, result)
+  local receiver = cb_extra.receiver
+  local url = cb_extra.url
+  
+  local file_path = download_to_file(url, false)
+  if not file_path then -- Error
+    local text = 'Fehler beim Herunterladen des Dokumentes'
+    send_msg(receiver, text, ok_cb, false)
+  else
+    print("File path: "..file_path)
+    _send_document(receiver, file_path, ok_cb, false)
+  end
 end
 
 --  Send multiple images asynchronous.
@@ -445,48 +438,6 @@ function send_order_msg(destination, msgs)
    send_order_msg_callback(cb_extra, true)
 end
 
-function send_order_msg_callback(cb_extra, success, result)
-   local destination = cb_extra.destination
-   local msgs = cb_extra.msgs
-   local file_path = cb_extra.file_path
-   if file_path ~= nil then
-      os.remove(file_path)
-      print("Deleted: " .. file_path)
-   end
-   if type(msgs) == 'string' then
-      send_large_msg(destination, msgs)
-   elseif type(msgs) ~= 'table' then
-      return
-   end
-   if #msgs < 1 then
-      return
-   end
-   local msg = table.remove(msgs, 1)
-   local new_cb_extra = {
-      destination = destination,
-      msgs = msgs
-   }
-   if type(msg) == 'string' then
-      send_msg(destination, msg, send_order_msg_callback, new_cb_extra)
-   elseif type(msg) == 'table' then
-      local typ = msg[1]
-      local nmsg = msg[2]
-      new_cb_extra.file_path = nmsg
-      if typ == 'document' then
-         send_document(destination, nmsg, send_order_msg_callback, new_cb_extra)
-      elseif typ == 'image' or typ == 'photo' then
-         send_photo(destination, nmsg, send_order_msg_callback, new_cb_extra)
-      elseif typ == 'audio' then
-         send_audio(destination, nmsg, send_order_msg_callback, new_cb_extra)
-      elseif typ == 'video' then
-         send_video(destination, nmsg, send_order_msg_callback, new_cb_extra)
-      else
-         send_file(destination, nmsg, send_order_msg_callback, new_cb_extra)
-      end
-   end
-end
-
--- Same as send_large_msg_callback but friendly params
 function send_large_msg(destination, text)
   local cb_extra = {
     destination = destination,
@@ -522,17 +473,13 @@ function send_large_msg_callback(cb_extra, success, result)
 end
 
 -- Returns a table with matches or nil
-function match_pattern(pattern, text, lower_case)
+--function match_pattern(pattern, text, lower_case)
+function match_pattern(pattern, text)
   if text then
-    local matches = {}
-    if lower_case then
-      matches = { string.match(text:lower(), pattern) }
-    else
-      matches = { string.match(text, pattern) }
-     end
-      if next(matches) then
-        return matches
-      end
+    local matches = { string.match(text, pattern) }
+    if next(matches) then
+      return matches
+	end
   end
   -- nil
 end
@@ -557,7 +504,7 @@ function load_from_file(file, default_data)
   return loadfile (file)()
   end
   
-  function run_bash(str)
+function run_bash(str)
     local cmd = io.popen(str)
     local result = cmd:read('*all')
     cmd:close()
@@ -572,11 +519,26 @@ function run_sh(msg)
      return text
 end
 
+function round(num, idp)
+  if idp and idp>0 then
+    local mult = 10^idp
+    return math.floor(num * mult + 0.5) / mult
+  end
+  return math.floor(num + 0.5)
+end
+
 function unescape(str)
   str = string.gsub( str, '&lt;', '<' )
   str = string.gsub( str, '&gt;', '>' )
   str = string.gsub( str, '&quot;', '"' )
   str = string.gsub( str, '&apos;', "'" )
+  str = string.gsub( str, "&Auml;", "Ä")
+  str = string.gsub( str, "&auml;", "ä")
+  str = string.gsub( str, "&Ouml;", "Ö")
+  str = string.gsub( str, "&ouml;", "ö")
+  str = string.gsub( str, "Uuml;", "Ü")
+  str = string.gsub( str, "&uuml;", "ü")
+  str = string.gsub( str, "&szlig;", "ß")
   str = string.gsub( str, '&#(%d+);', function(n) return string.char(n) end )
   str = string.gsub( str, '&#x(%d+);', function(n) return string.char(tonumber(n,16)) end )
   str = string.gsub( str, '&amp;', '&' ) -- Be sure to do this after all others
@@ -601,6 +563,44 @@ function unescape_html(str)
   return new
 end
 
+function post_petition(url, arguments)
+   local url, h = string.gsub(url, "http://", "")
+   local url, hs = string.gsub(url, "https://", "")
+   local post_prot = "http"
+   if hs == 1 then
+      post_prot = "https"
+   end
+   local response_body = {}
+   local request_constructor = {
+      url = post_prot..'://'..url,
+      method = "POST",
+      sink = ltn12.sink.table(response_body),
+      headers = {},
+      redirect = false
+   }
+
+   local source = arguments
+   if type(arguments) == "table" then
+      local source = helpers.url_encode_arguments(arguments)
+   end
+   request_constructor.headers["Content-Type"] = "application/x-www-form-urlencoded"
+   request_constructor.headers["Content-Length"] = tostring(#source)
+   request_constructor.source = ltn12.source.string(source)
+   if post_prot == "http" then
+     ok, response_code, response_headers, response_status_line = http.request(request_constructor)
+   else
+     ok, response_code, response_headers, response_status_line = https.request(request_constructor)
+   end
+
+   if not ok then
+      return nil
+   end
+
+   response_body = json:decode(table.concat(response_body))
+
+   return response_body
+end
+
 function get_redis_hash(msg, var)
   if msg.to.type == 'chat' then
     return 'chat:'..msg.to.id..':'..var
@@ -608,4 +608,26 @@ function get_redis_hash(msg, var)
   if msg.to.type == 'user' then
     return 'user:'..msg.from.id..':'..var
   end
+end
+
+function tablelength(T)
+  local count = 0
+  for _ in pairs(T) do count = count + 1 end
+  return count
+end
+
+function comma_value(amount)
+  local formatted = amount
+  while true do  
+    formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1.%2')
+    if (k==0) then
+      break
+    end
+  end
+  return formatted
+end
+
+
+function string.ends(str, fin)
+  return fin=='' or string.sub(str,-string.len(fin)) == fin
 end

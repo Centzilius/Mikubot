@@ -9,11 +9,16 @@ function getTitle(page)
   s = string.gsub(s, " *> *", ">")
   
   -- Character encoding
+  s = string.gsub(s, "&acute;", "´")
   s = string.gsub(s, "&gt;", ">")
   s = string.gsub(s, "&lt;", "<")
   s = string.gsub(s, "&mdash;", "—")
+  s = string.gsub(s, "&nabla;", "∇")
   s = string.gsub(s, "&ndash;", "–")
+  s = string.gsub(s, "&Psi;", "ψ")
+  s = string.gsub(s, "&psi;", "ψ")
   s = string.gsub(s, "&raquo;", "»")
+  s = string.gsub(s, "&szlig;", "ß")  
   s = string.gsub(s, "&#39;", "'")
   s = string.gsub(s, "&#124;", "|")
   s = string.gsub(s, "&#160;", " ")
@@ -43,7 +48,7 @@ function getTitle(page)
 
   -- Put all the tags in lowercase.
   s = string.gsub(s, "(<[^ >]+)", string.lower)
-
+  s = string.gsub(s, "&amp;", "&") -- Be sure to do this after all others
   local i, f, t = string.find(s, "<title>(.+)</title>")
   return t or ""
 end
@@ -70,6 +75,7 @@ function run(msg, matches)
 	  title == "Redirection" or
 	  title == "Object moved" or
 	  title == "Error 404 (Not Found)!!1" or
+	  title =="Moved Temporarily" or
 	  string.match(title, "on Steam") or
 	  string.match(title, "521: Web server is down") or
       string.match(title, "eBay</title>") or
@@ -78,7 +84,8 @@ function run(msg, matches)
 	  string.match(msg.text, "steamcommunity.com/app/") or
 	  string.match(msg.text, "deviantart.com") or
 	  string.match(msg.text, "urbanup.com/") or
-	  string.match(msg.text, "urbandictionary.com/define.php") then
+	  string.match(msg.text, "urbandictionary.com/define.php")or
+	  string.match(msg.text, "dropbox.com/s/") then
     print('Ungültig, da "'..title..'"')
   else
     return title

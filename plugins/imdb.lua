@@ -67,7 +67,9 @@ end
 return {
   description = "Zeigt Info zu einem Film (von IMDB, englisch)",
   usage = "/imdb [Film]: Zeigt Info zu Film",
-  patterns = {"^/imdb (.+)"},
+  patterns = {"^/imdb (.+)",
+			  "imdb.com/title/(tt)(%d+[%d%.,]*)"
+			  },
   run = run
 }
 

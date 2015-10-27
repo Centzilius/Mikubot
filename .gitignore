@@ -52,5 +52,12 @@ plugins/miiverse.lua
 plugins/videotogif.lua
 plugins/music163.lua
 plugins/love_calculator.lua
-plugins/get_image.lua
-plugins/get_data.lua
+plugins/gamesdb.lua
+plugins/myanimelist.lua
+plugins/bitly_create.lua
+plugins/aktien.lua
+plugins/create_sticker.lua
+plugins/currency.lua
+plugins/dropbox.lua
+plugins/spotify_search.lua
+plugins/credentials_manager.lua

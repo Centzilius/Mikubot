@@ -30,6 +30,34 @@ local function is_banned(user_id, chat_id)
   return banned or false
 end
 
+local function makesudo(user_id, msg, delete)
+  local set = 'telegram:sudo_users'
+  local is_sudo = redis:sismember(set, user_id)
+  if delete then
+    if not is_sudo then
+	  return user_id..' ist kein Superuser.'
+	else
+	  if string.match(user_id, msg.from.id) then
+	    return 'Das Löschen deiner User-ID aus den Superusern wird feige verweigert.'
+	  else
+	    print('deleting user id '..user_id..' from redis set '..set)
+	    redis:srem(set, user_id)
+	    sudo_users = load_sudo_users()
+	    return user_id..' ist jetzt kein Superuser mehr.'
+	  end
+	end
+  else
+	if not is_sudo then
+	  print('saving user id '..user_id..' to redis set '..set)
+	  redis:sadd(set, user_id)
+	  sudo_users = load_sudo_users()
+	  return user_id..' ist jetzt ein Superuser.'
+	else
+	  return user_id..' ist bereits ein Superuser.'
+	end
+  end
+end
+
 local function pre_process(msg)
 
   -- SERVICE MESSAGE
@@ -86,6 +114,10 @@ local function pre_process(msg)
         else
           --print ('Chat '..msg.to.id..' whitelisted :)')
         end
+      else
+	    local user_name = get_name(msg)
+		local receiver = get_receiver(msg)
+		send_msg(receiver, "Hey "..user_name..", dies ist der Bot von @Akamaru und kann nur nach Freischaltung durch ihn benutzt werden." , ok_cb, false)
       end
     else
       --print('User '..msg.from.id..' allowed :)')
@@ -126,6 +158,16 @@ local function run(msg, matches)
     else
       return 'Das hier ist keine Chat-Gruppe'
     end
+  end
+  
+  if matches[1] == 'makesudo' then
+    local user_id = matches[3]
+	if matches[2] == 'user' then
+	  return makesudo(user_id)
+	end
+	if matches[2] == 'delete' then
+	  return makesudo(user_id, msg, true)
+	end
   end
 
   if matches[1] == 'kick' then
@@ -183,16 +225,18 @@ local function run(msg, matches)
 end
 
 return {
-  description = "Plugin to manage bans, kicks and white/black lists.", 
+  description = "Manager-Plugin für Whitelist, Kicks und Banns (nur Superuser)", 
   usage = {
-    "/whitelist <enable>/<disable>: Enable or disable whitelist mode",
-    "/whitelist user <user_id>: Allow user to use the bot when whitelist mode is enabled",
-    "/whitelist chat: Allow everybody on current chat to use the bot when whitelist mode is enabled",
-    "/whitelist delete user <user_id>: Remove user from whitelist",
-    "/whitelist delete chat: Remove chat from whitelist",
-    "/ban user <user_id>: Kick user from chat and kicks it if joins chat again",
-    "/ban delete <user_id>: Unban user",
-    "/kick <user_id> Kick user from chat group"
+    "/whitelist <enable>/<disable>: Aktiviert/deaktiviert Whitelist",
+    "/whitelist user <user_id>: Whiteliste User",
+    "/whitelist chat: Whiteliste ganze Gruppe",
+    "/whitelist delete user <user_id>: Lösche User von der Whitelist",
+    "/whitelist delete chat: Lösche ganze Gruppe von der Whitelist",
+    "/ban user <user_id>: Kicke User vom Chat und kicke ihn, wenn er erneut beitritt",
+    "/ban delete <user_id>: Entbanne User",
+    "/kick <user_id>: Kicke User vom Chat",
+	"/makesudo user <user_id>: Macht User zum Superuser",		
+	"/makesudo delete <user_id>: Macht User zum Superuser"
   },
   patterns = {
     "^/(whitelist) (enable)$",
@@ -205,6 +249,8 @@ return {
     "^/(ban) (delete) (%d+)$",
     "^/(kick) (%d+)$",
     --"^//tgservice (.+)$",
+	"^/(makesudo) (user) (%d+)$",		
+	"^/(makesudo) (delete) (%d+)$"
   }, 
   run = run,
   pre_process = pre_process,

@@ -10,7 +10,7 @@ end
 return {
   description = "Wenn ein Link zu einem Bild gesendet wird, läd und sendet der Bot das Bild.", 
   usage = {"Link zum Bild"},
-  patterns = {"^(https?://[%w-_%.%?%.:/%+=&]+%.png)$","^(https?://[%w-_%.%?%.:/%+=&]+%.jpg)$","^(https?://[%w-_%.%?%.:/%+=&]+%.jpeg)$",}, 
+  patterns = {"^(https?://[%w-_%.%?%.:/%+=&]+%.png)","^(https?://[%w-_%.%?%.:/%+=&]+%.jpg)","^(https?://[%w-_%.%?%.:/%+=&]+%.jpeg)",}, 
   run = run 
 }
 

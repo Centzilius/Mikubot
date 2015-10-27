@@ -16,8 +16,13 @@ end
 
 return {
   description = 'Sagt dass ihr afk oder wieder da seid',
-    usage = {'/afk','/re','/wd'},
-  patterns = {'^/([A|a][F|f][K|k])$','^/([A|a][F|f][K|k]) (.*)$','^/([R|r][E|e])$','^/([W|w][D|d])$'}, 
+    usage = {'/afk',
+			 '/re',
+			 '/wd'},
+  patterns = {'^/([A|a][F|f][K|k])$',
+			  '^/([A|a][F|f][K|k]) (.*)$',
+			  '^/([R|r][E|e])$',
+			  '^/([W|w][D|d])$'}, 
   run = run 
 }
 --by Akamaru [https://ponywave.de]

@@ -185,7 +185,7 @@ return {
     "^/[Ww]iki (search) ?(.*)$",
     "^/[Ww]iki(%w+) (.+)$",
     "^/[Ww]iki ?(.*)$",
-	"de.wikipedia.org/wiki/(.+)"
+	"(%w+).wikipedia.org/wiki/(.+)"
   },
   run = run
 }

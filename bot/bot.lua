@@ -1,26 +1,23 @@
-package.path = package.path .. ';.luarocks/share/lua/5.2/?.lua'
-  ..';.luarocks/share/lua/5.2/?/init.lua'
-package.cpath = package.cpath .. ';.luarocks/lib/lua/5.2/?.so'
-
 require("./bot/utils")
 
 VERSION = '20151003'
 
 -- This function is called when tg receive a msg
 function on_msg_receive (msg)
+
   if not started then
     return
   end
 
   local receiver = get_receiver(msg)
-
+  
   -- vardump(msg)
   msg = pre_process_service_msg(msg)
   if msg_valid(msg) then
     msg = pre_process_msg(msg)
-    if msg then
-      match_plugins(msg)
-      --mark_read(receiver, ok_cb, false)
+  if msg then
+    match_plugins(msg)
+    -- mark_read(receiver, ok_cb, false)
     end
   end
 end
@@ -33,9 +30,10 @@ function on_binlog_replay_end()
   postpone (cron_plugins, false, 60*5.0)
   -- See plugins/isup.lua as an example for cron
 
-  _config = load_config()
+  -- load sudo_users and credentials
+  sudo_users = load_sudo_users()
   cred_data = load_cred()
-
+   
   -- load plugins
   plugins = {}
   load_plugins()
@@ -53,11 +51,6 @@ function msg_valid(msg)
     print('\27[36mNicht gültig: alte Nachricht\27[39m')
     return false
   end
-  
-  if msg.unread == 0 then
-    print('\27[36mNicht gültig: gelesen\27[39m')
-    return false
-  end
 
   if not msg.to.id then
     print('\27[36mNicht gültig: To id not provided\27[39m')
@@ -66,6 +59,11 @@ function msg_valid(msg)
 
   if not msg.from.id then
     print('\27[36mNicht gültig: From id not provided\27[39m')
+    return false
+  end
+  
+  if msg.unread == 0 then
+    print('\27[36mNicht gültig: gelesen\27[39m')
     return false
   end
 
@@ -83,11 +81,10 @@ function msg_valid(msg)
     print('\27[36mNicht gültig: Telegram Nachricht\27[39m')
     return false
   end
-
+  
   return true
 end
 
---
 function pre_process_service_msg(msg)
    if msg.service then
       local action = msg.action or {type=""}
@@ -111,7 +108,7 @@ function pre_process_msg(msg)
   for name,plugin in pairs(plugins) do
     if plugin.pre_process and msg then
 	  -- print('Preprocess', name)
-      msg = plugin.pre_process(msg)
+	  msg = plugin.pre_process(msg)
     end
   end
 
@@ -125,22 +122,18 @@ function match_plugins(msg)
   end
 end
 
--- Check if plugin is on _config.disabled_plugin_on_chat table
-local function is_plugin_disabled_on_chat(plugin_name, receiver)
-  local disabled_chats = _config.disabled_plugin_on_chat
-  -- Table exists and chat has disabled plugins
-  if disabled_chats and disabled_chats[receiver] then
-    -- Checks if plugin is disabled on this chat
-    for disabled_plugin,disabled in pairs(disabled_chats[receiver]) do
-      if disabled_plugin == plugin_name and disabled then
-        local warning = 'Plugin '..disabled_plugin..' ist in diesem Chat deaktiviert'
-        print(warning)
-        -- send_msg(receiver, warning, ok_cb, false)
-        return true
-      end
-    end
+-- Check if plugin is deactivated in this chat
+local function is_plugin_disabled_on_chat(plugin_name, msg)
+  local hash = get_redis_hash(msg, 'disabled_plugins')
+  local disabled = redis:hget(hash, plugin_name)
+  
+  -- Plugin is disabled
+  if disabled == 'true' then
+    print('Plugin '..plugin_name..' ist in diesem Chat deaktiviert')
+	return true
+  else
+    return false
   end
-  return false
 end
 
 function match_plugin(plugin, plugin_name, msg)
@@ -151,20 +144,13 @@ function match_plugin(plugin, plugin_name, msg)
     local matches = match_pattern(pattern, msg.text)
     if matches then
       print("Nachricht stimmt überein mit ", pattern)
-	  -- Send typing
-      --if pattern ~= ".*" then send_typing(receiver, ok_cb, true) end
 	  
-	  if is_plugin_disabled_on_chat(plugin_name, receiver) then
+	  if is_plugin_disabled_on_chat(plugin_name, msg) then
         return nil
 	  end
       -- Function exists
       if plugin.run then
-        -- check if user has privileges
-          if can_use_bot(msg) then
-	    print("Gesperrt")
-            -- local text = 'Du darfst den Bot nicht nutzen!'
-           -- send_msg(receiver, text, ok_cb, false)
-          else
+	    --if pattern ~= ".*" then send_typing(receiver, ok_cb, true) end
 	-- If plugin is for privileged users only
         if not warns_user_not_allowed(plugin, msg) then
           local result = plugin.run(msg, matches)
@@ -173,7 +159,6 @@ function match_plugin(plugin, plugin_name, msg)
           end
         end
       end
-     end
       -- One patterns matches
       return
     end
@@ -185,61 +170,37 @@ function _send_msg(destination, text)
   send_large_msg(destination, text)
 end
 
--- Save the content of _config to config.lua
-function save_config( )
-  serialize_to_file(_config, './data/config.lua')
-  print ('Configuration in ./data/config.lua gespeichert')
+-- Load superusers from redis
+function load_sudo_users()
+  if redis:exists("telegram:sudo_users") == false then
+  -- If sudo_users set doesnt exists
+    print ("Created new sudo_users set: telegram:sudo_users")
+    create_sudo_users()
+  end
+  local sudo_users = redis:smembers("telegram:sudo_users")
+  for v,user in pairs(sudo_users) do
+    print("Superuser: " .. user)
+  end
+  return sudo_users
 end
 
--- Returns the config from config.lua file.
--- If file doesn't exist, create it.
-function load_config( )
-  local f = io.open('./data/config.lua', "r")
-  -- If config.lua doesn't exist
-  if not f then
-    print ("Neue Config-Datei erstellt: data/config.lua")
-    create_config()
-  else
-    f:close()
-  end
-  local config = loadfile ("./data/config.lua")()
-  for v,user in pairs(config.sudo_users) do
-    print("Erlaubter Benutzer: " .. user)
-  end
-  return config
-end
-
-function load_cred( )
-  local cf = io.open('./data/credentials.lua', "r")
-  -- If credentials.lua doesnt exists
-  if not cf then
-    print ("Neue Credentials-Datei erstellt: data/credentials.lua")
+-- Load credentials from redis
+function load_cred()
+  if redis:exists("telegram:credentials") == false then
+  -- If credentials hash doesnt exists
+    print ("Neuen Credentials-Hash erstellt: telegram:credentials")
     create_cred()
-  else
-    cf:close()
   end
-  local _file_cred = loadfile ("./data/credentials.lua")()
-  return _file_cred
+  return redis:hgetall("telegram:credentials")
 end
 
--- Create a basic config.json file and saves it.
-function create_config( )
-  -- A simple config with basic plugins and ourselves as privileged user
-  config = {
-    enabled_plugins = {
-      "help",
-      "plugins" },
-    sudo_users = {our_id},
-    disabled_channels = {}
-  }
-  serialize_to_file(config, './data/config.lua')
-  print ('Configuration in ./data/config.lua gespeichert')
-end
-
-function create_cred( )
+-- create credentials hash with redis
+function create_cred()
   cred = {
   bitly_access_token = "",
-  cloudconvert_apikey = "",
+  cloudinary_apikey = "",
+  cloudinary_api_secret = "",
+  cloudinary_public_id = "",
   derpibooru_apikey = "",
   fb_access_token = "",
   flickr_apikey = "",
@@ -247,15 +208,20 @@ function create_cred( )
   ftp_username = "",
   ftp_password = "",
   gender_apikey = "",
+  golem_apikey = "",
   google_apikey = "",
   google_cse_id = "",
+  gitlab_private_token = "",
+  gitlab_project_id = "",
   instagram_access_token = "",
   lyricsnmusic_apikey = "",
+  mal_username = "",
+  mal_pw = "",
   neutrino_userid = "",
   neutrino_apikey = "",
+  owm_apikey = "",
   page2images_restkey = "",
   soundcloud_client_id = "",
-  superfeedr_authorization = "",
   tw_consumer_key = "",
   tw_consumer_secret = "",
   tw_access_token = "",
@@ -266,8 +232,28 @@ function create_cred( )
   yourls_site_url = "",
   yourls_signature_token = ""
   }
-  serialize_to_file(cred, './data/credentials.lua')
-  print ('Credentials gespeichert in ./data/credentials.lua')
+  redis:hmset("telegram:credentials", cred)
+  print ('Credentials gespeichert in telegram:credentials')
+end
+
+function create_sudo_users()
+  redis:sadd("telegram:sudo_users", '0')
+  redis:sadd("telegram:sudo_users", '1')
+  redis:sadd("telegram:sudo_users", our_id)
+  print('Speichere Superuser in telegram:sudo_users')
+  print('Adde deine ID mit Redis: SADD telegram:sudo_users YOURID')
+end
+
+-- create plugin set if it doesn't exist
+function create_plugin_set()
+  enabled_plugins = {
+	"plugins",
+	"manager"
+  }
+  print ('enabling a few plugins - saving to redis set telegram:enabled_plugins')
+  for _,plugin in pairs(enabled_plugins) do
+    redis:sadd("telegram:enabled_plugins", plugin)
+  end
 end
 
 function on_our_id (id)
@@ -291,7 +277,11 @@ end
 
 -- Enable plugins in config.json
 function load_plugins()
-  for k, v in pairs(_config.enabled_plugins) do
+  enabled_plugins = redis:smembers('telegram:enabled_plugins')
+  if not enabled_plugins[1] then
+    create_plugin_set()
+  end
+  for k, v in pairs(enabled_plugins) do
     print("Lade Plugin", v)
 
     local ok, err =  pcall(function()
@@ -300,9 +290,10 @@ function load_plugins()
     end)
 
     if not ok then
-      print('\27[31mFehler beim laden des Plugins '..v..'\27[39m')
+      print('\27[31mFehler beim Laden vom Plugin '..v..'\27[39m')
       print('\27[31m'..err..'\27[39m')
     end
+
   end
 end
 
@@ -324,4 +315,5 @@ end
 our_id = 0
 now = os.time()
 math.randomseed(now)
+
 started = false
