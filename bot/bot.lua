@@ -1,3 +1,5 @@
+package.path = './.luarocks/share/lua/5.2/?.lua;./.luarocks/share/lua/5.2/?/init.lua;./.luarocks/lib/lua/5.2/?.lua;./.luarocks/lib/lua/5.2/?/init.lua;' .. package.path
+require("luarocks.loader")
 require("./bot/utils")
 
 VERSION = '20151003'
